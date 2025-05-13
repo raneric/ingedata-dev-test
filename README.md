@@ -99,7 +99,7 @@ Consider implementing any of these features for bonus points:
 - We value quality over quantity
 
 ## Questions
-If you have any questions about the requirements, please create an issue in this repository, and we'll respond as soon as possible.
+If you have any questions about the requirements, please contact your HR at Ingedata.
 
 Good luck!
 

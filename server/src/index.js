@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const roomRouter = require('./routes/Room');
 
-app.get('/', (req, res) => {
-  console.log(`Example app listening on port ${port}`);
-});
+app.use('/', roomRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+app.listen(3000, () => {
+  console.log("listening on http://localhost:3000");
+})

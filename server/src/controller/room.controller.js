@@ -13,7 +13,7 @@ async function getAllRooms(req, res, next) {
 async function getRoomById(req, res, next) {
   const roomId = req.params.id;
   try {
-    const room = await Room.findOne({ where: { id: roomId } });
+    const room = await Room.findByPk(roomId);
     if (!room) {
       throw new ResourceNotFoundError(`Room with ${roomId} not found`)
     }

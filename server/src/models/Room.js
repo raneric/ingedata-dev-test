@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../config/sequelize');
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../config/sequelize.js';
 
 class Room extends Model { }
 
@@ -30,4 +30,4 @@ Room.init(
 }
 );
 
-module.exports = Room;
+export default Room;

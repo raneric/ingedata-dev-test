@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import roomRouter from './routes/RoomRoute.js';
+
 const app = express();
-const roomRouter = require('./routes/Room');
 
 app.use('/', roomRouter);
 
-module.exports = app
+export default app;

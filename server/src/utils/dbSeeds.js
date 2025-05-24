@@ -1,5 +1,5 @@
-const Room = require('../models/Room');
-const sequelize = require('../config/sequelize');
+import Room from '../models/Room.js';
+import sequelize from '../config/sequelize.js';
 
 const rooms = [
   { id: 'S1', category: 'Simple', description: 'Comfort and convenience come together in our Simple Room — the perfect choice for budget-conscious travelers who don’t want to compromise on quality.', pricePerNight: 50, amenities: ['Wi-Fi', 'Fan'] },

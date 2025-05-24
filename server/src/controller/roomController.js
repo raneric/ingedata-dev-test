@@ -1,6 +1,6 @@
-const roomModel = require('../models/Room')
+import roomModel from '../models/Room.js';
 
-exports.getAllRooms = async (req, res) => {
+async function getAllRooms(req, res) {
   try {
     const rooms = await roomModel.findAll();
     res.json(rooms);
@@ -9,7 +9,7 @@ exports.getAllRooms = async (req, res) => {
   }
 }
 
-exports.getRoomById = async (req, res) => {
+async function getRoomById(req, res) {
   const roomId = req.params.id;
   console.log(roomId);
   try {
@@ -18,4 +18,9 @@ exports.getRoomById = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+}
+
+export {
+  getAllRooms,
+  getRoomById
 }

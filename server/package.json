@@ -2,17 +2,25 @@
   "name": "server",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/server/server.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix "
   },
   "author": "Eric",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "sequelize": "^6.37.7",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0"
   }
 }

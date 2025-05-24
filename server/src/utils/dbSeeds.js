@@ -1,4 +1,4 @@
-import Room from '../models/Room.js';
+import Room from '../models/room.model.js';
 import sequelize from '../config/sequelize.js';
 
 const rooms = [

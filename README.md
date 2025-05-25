@@ -5,7 +5,7 @@
 *Explain your technical choices and architecture*
 
 ### API Documentation
-*Document your endpoints if applicable*
+e 
 
 ### Additional Features
 *List any extra features you implemented*

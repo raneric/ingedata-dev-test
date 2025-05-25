@@ -1,4 +1,3 @@
-
 /**
  * Centralized error handler middleware.
  *

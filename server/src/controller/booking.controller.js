@@ -1,5 +1,5 @@
 import Booking from "../models/booking.model.js";
-import { Op, where } from "sequelize";
+import { Op } from "sequelize";
 
 import { ResourceNotFoundError } from '../utils/errors.js';
 

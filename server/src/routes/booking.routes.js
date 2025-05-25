@@ -1,11 +1,15 @@
 import express from 'express';
-import Booking from '../models/booking.model.js';
-import { getBookingByRoomId, getBookings, getBookingById } from '../controller/booking.controller.js';
+import {
+  getBookingByRoomId,
+  getBookings,
+  getBookingById
+} from '../controller/booking.controller.js';
+import bookingDateValidator from '../validators/booking.validator.js';
 
 const router = express.Router();
 
 router.get('/bookings/:roomId', getBookingByRoomId);
-router.get('/bookings', getBookings);
+router.get('/bookings', bookingDateValidator, getBookings);
 router.get('/booking/:id', getBookingById);
 
 export default router;

@@ -14,7 +14,6 @@ async function findAllRooms(req, res, next) {
     let rooms;
     if (checkInDate && checkOutDate) {
       rooms = await RoomRepository.findAvailableWithin(checkInDate, checkOutDate);
-      console.log(rooms);
     } else {
       rooms = await RoomRepository.findAll();
     }
@@ -28,9 +27,9 @@ async function findAvailableRoomWithinDate(req, res, next) {
   const { checkInDate, checkOutDate } = req.query;
   try {
     const rooms = await RoomRepository.findAvailableWithin(checkInDate, checkOutDate);
-    console.log(rooms);
+    res.json(rooms);
   } catch (error) {
-
+    next(error)
   }
 }
 

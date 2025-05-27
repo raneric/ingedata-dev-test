@@ -16,7 +16,7 @@ app.use(cors());
 app.use('/', roomRouter);
 app.use('/', bookingRouter);
 
-//app.use(defaultResourceNotFoundError);
+app.use(defaultResourceNotFoundError);
 
 // Error handling middleware
 app.use(errorHandler);

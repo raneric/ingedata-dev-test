@@ -9,7 +9,7 @@
  * @param {Object} res The Express response object
  * @param {Function} next The Express next middleware function
  */
-function errorHandler(err, req, res, next) {
+function errorHandler(err, req, res, _) {
   const statusCode = err.statusCode || 500;
   res.status(statusCode).json({
     error: err.name,
@@ -17,7 +17,7 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-function defaultResourceNotFoundError(req, res, next) {
+function defaultResourceNotFoundError(req, res, _) {
   res.status(404).json({
     error: 'Not Found',
     message: `Route ${req.originalUrl} does not exist`,

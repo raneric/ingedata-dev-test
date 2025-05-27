@@ -25,7 +25,6 @@ async function getBookingByRoomId(req, res, next) {
   }
 }
 
-
 /**
  * Controller to fetch all bookings or all bookings that are within a specific date range.
  *

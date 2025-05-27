@@ -11,7 +11,20 @@
  */
 function errorHandler(err, req, res, next) {
   const statusCode = err.statusCode || 500;
-  res.status(statusCode).json({ message: err.message });
+  res.status(statusCode).json({
+    error: err.name,
+    message: err.message
+  });
 }
 
-export default errorHandler
+function defaultResourceNotFoundError(req, res, next) {
+  res.status(404).json({
+    error: 'Not Found',
+    message: `Route ${req.originalUrl} does not exist`,
+  });
+}
+
+export {
+  errorHandler,
+  defaultResourceNotFoundError
+}

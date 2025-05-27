@@ -1,5 +1,5 @@
-import Room from '../models/room.model.js';
 import { ResourceNotFoundError } from '../utils/errors.js';
+import RoomRepository from '../repositories/RoomRepository.js';
 
 /**
  * Controller to fetch all rooms.
@@ -8,15 +8,31 @@ import { ResourceNotFoundError } from '../utils/errors.js';
  *   - 200 OK with a list of room objects.
  *   - 500 Internal Server Error for other failures.
  */
-async function getAllRooms(req, res, next) {
+async function findAllRooms(req, res, next) {
+  const { checkInDate, checkOutDate } = req.query;
   try {
-    const rooms = await Room.findAll();
+    let rooms;
+    if (checkInDate && checkOutDate) {
+      rooms = await RoomRepository.findAvailableWithin(checkInDate, checkOutDate);
+      console.log(rooms);
+    } else {
+      rooms = await RoomRepository.findAll();
+    }
     res.json(rooms);
   } catch (error) {
     next(error)
   }
 }
 
+async function findAvailableRoomWithinDate(req, res, next) {
+  const { checkInDate, checkOutDate } = req.query;
+  try {
+    const rooms = await RoomRepository.findAvailableWithin(checkInDate, checkOutDate);
+    console.log(rooms);
+  } catch (error) {
+
+  }
+}
 
 /**
  * Controller to fetch a room by its ID.
@@ -29,12 +45,12 @@ async function getAllRooms(req, res, next) {
  *   - 404 Not Found if the room does not exist.
  *   - 500 Internal Server Error for other failures.
  */
-async function getRoomById(req, res, next) {
+async function findRoom(req, res, next) {
   const roomId = req.params.id;
   try {
-    const room = await Room.findByPk(roomId);
+    const room = await RoomRepository.findById(roomId);
     if (!room) {
-      throw new ResourceNotFoundError(`Room with ${roomId} not found`)
+      throw new ResourceNotFoundError(`Room with ID ${roomId} doesn't exist`)
     }
     res.json(room);
   } catch (error) {
@@ -44,6 +60,7 @@ async function getRoomById(req, res, next) {
 }
 
 export {
-  getAllRooms,
-  getRoomById
+  findAllRooms,
+  findRoom,
+  findAvailableRoomWithinDate
 }

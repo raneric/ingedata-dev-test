@@ -1,6 +1,4 @@
-import Booking from "../models/booking.model.js";
-import { Op } from "sequelize";
-
+import BookingRepository from "../repositories/BookingRepository.js";
 import { ResourceNotFoundError } from '../utils/errors.js';
 
 /**
@@ -17,7 +15,7 @@ import { ResourceNotFoundError } from '../utils/errors.js';
 async function getBookingByRoomId(req, res, next) {
   const roomId = req.params.roomId;
   try {
-    const bookings = await Booking.findAll({ where: { roomId } });
+    const bookings = await BookingRepository.findByRoomId(roomId)
     if (!bookings) {
       throw new ResourceNotFoundError(`No booking found for ${roomId}`);
     }
@@ -46,19 +44,9 @@ async function getBookings(req, res, next) {
     let bookings;
 
     if (checkInDate && checkOutDate) {
-      bookings = await Booking.findAll(
-        {
-          where: {
-            checkInDate: {
-              [Op.gte]: new Date(checkInDate)
-            },
-            checkOutDate: {
-              [Op.lte]: new Date(checkOutDate)
-            }
-          }
-        });
+      bookings = await BookingRepository.findByDateRange(checkInDate, checkOutDate);
     } else {
-      bookings = await Booking.findAll();
+      bookings = await BookingRepository.findAll();
     }
 
     if (!bookings) {
@@ -84,7 +72,7 @@ async function getBookings(req, res, next) {
 async function getBookingById(req, res, next) {
   const id = req.params.id;
   try {
-    const booking = await Booking.findByPk(id);
+    const booking = await BookingRepository.findById(id);
     if (!booking) {
       throw new ResourceNotFoundError(`No bookings with ${id} found`);
     }

@@ -25,18 +25,22 @@ import { ValidatorError } from "../utils/errors.js";
  */
 function bookingDateValidator(req, res, next) {
   const { checkInDate, checkOutDate } = req.query;
-
-  if (!checkInDate || !checkOutDate) {
+  console.log("in validation middleware");
+  if (!checkInDate && !checkOutDate) {
     return next();
   }
 
   const checkInDateObject = new Date(checkInDate);
   const checkOutDateObject = new Date(checkOutDate);
 
-  if (checkInDateObject.toString() === "Invalid Date" || checkOutDateObject.toString() === "Invalid Date") {
-    throw new ValidatorError(`Invalid date from query ${checkInDate} or/and ${checkOutDate}`);
+  if (checkInDateObject.toString() === "Invalid Date") {
+    throw new ValidatorError(`Invalid check-in date date format from query ${checkInDate}`);
   }
 
+  if (checkOutDateObject.toString() === "Invalid Date") {
+    throw new ValidatorError(`Invalid checkout date format from query ${checkOutDate}`);
+  }
+  next();
 }
 
 export default bookingDateValidator;

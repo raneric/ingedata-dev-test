@@ -12,8 +12,18 @@ Booking.init({
       key: 'id',
     },
   },
-  checkInDate: DataTypes.DATE,
-  checkOutDate: DataTypes.DATE
+  price: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  checkInDate: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  checkOutDate: {
+    type: DataTypes.DATE,
+    allowNull: false
+  }
 }, {
   sequelize,
   modelName: 'Booking',

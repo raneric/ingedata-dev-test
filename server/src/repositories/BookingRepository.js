@@ -4,48 +4,23 @@ import { Op } from "sequelize";
 class BookingRepository {
 
   /**
-   * Retrieves all bookings for a specific room by its ID.
+   * Retrieves all bookings that match the specified filters.
    *
-   * @param {string} roomId - The ID of the room (e.g., 'S1', 'P2', etc.)
-   * @returns {Promise<Array>} A promise that resolves to a list of booking objects.
+   * @param {Object} filters - An object representing the filters to apply.
+   *  Each key-value pair corresponds to a column and its filter value.
+   *  Filters with undefined values will be ignored.
+   * @returns {Promise<Array>} A promise that resolves to an array of booking objects
+   *  that match the specified filters.
    */
-  async findByRoomId(roomId) {
-    return await Booking.findAll({ where: { roomId } });
-  }
 
+  async findAll(filters = {}) {
+    const specifiedFilter = Object.fromEntries(Object.entries(filters)
+      .filter(([_, value]) => value !== undefined)
+    );
 
-  /**
-   * Retrieves all bookings within the given date range.
-   *
-   * This method takes two parameters, `checkInDate` and `checkOutDate`, which
-   * are expected to be strings in the format of 'YYYY-MM-DD'. It returns a
-   * promise that resolves to an array of booking objects.
-   *
-   * @param {string} checkInDate - The check-in date (inclusive).
-   * @param {string} checkOutDate - The check-out date (inclusive).
-   * @returns {Promise<Array>} A promise that resolves to an array of booking objects.
-   */
-  async findByDateRange(checkInDate, checkOutDate) {
-    return await Booking.findAll(
-      {
-        where: {
-          checkInDate: {
-            [Op.gte]: new Date(checkInDate)
-          },
-          checkOutDate: {
-            [Op.lte]: new Date(checkOutDate)
-          }
-        }
-      });
-  }
-
-  /**
-   * Retrieves all bookings from the database.
-   *
-   * @returns {Promise<Array>} A promise that resolves to an array of booking objects.
-   */
-  async findAll() {
-    return await Booking.findAll();
+    return await Booking.findAll({
+      where: specifiedFilter
+    });
   }
 
   /**
@@ -59,6 +34,5 @@ class BookingRepository {
     return await Booking.findByPk(id);
   }
 }
-
 
 export default new BookingRepository();

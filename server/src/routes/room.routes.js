@@ -1,7 +1,6 @@
 import express from 'express';
 import {
   findAllRooms,
-  findAvailableRoomWithinDate,
   findRoom
 } from '../controller/room.controller.js';
 

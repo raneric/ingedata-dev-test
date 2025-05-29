@@ -23,16 +23,6 @@ async function findAllRooms(req, res, next) {
   }
 }
 
-async function findAvailableRoomWithinDate(req, res, next) {
-  const { checkInDate, checkOutDate } = req.query;
-  try {
-    const rooms = await RoomRepository.findAvailableWithin(checkInDate, checkOutDate);
-    res.json(rooms);
-  } catch (error) {
-    next(error)
-  }
-}
-
 /**
  * Controller to fetch a room by its ID.
  *
@@ -60,6 +50,5 @@ async function findRoom(req, res, next) {
 
 export {
   findAllRooms,
-  findRoom,
-  findAvailableRoomWithinDate
+  findRoom
 }

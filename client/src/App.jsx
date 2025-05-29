@@ -1,15 +1,10 @@
-import Footer from "./ui/layouts/Footer";
-import Header from "./ui/layouts/Header";
-import Main from "./ui/layouts/Main";
+import { RouterProvider } from "react-router-dom";
+import router from './router';
+
 import './index.css';
+
 function App() {
-  return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </ >
-  )
+  return <RouterProvider router={router} />
 }
 
-export default App
+export default App;

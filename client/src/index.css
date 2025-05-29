@@ -1,6 +1,82 @@
+
 /* Global CSS reset */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
+  font-family: "Roboto", sans-serif;
+  }
+  
+  :root {
+    --primary-color: #eddea4;
+    --on-primary-color: #29261b;
+    --secondary-color: #8d3302;
+    --on-secondary-color: #424242;
+    --background-color: #F5F5F5;
+    --on-background-color: #424242;
+    --surface-color: #f9f7f3;
+    --on-surface-color: #005f69;
+    --accent-color: #f7a072;
+    --secondary-accent-color:#0fa3b1;
+    --error-color: #F44336;
+    --default-grey-body-color:#a5a5a5;
+  
+    --font-h1: 2.986rem;
+    --font-h2: 2.488rem;
+    --font-h3: 2.074rem;
+    --font-h4: 1.728rem;
+    --font-h5: 1.44rem;
+    --font-h6: 1.2rem;
+    --font-p-big: 1rem;
+    --font-p-medium: 0.9rem;
+    --font-small: 0.833rem;
+  
+    --font-tiny: 0.694rem
+  }
+  
+  body{
+    background-color: var(--surface-color);
+  }
+
+  header {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    font-size: var(--font-h6);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+   
+  .welcome-message{
+    font-style: italic;
+    font-family: 'Caveat';
+  }
+
+  header ul {
+    width: 180px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 12px;
+  }
+
+  header ul li a {
+    text-decoration: none;
+    color: var(--on-primary-color);
+    font-size: var(--font-h6);
+    font-weight: bold;
+  }
+
+  header ul li a:hover {
+   cursor: pointer;
+   color:  #01474e;
+  }
+
+ hr {
+   border-top: 1px dotted;
+   /* Set the top border */
+ }

@@ -1,0 +1,24 @@
+.bookButton {
+  grid-column: 2 / -1;
+  justify-self: flex-end;
+  background-color: var(--accent-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: var(--on-primary-color);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 12px;
+  max-width: 90px;
+  transition: all 0.3s ease-in-out;
+}
+
+.bookButton:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #f3864c;
+  scale: 1.05;
+}
+

@@ -26,14 +26,11 @@
 .roomDetails {
   width: 100%;
   padding: 8px;
-  display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
 }
 
 .description {
   font-size: var(--font-small);
-  grid-column: 1 / -1;
 }
 
 .description h4 {
@@ -76,8 +73,4 @@
 .bookButton {
   grid-column: 2 / -1;
   justify-self: flex-end;
-}
-
-.dv {
-  grid-column: 1 / -1;
 }

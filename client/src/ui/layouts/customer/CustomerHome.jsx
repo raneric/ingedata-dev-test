@@ -4,11 +4,11 @@ import { getRooms } from '../../../services/roomService.js';
 import { useLoaderData } from 'react-router-dom';
 
 function CustomerHome() {
-  const roomsLoaded = useLoaderData();
+  const rooms = useLoaderData();
 
   return (
     <div className={styles.roomList}>
-      {roomsLoaded.map((item, index) => (
+      {rooms.map((item, index) => (
         <RoomCard
           key={index}
           room={item}

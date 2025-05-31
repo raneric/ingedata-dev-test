@@ -1,13 +1,18 @@
 import styles from './core.module.css';
 
+const {
+  simpleButton,
+  iconButton } = styles
+
 function Button({ className, children, onClick }) {
+
   return (
     <>
       <button onClick={(e) => {
         e.stopPropagation();
         onClick();
       }
-      } className={`${styles.simpleButton} ${className}`}>
+      } className={`${simpleButton} ${className}`}>
         {children}
       </button>
     </>
@@ -17,7 +22,7 @@ function Button({ className, children, onClick }) {
 function IconButton({ children }) {
   return (
     <>
-      <button className={styles.iconButton}>
+      <button className={iconButton}>
         {children}
       </button>
     </>

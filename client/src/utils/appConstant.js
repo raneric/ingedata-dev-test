@@ -5,16 +5,19 @@
 const BASE_URL = 'http://localhost:3000';
 
 const ApiPath = {
-  room:{
-      all: '/rooms',
-      details: '/room/:id'
+  room: {
+    all: '/rooms',
+    detailsPath: '/room/:id',
+    details: '/room'
   },
-  booking:{
-      all: '/bookings',
-      details: '/booking/:id',
-      userBookings: '/bookings/:userId',
+  booking: {
+    all: '/bookings',
+    detailsPath: '/booking/:id',
+    userBookingsPath: '/bookings/:userId',
+    new: '/booking/new',
+    details: '/booking'
   },
-  admin:{
+  admin: {
     home: '/admin',
     stats: '/admin/stats'
   }

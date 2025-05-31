@@ -5,7 +5,9 @@ import { Button } from '../../core/Button';
 import Divider from '../../core/Divider';
 
 import styles from './room.module.css';
+import { useNavigate } from 'react-router';
 
+import { ApiPath } from '../../../utils/appConstant';
 
 /**
  * A card component for displaying a single room's details.
@@ -21,8 +23,9 @@ import styles from './room.module.css';
  * @param {Array<string>} props.room.amenities - The amenities available in the room.
  * @param {number} props.room.pricePerNight - The price per night of the room.
  */
-function RoomCard(props) {
-  const { room } = props
+function RoomCard({ room }) {
+
+  const navigate = useNavigate()
 
   let cardImg = null;
 
@@ -37,17 +40,45 @@ function RoomCard(props) {
       cardImg = royal_room;
   }
 
+  const onBookClickHandler = (roomId) => {
+    navigate(`${ApiPath.booking.new}?roomId=${roomId}`);
+  }
+
+  /**
+   * Handler for when a room is clicked.
+   *
+   * Navigates to the room's details page. /room/:id
+   *
+   * @param {string} roomId - The id of the room.
+   */
+  function onRoomClickedHandler(e, roomId) {
+    navigate(`${ApiPath.room.details}/${roomId}`);
+  }
+
   return (
-    <div className={styles.roomCard}>
+    <div
+      className={styles.roomCard}
+      onClick={(e) => onRoomClickedHandler(e, room.id)} >
+
       <img className={styles.cardImg} src={cardImg} />
+
       <div className={styles.roomDetails}>
+
         <span className={styles.category}>{room.category} room {room.id}</span>
+
         <PriceSection pricePerNight={room.pricePerNight} />
+
         <Divider className={styles.dv} />
+
         <Description description={room.description} />
-        <Divider className={styles.dv}/>
+
+        <Divider className={styles.dv} />
+
         <Amenities amenities={room.amenities} />
-        <Button className={styles.bookButton}>
+
+        <Button onClick={() => onBookClickHandler(room.id)}
+          className={styles.bookButton}
+        >
           <span>Book now</span>
         </Button>
       </div>
@@ -56,22 +87,22 @@ function RoomCard(props) {
 }
 
 
-function PriceSection(props) {
+function PriceSection({ pricePerNight }) {
   return (
     <>
       <span className={styles.priceSection}>
-        <span className={styles.price}> {props.pricePerNight} $</span> / one night
+        <span className={styles.price}> {pricePerNight} $</span> / one night
       </span>
     </>
   )
 }
 
-function Description(props) {
+function Description({ description }) {
   return (
     <>
       <div className={styles.description}>
         <h4>Room description:</h4>
-        <p >{props.description}</p>
+        <p >{description}</p>
       </div>
     </>
   )
@@ -85,13 +116,13 @@ function Description(props) {
  * 
  * The component renders a list as an unordered list.
  */
-function Amenities(props) {
+function Amenities({ amenities }) {
   return (
     <>
       <div className={styles.amenities}>
         <span>Amenities :</span>
         <ul >
-          {props.amenities.map((item, index) => (<li key={index}>{item}</li>))}
+          {amenities.map((item, index) => (<li key={index}>{item}</li>))}
         </ul>
       </div>
     </>

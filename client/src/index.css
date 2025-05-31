@@ -86,3 +86,6 @@ header ul li a:hover {
   color: var(--secondary-accent-color);
 }
 
+main {
+  padding: 32px 12px;
+}

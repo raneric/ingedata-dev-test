@@ -10,7 +10,7 @@ function Header() {
           <Link to={ApiPath.room.all}>Home</Link>
         </li>
         <li>
-          <Link to={ApiPath.booking.userBookings}>My booking</Link>
+          <Link to={ApiPath.booking.userBookingsPath}>My booking</Link>
         </li>
       </ul>
     </header>

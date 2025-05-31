@@ -1,9 +1,9 @@
 import styles from './core.module.css';
 
-function Icon(props) {
+function Icon({ iconFile }) {
   return (
     <>
-      <img className={styles.icon} src={props.iconFile} alt="Icon"/>
+      <img className={styles.icon} src={iconFile} alt="Icon" />
     </>
   )
 }

@@ -5,12 +5,18 @@ import { useLoaderData } from 'react-router-dom';
 
 function CustomerHome() {
   const roomsLoaded = useLoaderData();
+
   return (
     <div className={styles.roomList}>
-      {roomsLoaded.map((item, index) => (<RoomCard key={index} room={item} />))}
+      {roomsLoaded.map((item, index) => (
+        <RoomCard
+          key={index}
+          room={item}
+        />))}
     </div>
   )
 }
+
 
 export function loader() {
   return getRooms();

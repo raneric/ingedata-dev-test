@@ -1,14 +1,16 @@
 import { Link } from "react-router"
+import { ApiPath } from "../../utils/appConstant"
+
 function Header() {
   return (
     <header >
       <h1 className="welcome-message">Welcome</h1>
       <ul>
         <li>
-          <Link to="/customer">Home</Link>
+          <Link to={ApiPath.room.all}>Home</Link>
         </li>
         <li>
-          <Link to="/customer/bookings">My booking</Link>
+          <Link to={ApiPath.booking.userBookings}>My booking</Link>
         </li>
       </ul>
     </header>

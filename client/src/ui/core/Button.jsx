@@ -3,11 +3,24 @@ import styles from './core.module.css';
 function Button(props) {
   return (
     <>
-      <button className={styles.bookButton}>
+      <button className={`${styles.simpleButton} ${props.className}`}>
         {props.children}
       </button>
     </>
   )
 }
 
-export default Button
+function IconButton(props) {
+  return (
+    <>
+      <button className={styles.iconButton}>
+        {props.children}
+      </button>
+    </>
+  )
+}
+
+export {
+  Button,
+  IconButton
+}

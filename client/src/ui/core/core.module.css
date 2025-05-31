@@ -1,6 +1,4 @@
-.bookButton {
-  grid-column: 2 / -1;
-  justify-self: flex-end;
+.simpleButton {
   background-color: var(--accent-color);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   border: 1px solid var(--accent-color);
@@ -8,7 +6,7 @@
   box-sizing: border-box;
   color: var(--on-primary-color);
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--font-p-medium);
   font-weight: 600;
   line-height: 20px;
   padding: 6px 12px;
@@ -16,9 +14,24 @@
   transition: all 0.3s ease-in-out;
 }
 
-.bookButton:hover {
+.simpleButton:hover {
   transition: all 0.3s ease-in-out;
   background-color: #f3864c;
-  scale: 1.05;
 }
 
+.iconButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.icon {
+  max-width: 24px;
+  height: auto;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #8d330223;
+}

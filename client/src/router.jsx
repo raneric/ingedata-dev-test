@@ -1,12 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import CustomerLayout from "./ui/layouts/customer/CustomerLayout";
-import CustomerHome from "./ui/layouts/customer/CustomerHome";
+import CustomerHome, { loader as roomsLoader } from "./ui/layouts/customer/CustomerHome";
 import BookingDetail from "./ui/layouts/customer/BookingDetail";
+
 import AdminLayout from "./ui/layouts/admin/AdminLayout";
 import AdminHome from "./ui/layouts/admin/AdminHome";
 import BookingStats from "./ui/layouts/admin/BookingStats";
-import RootLayout from "./ui/layouts/RootLayout";
 
+import RootLayout from "./ui/layouts/RootLayout";
+import RoomDetails, { loader as roomLoader } from "./ui/components/room/RoomDetails";
+
+import { ApiPath } from "./utils/appConstant";
 
 const router = createBrowserRouter(
   [
@@ -18,11 +23,16 @@ const router = createBrowserRouter(
           element: <CustomerLayout />,
           children: [
             {
-              path: '/customer',
+              path: ApiPath.room.all,
               element: <CustomerHome />,
+              loader: roomsLoader
+            }, {
+              path: ApiPath.room.details,
+              element: <RoomDetails />,
+              loader: roomLoader
             },
             {
-              path: '/customer/booking/:id',
+              path: ApiPath.booking.details,
               element: <BookingDetail />,
             }
           ]
@@ -31,11 +41,11 @@ const router = createBrowserRouter(
           element: <AdminLayout />,
           children: [
             {
-              path: '/admin',
+              path: ApiPath.admin.home,
               element: <AdminHome />,
             },
             {
-              path: '/admin/stats',
+              path: ApiPath.admin.stats,
               element: <BookingStats />,
             }
           ]

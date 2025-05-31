@@ -1,9 +1,9 @@
 function Footer() {
   return (
-    <>
-      <h1>Application Footer</h1>
-    </>
+    <footer>
+      <p>Application footer</p>
+    </footer>
   )
 }
 
-export default Footer
+export default Footer;

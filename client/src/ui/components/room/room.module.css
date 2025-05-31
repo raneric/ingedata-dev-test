@@ -1,18 +1,31 @@
 .roomCard {
   display: flex;
+  justify-content: space-between;
   max-width: 600px;
+  min-height: 260px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 8px;
+  background-color: var(--background-color);
+  transition: all 0.3s ease;
+}
+
+.roomCard:hover {
+  cursor: pointer;
+  scale: 1.01;
+  transition: all 0.3s ease;
 }
 
 .cardImg {
   max-width: 250px;
-  border-right: 1px solid #95e1f873;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px 0px 0px 8px;
+  border-right: 1px solid #75460041;
 }
 
 .roomDetails {
   width: 100%;
-  padding:8px;
+  padding: 8px;
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr;
@@ -24,8 +37,6 @@
 }
 
 .description h4 {
-  margin-bottom: 6px;
-  margin-top: 16px;
   font-size: var(--font-p-big);
   color: var(--on-background-color)
 }
@@ -33,7 +44,7 @@
 .description p {
   font-size: var(--font-p-medium);
   text-align: justify;
-  color:var(--on-background-color)
+  color: var(--on-background-color)
 }
 
 .category {
@@ -53,11 +64,20 @@
 }
 
 .amenities {
-  margin-top: 16px;
   grid-column: 1 / -1;
   color: var(--on-background-color)
 }
+
 .amenities ul {
   margin-left: 32px;
   font-size: var(--font-p-medium);
+}
+
+.bookButton {
+  grid-column: 2 / -1;
+  justify-self: flex-end;
+}
+
+.dv {
+  grid-column: 1 / -1;
 }

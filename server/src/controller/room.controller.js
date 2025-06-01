@@ -48,7 +48,18 @@ async function findRoom(req, res, next) {
 
 }
 
+async function findRoomBookings(req, res, next) {
+  const roomId = req.params.id;
+  try {
+    const roomBookings = await RoomRepository.findRoomBookings(roomId);
+    res.json(roomBookings);
+  } catch (error) {
+    next(error)
+  }
+}
+
 export {
   findAllRooms,
-  findRoom
+  findRoom,
+  findRoomBookings
 }

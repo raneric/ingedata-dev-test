@@ -29,7 +29,7 @@ class RoomRepository {
    */
   async findAvailableWithin(checkInDate, checkOutDate) {
 
-    const query = `select * from rooms WHERE id NOT IN (
+    const query = `SELECT * from rooms WHERE id NOT IN (
                   SELECT roomId FROM Bookings
                   WHERE NOT (
                     checkOutDate <= :checkInDate OR
@@ -60,7 +60,39 @@ class RoomRepository {
   async findById(roomId) {
     return await Room.findByPk(roomId);
   }
-}
 
+
+  async findRoomBookings(roomId) {
+    const query = `SELECT * FROM rooms 
+                LEFT JOIN bookings ON rooms.id = bookings.roomId 
+                WHERE rooms.id =:roomId`;
+    const rawBookings = await sequelize.query(
+      query,
+      {
+        replacements: { roomId },
+        type: QueryTypes.SELECT,
+      });
+
+    const roomBookings = {
+      id: rawBookings[0].id,
+      name: rawBookings[0].category,
+      category: rawBookings[0].category,
+      description: rawBookings[0].description,
+      pricePerNight: rawBookings[0].price_per_night,
+      amenities: JSON.parse(rawBookings[0].amenities),
+      bookings: []
+    }
+
+    rawBookings.forEach((booking) => {
+      roomBookings.bookings.push({
+        bookingId: booking.id,
+        checkInDate: booking.checkInDate,
+        checkOutDate: booking.checkOutDate
+      })
+    })
+
+    return roomBookings;
+  }
+}
 
 export default new RoomRepository();

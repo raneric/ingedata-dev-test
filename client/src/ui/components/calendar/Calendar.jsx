@@ -22,7 +22,7 @@ const {
   bookedDate
 } = styles
 
-function Calendar() {
+function Calendar({ bookings }) {
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -30,6 +30,18 @@ function Calendar() {
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
+
+  const bookedDates = new Set();
+
+  bookings.forEach(({ checkInDate, checkOutDate }) => {
+    let current = new Date(checkInDate);
+    const end = new Date(checkOutDate);
+
+    while (current < end) {
+      bookedDates.add(current.toDateString()); // Using readable format for comparison
+      current.setDate(current.getDate() + 1);
+    }
+  })
 
   const daysOfWeekLabel = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -69,10 +81,12 @@ function Calendar() {
      */
     if (firstDayOfMonth > 0 && firstDayOfMonth <= 6) {
       for (let i = lastDayOfPrevMonth.getDay(); i >= 0; i--) {
+        const date = new Date(year, month, i);
+        const isBooked = bookedDates.has(date.toDateString());
         days.push(
           <div
             key={`previous-month-${i}`}
-            className={`${day} ${bookedDate}`}
+            className={`${day} ${isBooked ? bookedDate : ''}`}
           >
             {lastDayOfPrevMonth.getDate() - i}
           </div>
@@ -89,10 +103,13 @@ function Calendar() {
         month === todayDate.getMonth() &&
         year === todayDate.getFullYear();
 
+      const date = new Date(year, month, i);
+      const isBooked = bookedDates.has(date.toDateString());
+
       days.push(
         <div
           key={`current-month-${i}`}
-          className={`${day} ${isToday ? today : ''}`}
+          className={`${day} ${isBooked ? bookedDate : ''} ${isToday ? today : ''}`}
         >
           {i}
         </div>
@@ -105,10 +122,12 @@ function Calendar() {
      */
     if (nextMonthStartIndex > 0 && nextMonthStartIndex <= 6) {
       for (let i = 0; i <= 6 - nextMonthStartIndex; i++) {
+        const date = new Date(year, month, i);
+        const isBooked = bookedDates.has(date.toDateString());
         days.push(
           <div
             key={`next-month-${i}`}
-            className={`${day} ${daysOtherMonth}`}
+            className={`${day} ${isBooked ? bookedDate : ''} ${daysOtherMonth}`}
           >
             {i + 1}
           </div>

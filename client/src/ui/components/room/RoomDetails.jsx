@@ -1,4 +1,4 @@
-import { getRoom } from '../../../services/roomService';
+import { getRoomWithBookings } from '../../../services/roomService';
 import { useLoaderData } from 'react-router-dom';
 
 import roomStyles from './room.module.css';
@@ -17,14 +17,14 @@ function RoomDetails() {
       <div className={roomAvailability}>
         <h3 className={availabilityLabel}>Availability</h3>
         <Divider />
-        <Calendar />
+        <Calendar bookings={room.bookings} />
       </div>
     </div>
   )
 }
 
 export function loader({ params }) {
-  return getRoom(params.id);
+  return getRoomWithBookings(params.id);
 }
 
 export default RoomDetails;

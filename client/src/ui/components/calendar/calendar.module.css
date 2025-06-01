@@ -1,0 +1,50 @@
+.calendar {
+  max-width: 320px;
+  background-color: var(--background-color);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.header button {
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+}
+
+.daysOfWeek,
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.dayOfWeek {
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.day {
+  padding: 0.7rem;
+  border: 1px solid #dddddd79;
+  cursor: pointer;
+}
+
+.daysOtherMonth {
+  opacity: 0.6;
+  background-color: rgba(196, 196, 196, 0.267);
+}
+
+.today {
+  border-radius: 12%;
+  border: 2px solid var(--accent-color);
+}
+
+.bookedDate {
+  background-color: var(--secondary-color);
+  color: white;
+  opacity: 0.6;
+}

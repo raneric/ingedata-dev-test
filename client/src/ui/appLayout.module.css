@@ -14,10 +14,31 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.gridRowGapSmall {
+  gap: 0.4em;
+}
+
+.gridRowGapMedium {
+  gap: 0.6em;
+}
+
+.gridRowGapLarge {
+  gap: 0.8em;
+}
+
+.gridRowGapXLarge {
+  gap: 1em;
+}
+
+/* Grid items properties */
 .gridItemFullRow {
   grid-column: 1 / -1;
 }
 
 .gridItemFullColumn {
   grid-row: 1 / -1;
+}
+.gridItemCenter {
+  justify-self: center;
+  align-self: center;
 }

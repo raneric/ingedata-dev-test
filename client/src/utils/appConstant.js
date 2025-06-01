@@ -23,7 +23,10 @@ const ApiPath = {
   }
 }
 
+const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd';
+
 export {
   BASE_URL,
-  ApiPath
+  ApiPath,
+  DEFAULT_DATE_FORMAT
 }

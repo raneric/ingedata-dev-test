@@ -17,6 +17,7 @@
   --on-surface-color: #3d2010;
   --accent-color: #f7a072;
   --secondary-accent-color: #8C2A3C;
+  --on-secondary-accent-color: #f5768d;
   --error-color: #F44336;
   --default-grey-body-color: #a5a5a5;
 
@@ -32,8 +33,8 @@
   --font-tiny: 0.694rem
 }
 
-h4{
-  font-size:var(--font-h4) ;
+h4 {
+  font-size: var(--font-h4);
 }
 
 h5 {

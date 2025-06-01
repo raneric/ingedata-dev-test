@@ -1,14 +1,15 @@
-import premium_room from '../../../assets/premium_room.jpg';
-import royal_room from '../../../assets/royal_room.jpg';
-import simple_room from '../../../assets/simple_room.jpg';
-import { Button } from '../../core/Button';
-import Divider from '../../core/Divider';
+import { Button } from '../../../core/Button';
+import Divider from '../../../core/Divider';
 
-import roomStyles from './room.module.css';
-import appLayoutStyles from '../../appLayout.module.css';
+import roomCardsStyles from './roomCards.module.css';
+import appLayoutStyles from '../../../appLayout.module.css';
 import { useNavigate } from 'react-router';
-import { ApiPath } from '../../../utils/appConstant';
+import { ApiPath } from '../../../../utils/appConstant';
+import PriceSection from './PriceSection';
+import Description from './Description';
+import Amenities from './Amenities';
 
+import getRoomPicture from '../../../../utils/getRoomPicture.js';
 /**
  * A card component for displaying a single room's details.
  *
@@ -26,18 +27,17 @@ import { ApiPath } from '../../../utils/appConstant';
 
 const {
   cardImg,
-  roomDetails,
+  roomInfo,
   roomCard,
   category,
-  description,
-  priceSection,
-  price,
-  bookButton } = roomStyles
+  bookButton } = roomCardsStyles;
 
 const {
   gridItemFullRow,
   grid,
-  grid2Cols } = appLayoutStyles
+  grid2Cols,
+  gridItemCenter,
+  gridRowGapSmall } = appLayoutStyles;
 
 /**
  * A card component for displaying a single room's details.
@@ -49,18 +49,7 @@ function RoomCard({ room }) {
 
   const navigate = useNavigate()
 
-  let cardImageFile = null;
-
-  switch (room.category) {
-    case 'Simple':
-      cardImageFile = simple_room
-      break;
-    case 'Premium':
-      cardImageFile = premium_room;
-      break;
-    default:
-      cardImageFile = royal_room;
-  }
+  const cardImageFile = getRoomPicture(room.category);
 
   /**
    * Handler for booking button click.
@@ -85,13 +74,13 @@ function RoomCard({ room }) {
   }
 
   return (
-    <div
-      className={roomCard}
+    <article
+      className={`${roomCard}  ${gridItemCenter}`}
       onClick={(e) => onRoomClickedHandler(e, room.id)} >
 
       <img className={cardImg} src={cardImageFile} />
 
-      <div className={`${roomDetails} ${grid} ${grid2Cols}`}>
+      <div className={`${roomInfo} ${grid} ${grid2Cols} ${gridRowGapSmall}`}>
 
         <span className={category}>{room.category} room {room.id}</span>
 
@@ -111,51 +100,7 @@ function RoomCard({ room }) {
           <span>Book now</span>
         </Button>
       </div>
-    </div>
-  )
-}
-
-
-function PriceSection({ pricePerNight }) {
-  return (
-    <>
-      <span className={priceSection}>
-        <span className={price}> {pricePerNight} $</span> / one night
-      </span>
-    </>
-  )
-}
-
-function Description({ description: descriptionText }) {
-
-  return (
-    <>
-      <div className={`${description} ${gridItemFullRow}`}>
-        <h4>Room description:</h4>
-        <p >{descriptionText}</p>
-      </div>
-    </>
-  )
-}
-
-/**
- * Amenities component renders a list of amenities available in the room.
- * 
- * @param {Object} props - The properties object.
- * @param {Array} props.amenities - A list of amenities available in the room.
- * 
- * The component renders a list as an unordered list.
- */
-function Amenities({ amenities }) {
-  return (
-    <>
-      <div className={amenities}>
-        <span>Amenities :</span>
-        <ul >
-          {amenities.map((item, index) => (<li key={index}>{item}</li>))}
-        </ul>
-      </div>
-    </>
+    </article>
   )
 }
 

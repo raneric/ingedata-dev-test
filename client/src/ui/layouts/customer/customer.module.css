@@ -1,7 +1,0 @@
-.roomList{
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  justify-content: space-around;
-  row-gap: 32px;
-}

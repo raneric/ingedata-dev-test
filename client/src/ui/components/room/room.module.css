@@ -1,76 +1,24 @@
-.roomCard {
-  display: flex;
-  justify-content: space-between;
-  max-width: 600px;
-  min-height: 260px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 8px;
-  background-color: var(--background-color);
-  transition: all 0.3s ease;
-}
-
-.roomCard:hover {
-  cursor: pointer;
-  scale: 1.01;
-  transition: all 0.3s ease;
-}
-
-.cardImg {
-  max-width: 250px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px 0px 0px 8px;
-  border-right: 1px solid #75460041;
-}
-
 .roomDetails {
-  width: 100%;
-  padding: 8px;
+  display: flex;
+  flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 48px;
+}
+
+.roomAvailability {
+  display: flex;
   align-items: center;
+  flex-direction: column;
+    background-color: var(--background-color);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    gap: 8px;
 }
 
-.description {
-  font-size: var(--font-small);
-}
-
-.description h4 {
-  font-size: var(--font-p-big);
-  color: var(--on-background-color)
-}
-
-.description p {
-  font-size: var(--font-p-medium);
-  text-align: justify;
-  color: var(--on-background-color)
-}
-
-.category {
-  font-size: var(--font-h6);
-  font-weight: bold;
+.availabilityLabel {
+  width: 100%;
+  text-align: center;
   color: var(--on-surface-color);
-}
-
-.priceSection {
-  justify-self: flex-end;
-}
-
-.price {
-  justify-self: flex-end;
-  font-size: var(--font-h6);
-  font-weight: bold;
-}
-
-.amenities {
-  grid-column: 1 / -1;
-  color: var(--on-background-color)
-}
-
-.amenities ul {
-  margin-left: 32px;
-  font-size: var(--font-p-medium);
-}
-
-.bookButton {
-  grid-column: 2 / -1;
-  justify-self: flex-end;
 }

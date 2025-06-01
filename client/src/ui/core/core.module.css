@@ -34,4 +34,5 @@
 .divider {
   border: none;
   border-top: 1px solid #8d330223;
+  width: 100%;
 }

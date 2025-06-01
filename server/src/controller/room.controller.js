@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from '../utils/errors.js';
+import { ResourceNotFoundError } from '../utils/ApplicationError.js';
 import RoomRepository from '../repositories/RoomRepository.js';
 
 /**

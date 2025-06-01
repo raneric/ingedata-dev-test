@@ -1,4 +1,4 @@
-import { ValidatorError } from "../utils/errors.js";
+import { ValidatorError } from "../utils/ApplicationError.js";
 
 /**
  * Middleware to validate booking dates from query parameters.

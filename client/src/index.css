@@ -20,6 +20,7 @@
   --on-secondary-accent-color: #f5768d;
   --error-color: #F44336;
   --default-grey-body-color: #a5a5a5;
+  --border-light-color: #8d330223;
 
   --font-h1: 2.986rem;
   --font-h2: 2.488rem;
@@ -61,32 +62,10 @@ header {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.welcome-message {
-  font-style: italic;
-  font-family: 'Caveat';
-}
-
-header ul {
-  width: 180px;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  gap: 12px;
-}
-
-header ul li a {
-  text-decoration: none;
-  color: var(--on-primary-color);
-  font-size: var(--font-h6);
-  font-weight: bold;
-}
-
-header ul li a:hover {
-  cursor: pointer;
-  color: var(--secondary-accent-color);
-}
-
 main {
   padding: 32px 12px;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
 }

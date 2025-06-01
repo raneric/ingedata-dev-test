@@ -1,4 +1,3 @@
-import { getRoomWithBookings } from '../../../services/roomService';
 import { useLoaderData } from 'react-router-dom';
 
 import roomStyles from './room.module.css';
@@ -21,10 +20,6 @@ function RoomDetails() {
       </div>
     </div>
   )
-}
-
-export function loader({ params }) {
-  return getRoomWithBookings(params.id);
 }
 
 export default RoomDetails;

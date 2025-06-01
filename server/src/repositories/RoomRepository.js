@@ -14,8 +14,6 @@ class RoomRepository {
     return await Room.findAll();
   }
 
-
-
   /**
    * Retrieves all rooms that are available within the given date range.
    *
@@ -37,7 +35,7 @@ class RoomRepository {
                   )
                 )`;
 
-    const rooms = await sequelize.query(
+    const rawRooms = await sequelize.query(
       query,
       {
         replacements: {
@@ -46,9 +44,14 @@ class RoomRepository {
         },
         type: QueryTypes.SELECT,
       });
+    const rooms = rawRooms.map((room) => {
+      return {
+        ...room,
+        amenities: JSON.parse(room.amenities),
+      };
+    });
     return rooms;
   }
-
 
   /**
    * Retrieves a room by its ID.
@@ -61,7 +64,14 @@ class RoomRepository {
     return await Room.findByPk(roomId);
   }
 
-
+  /**
+   * Retrieves a room and its bookings by the room's ID.
+   *
+   *
+   * @param {string} roomId - The ID of the room to retrieve.
+   * @returns {Promise<Object>} A promise that resolves to the room object with its bookings if found,
+   *  or null if no room is found.
+   */
   async findRoomBookings(roomId) {
     const query = `SELECT * FROM rooms 
                 LEFT JOIN bookings ON rooms.id = bookings.roomId 
@@ -74,14 +84,14 @@ class RoomRepository {
       });
 
     const roomBookings = {
-      id: rawBookings[0].id,
+      id: rawBookings[0].roomId,
       name: rawBookings[0].category,
       category: rawBookings[0].category,
       description: rawBookings[0].description,
-      pricePerNight: rawBookings[0].price_per_night,
+      pricePerNight: rawBookings[0].pricePerNight,
       amenities: JSON.parse(rawBookings[0].amenities),
       bookings: []
-    }
+    };
 
     rawBookings.forEach((booking) => {
       roomBookings.bookings.push({
@@ -89,7 +99,7 @@ class RoomRepository {
         checkInDate: booking.checkInDate,
         checkOutDate: booking.checkOutDate
       })
-    })
+    });
 
     return roomBookings;
   }

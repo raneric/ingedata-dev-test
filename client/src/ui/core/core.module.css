@@ -17,13 +17,27 @@
 .simpleButton:hover {
   transition: all 0.3s ease-in-out;
   background-color: #f3864c;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .iconButton {
   background-color: transparent;
-  border: none;
+  border-radius: 0.8em;
+    border: 2px solid var(--border-light-color);
+    padding: 0.6em;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    transition: all 0.3s ease-in-out;
+  
+  }
+  
+  .iconButton:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .icon {
@@ -33,6 +47,6 @@
 
 .divider {
   border: none;
-  border-top: 1px solid #8d330223;
+  border-top: 1px solid var(--border-light-color);
   width: 100%;
 }

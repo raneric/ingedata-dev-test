@@ -11,15 +11,15 @@ const ApiPath = {
     details: '/room'
   },
   booking: {
-    all: '/bookings',
-    detailsPath: '/booking/:id',
+    all: '/user/:userId/bookings',
+    detailsPath: '/user/:userId/booking/:id',
     userBookingsPath: '/bookings/:userId',
     new: '/booking/new',
     details: '/booking'
   },
   admin: {
     home: '/admin',
-    stats: '/admin/stats'
+    bookings: '/admin/bookings',
   }
 }
 

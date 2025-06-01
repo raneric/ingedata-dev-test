@@ -16,8 +16,7 @@ Room.init(
     description: DataTypes.TEXT,
     pricePerNight: {
       type: DataTypes.FLOAT,
-      allowNull: false,
-      field: 'price_per_night',
+      allowNull: false
     },
     amenities: {
       type: DataTypes.JSON,

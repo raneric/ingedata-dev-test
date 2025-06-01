@@ -1,5 +1,5 @@
 import BookingRepository from "../repositories/BookingRepository.js";
-import { ResourceNotFoundError } from '../utils/errors.js';
+import { ResourceNotFoundError } from '../utils/ApplicationError.js';
 
 /**
  * Controller to fetch all bookings that fit the given filter criteria based on 

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import CustomerLayout from "./ui/layouts/customer/CustomerLayout";
-import CustomerHome, { loader as roomsLoader } from "./ui/layouts/customer/CustomerHome";
+import CustomerHome from "./ui/layouts/customer/CustomerHome";
 import BookingDetail from "./ui/components/booking/BookingDetail";
 
 import AdminLayout from "./ui/layouts/admin/AdminLayout";
@@ -9,10 +9,12 @@ import AdminHome from "./ui/layouts/admin/AdminHome";
 import BookingStats from "./ui/components/booking/BookingStats";
 
 import RootLayout from "./ui/layouts/RootLayout";
-import RoomDetails, { loader as roomLoader } from "./ui/components/room/RoomDetails";
+import RoomDetails from "./ui/components/room/RoomDetails";
 
 import { ApiPath } from "./utils/appConstant";
 import BookingForm from "./ui/components/booking/BookingForm";
+import Error from "./ui/components/error/Error";
+import { roomLoader, roomsLoader } from "./loader/roomsLoader";
 
 const router = createBrowserRouter(
   [
@@ -22,6 +24,7 @@ const router = createBrowserRouter(
       children: [
         {
           element: <CustomerLayout />,
+          errorElement: <Error />,
           children: [
             {
               path: ApiPath.room.all,
@@ -43,13 +46,14 @@ const router = createBrowserRouter(
         },
         {
           element: <AdminLayout />,
+          errorElement: <Error />,
           children: [
             {
               path: ApiPath.admin.home,
               element: <AdminHome />,
             },
             {
-              path: ApiPath.admin.stats,
+              path: ApiPath.admin.bookings,
               element: <BookingStats />,
             }
           ]

@@ -12,6 +12,18 @@ Booking.init({
       key: 'id',
     },
   },
+  customerName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  customerEmail: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  customerPhone: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   price: {
     type: DataTypes.FLOAT,
     allowNull: false

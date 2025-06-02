@@ -5,7 +5,7 @@ import search from '../../../assets/search.png';
 import Icon from '../../core/Icon.jsx';
 
 import styles from './filter.module.css';
-import { ApiPath } from '../../../utils/appConstant.js';
+import { AppPath } from '../../../utils/appConstant.js';
 import { useState } from 'react';
 
 const {
@@ -36,7 +36,7 @@ function SearchFilter() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`${ApiPath.room.all}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`);
+    navigate(`${AppPath.room.all}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`);
   }
 
   return (

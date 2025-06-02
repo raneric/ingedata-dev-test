@@ -10,7 +10,6 @@ function roomsLoader({ request }) {
 }
 
 function roomLoader({ params }) {
-  console.log(params);
   return getRoomWithBookings(params.id);
 }
 

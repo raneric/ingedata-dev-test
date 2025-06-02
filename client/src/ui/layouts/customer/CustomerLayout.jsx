@@ -1,16 +1,16 @@
 
 import { Outlet } from "react-router-dom";
 import Header from "../../components/header/Header";
-import { ApiPath } from "../../../utils/appConstant";
+import { AppPath } from "../../../utils/appConstant";
 
 function CustomerLayout() {
 
   const linkList = [
     {
-      path: ApiPath.room.all,
+      path: AppPath.room.all,
       label: 'Home'
     }, {
-      path: ApiPath.booking.userBookingsPath,
+      path: AppPath.booking.userBookingsPath,
       label: 'My bookings'
     }
   ]

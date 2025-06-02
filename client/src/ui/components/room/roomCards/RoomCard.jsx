@@ -4,7 +4,7 @@ import Divider from '../../../core/Divider';
 import roomCardsStyles from './roomCards.module.css';
 import appLayoutStyles from '../../../appLayout.module.css';
 import { useNavigate } from 'react-router';
-import { ApiPath } from '../../../../utils/appConstant';
+import { AppPath } from '../../../../utils/appConstant';
 import PriceSection from './PriceSection';
 import Description from './Description';
 import Amenities from './Amenities';
@@ -59,7 +59,7 @@ function RoomCard({ room }) {
    * @param {string} roomId - The id of the room to be booked.
    */
   const onBookClickHandler = (roomId) => {
-    navigate(`${ApiPath.booking.new}?roomId=${roomId}`);
+    navigate(`${AppPath.booking.new}?roomId=${roomId}`);
   }
 
   /**
@@ -70,7 +70,7 @@ function RoomCard({ room }) {
    * @param {string} roomId - The id of the room.
    */
   function onRoomClickedHandler(e, roomId) {
-    navigate(`${ApiPath.room.details}/${roomId}`);
+    navigate(`${AppPath.room.details}/${roomId}`);
   }
 
   return (

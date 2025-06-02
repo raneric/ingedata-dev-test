@@ -2,19 +2,15 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/appConstant';
 import AppError from '../utils/AppError';
 
-async function getRooms({ checkInDate, checkOutDate }) {
-  let response;
+async function getRooms({ checkInDate, checkOutDate } = {}) {
+  const query = new URLSearchParams({ checkInDate, checkOutDate }).toString();
+  const url = `${BASE_URL}/rooms?${query}`;
   try {
-    if (checkInDate && checkOutDate) {
-      response = await axios.get(`${BASE_URL}/rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`);
-    } else {
-      response = await axios.get(`${BASE_URL}/rooms`);
-    }
-
+    const response = await axios.get(url);
+    return response.data;
   } catch (error) {
     throw new AppError(error);
   }
-  return response.data;
 }
 
 async function getRoom(id) {

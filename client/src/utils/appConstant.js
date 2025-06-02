@@ -4,7 +4,7 @@
  */
 const BASE_URL = 'http://localhost:3000';
 
-const ApiPath = {
+const AppPath = {
   room: {
     all: '/rooms',
     detailsPath: '/room/:id',
@@ -27,6 +27,6 @@ const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd';
 
 export {
   BASE_URL,
-  ApiPath,
+  AppPath,
   DEFAULT_DATE_FORMAT
 }

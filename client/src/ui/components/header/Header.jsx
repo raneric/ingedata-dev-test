@@ -1,5 +1,4 @@
 import { Link } from "react-router"
-import { ApiPath } from "../../../utils/appConstant"
 import styles from "./header.module.css"
 
 const { welcomeMessage, header } = styles

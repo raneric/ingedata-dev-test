@@ -6,15 +6,16 @@ import BookingDetail from "./ui/components/booking/BookingDetail";
 
 import AdminLayout from "./ui/layouts/admin/AdminLayout";
 import AdminHome from "./ui/layouts/admin/AdminHome";
-import BookingStats from "./ui/components/booking/BookingStats";
 
 import RootLayout from "./ui/layouts/RootLayout";
 import RoomDetails from "./ui/components/room/RoomDetails";
 
-import { ApiPath } from "./utils/appConstant";
+import { AppPath } from "./utils/appConstant";
 import BookingForm from "./ui/components/booking/BookingForm";
 import Error from "./ui/components/error/Error";
 import { roomLoader, roomsLoader } from "./loader/roomsLoader";
+import BookingList from "./ui/components/booking/BookingList";
+import { bookingsLoader } from "./loader/bookingLoader";
 
 const router = createBrowserRouter(
   [
@@ -27,19 +28,19 @@ const router = createBrowserRouter(
           errorElement: <Error />,
           children: [
             {
-              path: ApiPath.room.all,
+              path: AppPath.room.all,
               element: <CustomerHome />,
               loader: roomsLoader
             }, {
-              path: ApiPath.room.detailsPath,
+              path: AppPath.room.detailsPath,
               element: <RoomDetails />,
               loader: roomLoader
             },
             {
-              path: ApiPath.booking.detailsPath,
+              path: AppPath.booking.detailsPath,
               element: <BookingDetail />,
             }, {
-              path: ApiPath.booking.new,
+              path: AppPath.booking.new,
               element: <BookingForm />
             }
           ]
@@ -49,12 +50,13 @@ const router = createBrowserRouter(
           errorElement: <Error />,
           children: [
             {
-              path: ApiPath.admin.home,
+              path: AppPath.admin.home,
               element: <AdminHome />,
             },
             {
-              path: ApiPath.admin.bookings,
-              element: <BookingStats />,
+              path: AppPath.admin.bookings,
+              element: <BookingList />,
+              loader: bookingsLoader
             }
           ]
         }

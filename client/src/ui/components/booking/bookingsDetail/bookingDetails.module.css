@@ -1,0 +1,28 @@
+.booking {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.bookingInfo {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 8px;
+  background-color: var(--background-color);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  justify-self: center;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--font-p-medium);
+  font-weight: bold;
+  color: var(--on-background-color);
+}
+
+.price {
+  color: var(--secondary-accent-color)
+}

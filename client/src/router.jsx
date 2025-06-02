@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import CustomerLayout from "./ui/layouts/customer/CustomerLayout";
 import CustomerHome from "./ui/layouts/customer/CustomerHome";
-import BookingDetail from "./ui/components/booking/BookingDetail";
+import BookingDetail from "./ui/components/booking/bookingsDetail/BookingDetail";
 
 import AdminLayout from "./ui/layouts/admin/AdminLayout";
 import AdminHome from "./ui/layouts/admin/AdminHome";
@@ -17,6 +17,8 @@ import { roomLoader, roomsLoader } from "./loader/roomsLoader";
 import BookingTable from "./ui/components/booking/bookingTable/BookingTable";
 import { bookingsLoader } from "./loader/bookingLoader";
 import { adminLoader } from "./loader/adminLoader";
+import { userBookingDetailLoader, userBookingsLoader } from "./loader/userLoader";
+import UserBookingTable from "./ui/components/booking/bookingTable/UserBookingTable";
 
 const router = createBrowserRouter(
   [
@@ -43,10 +45,16 @@ const router = createBrowserRouter(
               path: AppPath.booking.detailsPath,
               errorElement: <Error />,
               element: <BookingDetail />,
+              loader: userBookingDetailLoader
             }, {
               path: AppPath.booking.new,
               errorElement: <Error />,
               element: <BookingForm />
+            }, {
+              path: AppPath.booking.userBookingsPath,
+              errorElement: <Error />,
+              element: <UserBookingTable />,
+              loader: userBookingsLoader
             }
           ]
         },

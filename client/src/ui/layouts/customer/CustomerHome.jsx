@@ -22,6 +22,7 @@ function CustomerHome() {
           <RoomCard
             key={index}
             room={item}
+            showBookButton={true}
           />))}
       </section>
     </>

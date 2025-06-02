@@ -3,6 +3,7 @@ import cors from 'cors'
 import roomRouter from './routes/room.routes.js';
 import bookingRouter from './routes/booking.routes.js';
 import adminRouter from './routes/admin.routes.js';
+import userRouter from './routes/user.routes.js';
 
 import {
   errorHandler,
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/', roomRouter);
 app.use('/', bookingRouter);
 app.use('/admin', adminRouter);
+app.use('/user', userRouter);
 
 app.use(defaultResourceNotFoundError);
 

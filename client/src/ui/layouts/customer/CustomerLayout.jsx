@@ -10,7 +10,7 @@ function CustomerLayout() {
       path: AppPath.room.all,
       label: 'Home'
     }, {
-      path: AppPath.booking.userBookingsPath,
+      path: '/user/1/bookings', // TODO: authentication and use real user id
       label: 'My bookings'
     }
   ]

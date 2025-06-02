@@ -1,5 +1,4 @@
 import BookingRepository from "../repositories/BookingRepository.js";
-import { ResourceNotFoundError } from '../utils/ApplicationError.js';
 import { calculateFulfillmentRates } from '../utils/statsHelper.js';
 
 async function getStats(req, res, next) {

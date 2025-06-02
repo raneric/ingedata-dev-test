@@ -25,7 +25,6 @@ import { ValidatorError } from "../utils/ApplicationError.js";
  */
 function bookingDateValidator(req, res, next) {
   const { checkInDate, checkOutDate } = req.query;
-  console.log("in validation middleware");
   if (!checkInDate && !checkOutDate) {
     return next();
   }

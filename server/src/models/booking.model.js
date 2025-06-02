@@ -12,18 +12,6 @@ Booking.init({
       key: 'id',
     },
   },
-  customerName: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  customerEmail: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  customerPhone: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
   price: {
     type: DataTypes.FLOAT,
     allowNull: false
@@ -35,6 +23,13 @@ Booking.init({
   checkOutDate: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'users',
+      key: 'id',
+    },
   }
 }, {
   sequelize,

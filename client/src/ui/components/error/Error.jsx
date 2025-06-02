@@ -7,7 +7,7 @@ function Error() {
   return (
     <div className={styles.error}>
       <img className={styles.errorImg} src={errorFile} />
-      <span className={styles.errorText}>{error.statusCode} {error.message}</span>
+      <span className={styles.errorText}>{error.statusCode || error.status} {error.message || error.data}</span>
     </div>
   )
 }

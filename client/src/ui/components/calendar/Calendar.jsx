@@ -9,6 +9,7 @@ import {
 } from 'date-fns';
 
 import { Button } from '../../core/Button';
+import { monthList } from '../../../utils/appConstant';
 
 const {
   calendar,
@@ -25,11 +26,6 @@ const {
 function Calendar({ bookings }) {
 
   const [currentDate, setCurrentDate] = useState(new Date());
-
-  const monthList = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
 
   const bookedDates = new Set();
 

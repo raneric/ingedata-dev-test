@@ -1,8 +1,10 @@
+import BookingStats from "../../components/booking/stats/BookingStats";
+
 function AdminHome() {
   return (
     <>
-      <h1>Admin home</h1>
-    </>
+      <BookingStats />
+    </ >
   )
 }
 

@@ -12,11 +12,11 @@ function RoomDetails() {
   const room = useLoaderData();
   return (
     <div className={roomDetails}>
-      <RoomLargeCard room={room} />
+      <RoomLargeCard room={room[0]} />
       <div className={roomAvailability}>
         <h3 className={availabilityLabel}>Availability</h3>
         <Divider />
-        <Calendar bookings={room.bookings} />
+        <Calendar bookings={room[0].Bookings} />
       </div>
     </div>
   )

@@ -7,10 +7,10 @@ import Icon from '../../core/Icon.jsx';
 import styles from './filter.module.css';
 import { AppPath } from '../../../utils/appConstant.js';
 import { useState } from 'react';
+import DatePicker from '../../core/DatePicker.jsx';
 
 const {
-  filter,
-  filterElement
+  filter
 } = styles
 
 /**
@@ -41,21 +41,18 @@ function SearchFilter() {
 
   return (
     <form onSubmit={handleSubmit} method='get' className={filter}>
-      <div className={filterElement}>
-        <label htmlFor='checkIn'>Check In :</label>
-        <input value={checkInDate}
-          onInput={handleChange}
-          id='checkIn'
-          type='date' />
-      </div>
-      <div className={filterElement}>
-        <label htmlFor='checkOut'>Check Out :</label>
-        <input
-          value={checkOutDate}
-          onInput={handleChange}
-          id='checkOut'
-          type='date' />
-      </div>
+      <DatePicker
+        id='checkIn'
+        label='Check-in :'
+        onChange={handleChange}
+        value={checkInDate}
+      />
+      <DatePicker
+        id='checkOut'
+        label='Checkout :'
+        onChange={handleChange}
+        value={checkOutDate}
+      />
       <IconButton>
         <Icon iconFile={search} />
         <span >Search</span>

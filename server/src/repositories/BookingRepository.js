@@ -1,5 +1,5 @@
-import Booking from "../models/booking.model.js";
-import { Op } from "sequelize";
+import { Booking, User } from "../models/index.js";
+import { SqlQueryOrder } from "../utils/SqlQueryHelper.js";
 
 class BookingRepository {
 
@@ -13,13 +13,27 @@ class BookingRepository {
    *  that match the specified filters.
    */
 
-  async findAll(filters = {}) {
+  async findAll(filters = {}, queryOrder = SqlQueryOrder.bookings.byCheckInDateAsc) {
     const specifiedFilter = Object.fromEntries(Object.entries(filters)
       .filter(([_, value]) => value !== undefined)
     );
 
     return await Booking.findAll({
-      where: specifiedFilter
+      where: specifiedFilter,
+      raw: true,
+      order: [queryOrder]
+    });
+  }
+
+  async findAllBookingWithUsers() {
+
+    return await Booking.findAll({
+      include: [
+        {
+          model: User,
+          as: 'user'
+        }
+      ]
     });
   }
 

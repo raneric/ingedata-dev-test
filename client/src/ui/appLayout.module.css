@@ -38,7 +38,11 @@
 .gridItemFullColumn {
   grid-row: 1 / -1;
 }
+
 .gridItemCenter {
   justify-self: center;
+  align-self: center;
+}
+.gridItemAlignCenter {
   align-self: center;
 }

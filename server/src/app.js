@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors'
 import roomRouter from './routes/room.routes.js';
-import bookingRouter from './routes/booking.routes.js'
+import bookingRouter from './routes/booking.routes.js';
+import adminRouter from './routes/admin.routes.js';
+
 import {
   errorHandler,
   defaultResourceNotFoundError
@@ -15,6 +17,7 @@ app.use(cors());
 // Routes middlewares 
 app.use('/', roomRouter);
 app.use('/', bookingRouter);
+app.use('/admin', adminRouter);
 
 app.use(defaultResourceNotFoundError);
 

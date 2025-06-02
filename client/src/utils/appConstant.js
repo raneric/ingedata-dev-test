@@ -25,8 +25,21 @@ const AppPath = {
 
 const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd';
 
+const monthList = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const DUMMY_USER = {
+  id: 1,
+  name: 'Alice Smith',
+  email: 'alice@example.com',
+  phone: '123-456-7890'
+}
+
 export {
   BASE_URL,
   AppPath,
-  DEFAULT_DATE_FORMAT
+  DEFAULT_DATE_FORMAT,
+  monthList
 }

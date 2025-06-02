@@ -1,4 +1,4 @@
-import Room from "../models/room.model.js";
+import { Booking, Room } from "../models/index.js";
 import sequelize from '../config/sequelize.js';
 import { QueryTypes } from "sequelize";
 
@@ -73,36 +73,19 @@ class RoomRepository {
    *  or null if no room is found.
    */
   async findRoomBookings(roomId) {
-    const query = `SELECT * FROM rooms 
-                LEFT JOIN bookings ON rooms.id = bookings.roomId 
-                WHERE rooms.id =:roomId`;
-    const rawBookings = await sequelize.query(
-      query,
-      {
-        replacements: { roomId },
-        type: QueryTypes.SELECT,
+    const room = await Room.findAll({
+      where: {
+        id: roomId
+      },
+      include: [
+        {
+          model: Booking,
+        }
+      ]
       });
-
-    const roomBookings = {
-      id: rawBookings[0].roomId,
-      name: rawBookings[0].category,
-      category: rawBookings[0].category,
-      description: rawBookings[0].description,
-      pricePerNight: rawBookings[0].pricePerNight,
-      amenities: JSON.parse(rawBookings[0].amenities),
-      bookings: []
-    };
-
-    rawBookings.forEach((booking) => {
-      roomBookings.bookings.push({
-        bookingId: booking.id,
-        checkInDate: booking.checkInDate,
-        checkOutDate: booking.checkOutDate
-      })
-    });
-
-    return roomBookings;
+    return room;
   }
 }
+
 
 export default new RoomRepository();

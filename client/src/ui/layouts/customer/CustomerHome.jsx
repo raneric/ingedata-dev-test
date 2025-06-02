@@ -14,7 +14,6 @@ const {
 
 function CustomerHome() {
   const rooms = useLoaderData();
-  console.log(rooms);
   return (
     <>
       <SearchFilter />

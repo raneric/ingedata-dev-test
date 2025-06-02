@@ -15,22 +15,3 @@
   flex-direction: column;
   gap: 0.3em;
 }
-
-.filter label {
-  font-size: var(--font-p-medium);
-  font-weight: bold;
-  color: var(--on-primary-color);
-}
-
-.filter input {
-  font-size: var(--font-p-big);
-  color: var(--on-primary-color);
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #8d330223;
-  border-top: 1px solid #8d330223;
-  outline: none;
-  font-style: 'Roboto';
-  transition: all 0.3s ease-in-out;
-  padding: 6px 0px;
-}

@@ -1,0 +1,17 @@
+.statsDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
+  border-left: 1px solid var(--border-light-color);
+  padding-left: 1em;
+}
+
+.statsCard {
+  align-items: center;
+  padding: 1em;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 8px;
+  background-color: var(--background-color);
+}

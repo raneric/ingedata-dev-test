@@ -7,8 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: path.resolve(__dirname, '../db/hotel.db'),
-  logging: (...msg) => console.log(msg)
+  storage: path.resolve(__dirname, '../db/hotel.db')
 });
 
 export default sequelize;

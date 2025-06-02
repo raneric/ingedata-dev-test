@@ -1,10 +1,10 @@
 import { useLoaderData } from 'react-router';
-import styles from './booking.module.css'
+import styles from './bookingTable.module.css';
 import { format } from 'date-fns';
-import { DEFAULT_DATE_FORMAT } from '../../../utils/appConstant';
+import { DEFAULT_DATE_FORMAT } from '../../../../utils/appConstant';
 
 const { tableWrapper, table } = styles;
-function BookingList() {
+function BookingTable() {
 
   const bookings = useLoaderData();
 
@@ -26,9 +26,9 @@ function BookingList() {
           {bookings.map((booking) => (
             <tr key={booking.id}>
               <td>{booking.roomId}</td>
-              <td>{booking.customerName}</td>
-              <td>{booking.customerEmail}</td>
-              <td>{booking.customerPhone}</td>
+              <td>{booking.user.name}</td>
+              <td>{booking.user.email}</td>
+              <td>{booking.user.phone}</td>
               <td>{format(booking.checkInDate, DEFAULT_DATE_FORMAT)}</td>
               <td>{format(booking.checkOutDate, DEFAULT_DATE_FORMAT)}</td>
               <td>{booking.price} $</td>
@@ -40,4 +40,4 @@ function BookingList() {
   );
 }
 
-export default BookingList
+export default BookingTable

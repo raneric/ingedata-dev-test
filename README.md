@@ -39,13 +39,20 @@ Follow these steps to set up and run the project:
    ```
 
 ### Architecture Decisions
-The project follows a RESTful API architecture backed by a React client application. This approach ensures future integrations such as mobile apps or third-party services without rewriting backend logic. 
+The project follows a RESTful API architecture and React client application. This approach ensures future integrations such as mobile apps or third-party services without rewriting backend logic. Front-end and back-end can be deployed and maintained independently making them more scalable.
 
-Backend Design Principles
-Repository Pattern
+#### technology choices
+React is a popular and powerful front-end framework with a great community and ecosystems making it easy to improve if later a more powerful react framework is needed to be implemented.  
+
+SQlite is a lightweight database ideal for prototyping, easy to use, with the need to make a lot of configuration and deployment on a specific server.
+
+
+
+#### Backend Design Principles  
+Repository Pattern  
 Encapsulates data access logic in reusable repositories. This prevents controllers from dealing with database operations directly.
 
-Centralized Error Handling
+#### Centralized Error Handling
 A global middleware intercepts errors, ensuring consistent response formatting and simplifying debugging and logging.
 
 ### API Documentation
@@ -107,16 +114,15 @@ These tools have been used during the development :
     - Used for auto completion if the suggestion is interesting, mainly on css modules.
 
 ### Assumptions and Limitations
-
-1- The database : Using an embedded database like sqlite comes with some limitations if the project grows, and definitely not a good idea. For example we can’t deploy the api on multiple servers for geographical performance reasons for example, so that the API too becomes vulnerable to fault issues.
-
-2- no security nor access to resources restrictions on the back-end, but hard to implement without a full authentication process
-
-3- Using typescript would be a great idea on the back-end to add more abstraction to the repository. Thee controllers still depend on repository concert class instead of an abstraction. Which could involve a lot of refactoring if the database changes instead of just using different classes implementation. The open closed is not respected.
-
-4- Adding Unit would have helped during the development phase to check if all functionality that had been implemented still work fine.
-
-5- Adding more feedback to user on some action, like notification that booking has been cancelled correctly or has been added correctly
-
-6- Using library on front-end will improve UI/UX and reduce components that had been created
+#### Assumptions  
+    - A user cannot book dates that overlap with existing bookings they have to make a separate booking if there is another booked date between the range of date.
+    - No authentication for now so the user data is based on a DUMMY_USER no constant defined in `ingedata-dev-test/client/src/utils/appConstant.js`
+    - Admin endpoints are assumed to be protected (even if not implemented yet).
+    - The system supports only one type of room price (no discounts or promo logic).
+#### Limitations
+    - No user authentication implemented yet.
+    - No role-based authorization - all routes are publicly accessible.
+    - Limited error feedback on the frontend UI.
+    - Admin stats are basic limited to the current month a filter should have done.
+    - All tables are not paginated which can lead to a performance issues when the database grow
 

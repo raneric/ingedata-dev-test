@@ -41,8 +41,8 @@ Follow these steps to set up and run the project:
 ### Architecture Decisions
 The project follows a RESTful API architecture and React client application. This approach ensures future integrations such as mobile apps or third-party services without rewriting backend logic. Front-end and back-end can be deployed and maintained independently making them more scalable.
 
-#### technology choices
-React is a popular and powerful front-end framework with a great community and ecosystems making it easy to improve if later a more powerful react framework is needed to be implemented.  
+#### Technology choices
+React is a popular and powerful front-end framework with a great community and ecosystems making the easy to improve if later a more powerful react libraries or framework is needed to be implemented.  
 
 SQlite is a lightweight database ideal for prototyping, easy to use, with the need to make a lot of configuration and deployment on a specific server.
 
@@ -119,8 +119,10 @@ These tools have been used during the development :
     - No authentication for now so the user data is based on a DUMMY_USER no constant defined in `ingedata-dev-test/client/src/utils/appConstant.js`
     - Admin endpoints are assumed to be protected (even if not implemented yet).
     - The system supports only one type of room price (no discounts or promo logic).
+
 #### Limitations
     - No user authentication implemented yet.
+    - Using typescript on the back-end would have improved abstraction, like for the repository pattern where controllers still use concrete classes. Although it adds an abstraction between the model and the controller, we can’t change the database without modifying the repository which does not respect the open-closed principle. With an abstraction using an interface and dependency injection for example will add a full abstraction between the repository and the model. 
     - No role-based authorization - all routes are publicly accessible.
     - Limited error feedback on the frontend UI.
     - Admin stats are basic limited to the current month a filter should have done.

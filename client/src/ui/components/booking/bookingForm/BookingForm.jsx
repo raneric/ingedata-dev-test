@@ -11,12 +11,13 @@ import { useLoaderData, useNavigate } from 'react-router';
 import { createBooking } from '../../../../services/userService';
 import { DUMMY_USER } from '../../../../utils/appConstant';
 
+
+
 const {
   bookButton,
   form,
   cart,
   price } = styles;
-
 
 function BookingForm() {
   const room = useLoaderData()[0];
@@ -47,27 +48,29 @@ function BookingForm() {
   }
 
   return (
-    <div className={form} >
-      <RoomLargeCard showBookButton={false} room={room} />
-      <div className={cart}>
-        <Calendar
-          onRangeChange={handleDateSelect}
-          bookings={room.Bookings}
-          isRangeSelectable={true} />
-        <Divider />
-        <span>Total Booked days : {bookedDaysNumber}</span>
-        <Divider />
-        <span>Price : <span className={price}>{totalPrice} $</span> </span>
-        <Divider />
-        <Button
-          onClick={handleSubmit}
-          className={bookButton}
-          isDisabled={totalPrice === 0}
-        >
-          <span>Book now</span>
-        </Button>
-      </div>
-    </div >
+    <>
+      <div className={form} >
+        <RoomLargeCard showBookButton={false} room={room} />
+        <div className={cart}>
+          <Calendar
+            onRangeChange={handleDateSelect}
+            bookings={room.Bookings}
+            isRangeSelectable={true} />
+          <Divider />
+          <span>Total Booked days : {bookedDaysNumber}</span>
+          <Divider />
+          <span>Price : <span className={price}>{totalPrice} $</span> </span>
+          <Divider />
+          <Button
+            onClick={handleSubmit}
+            className={bookButton}
+            isDisabled={totalPrice === 0}
+          >
+            <span>Book now</span>
+          </Button>
+        </div>
+      </div >
+    </>
   )
 }
 

@@ -1,15 +1,22 @@
 //import styles from './bookingDetails.module.css';
-import RoomCard from "../../room/roomCards/RoomCard"
 import { useLoaderData, useNavigate } from "react-router";
+import { useState } from "react";
+
+import { format } from 'date-fns';
+
 import styles from "./bookingDetails.module.css";
+
+import RoomCard from "../../room/roomCards/RoomCard"
+import { Button } from "../../../core/Button";
+import ConfirmationDialog from "../../dialog/ConfirmationDialog";
 import Icon from "../../../core/Icon";
 import calendar from '../../../../assets/calendar.png';
 import cart from '../../../../assets/cart.png';
-import { format } from 'date-fns';
-import { AppPath, DEFAULT_DATE_FORMAT, DUMMY_USER } from "../../../../utils/appConstant";
-import { Button } from "../../../core/Button";
-import { cancelBooking } from "../../../../services/userService";
+
 import AppError from "../../../../utils/AppError";
+import { cancelBooking } from "../../../../services/userService";
+import { DEFAULT_DATE_FORMAT, DUMMY_USER } from "../../../../utils/appConstant";
+
 
 const { booking, bookingInfo, infoItem, price, cancelButton } = styles
 
@@ -24,42 +31,56 @@ function BookingDetail() {
 
   const navigate = useNavigate();
 
-  const handleCancel = async (userId, bookingId) => {
-    const confirmed = window.confirm('Are you sure you want to cancel this booking?'); //TODO: Add custom confirmation 
-    if (!confirmed) return;
-    try {
-      cancelBooking(userId, bookingId);
-    } catch (error) {
-      throw new AppError(error);
-    }
-    navigate(`/user/${DUMMY_USER.id}/bookings`); // TODO: authentication and use real user id
-  }
-
+  const [showDialog, setShowDialog] = useState(false);
 
   const userBooking = useLoaderData();
+
+  const handleCancel = async () => {
+    setShowDialog(true);
+  }
+
+  const handleDialogOk = () => {
+    setShowDialog(false);
+    handleDialogCancel();
+  }
+
+  const handleDialogCancel = () => {
+    setShowDialog(false);
+    setShowDialog(true);
+    try {
+      cancelBooking(userBooking.userId, userBooking.bookings[0].id);
+    } catch (error) {
+      throw new AppError(error);
+    } 
+    navigate(`/user/${DUMMY_USER.id}/bookings`); 
+  }
+
   return (
-    <div className={booking}>
-      <RoomCard room={userBooking.bookings[0].Room} />
-      <div className={bookingInfo}>
-        <div className={infoItem}>
-          <Icon iconFile={calendar} />
-          <span> Check-in : {format(userBooking.bookings[0].checkInDate, DEFAULT_DATE_FORMAT)}</span>
+    <>
+      {showDialog && <ConfirmationDialog handleDialogYes={handleDialogOk} handleDialogNo={handleDialogCancel} />}
+      <div className={booking}>
+        <RoomCard room={userBooking.bookings[0].Room} />
+        <div className={bookingInfo}>
+          <div className={infoItem}>
+            <Icon iconFile={calendar} />
+            <span> Check-in : {format(userBooking.bookings[0].checkInDate, DEFAULT_DATE_FORMAT)}</span>
+          </div>
+          <div className={infoItem}>
+            <Icon iconFile={calendar} />
+            <span> Checkout : {format(userBooking.bookings[0].checkOutDate, DEFAULT_DATE_FORMAT)}</span>
+          </div>
+          <div className={infoItem}>
+            <Icon iconFile={cart} />
+            <span> Price : <span className={price}> {userBooking.bookings[0].price} $</span></span>
+          </div>
+          <Button
+            onClick={() => handleCancel(userBooking.id, userBooking.bookings[0].id)}
+            className={cancelButton}>
+            Cancel
+          </Button>
         </div>
-        <div className={infoItem}>
-          <Icon iconFile={calendar} />
-          <span> Checkout : {format(userBooking.bookings[0].checkOutDate, DEFAULT_DATE_FORMAT)}</span>
-        </div>
-        <div className={infoItem}>
-          <Icon iconFile={cart} />
-          <span> Price : <span className={price}> {userBooking.bookings[0].price} $</span></span>
-        </div>
-        <Button
-          onClick={() => handleCancel(userBooking.id, userBooking.bookings[0].id)}
-          className={cancelButton}>
-          Cancel
-        </Button>
       </div>
-    </div>
+    </>
   )
 }
 

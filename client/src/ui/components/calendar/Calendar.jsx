@@ -75,6 +75,26 @@ function Calendar({
       setSelectedEndDate(clickedDate);
       onRangeChange?.(clickedDate, clickedDate, clickedDate);
     } else if (clickedDate >= selectedStartDate) {
+
+      const start = selectedStartDate < clickedDate ? selectedStartDate : clickedDate;
+      const end = selectedStartDate > clickedDate ? selectedStartDate : clickedDate;
+
+      let current = new Date(start);
+      let hasBooked = false;
+
+      while (current <= end) {
+        if (bookedDates.has(current.toDateString())) {
+          hasBooked = true;
+          break;
+        }
+        current.setDate(current.getDate() + 1);
+      }
+
+      if (hasBooked) {
+        alert("Selected range includes a booked date. Please choose a different range.");
+        return;
+      }
+
       setSelectedEndDate(clickedDate);
       onRangeChange?.(selectedStartDate, clickedDate, clickedDate);
     }

@@ -46,7 +46,7 @@ function Calendar({
     const end = new Date(checkOutDate);
 
     while (current <= end) {
-      bookedDates.add(current.toDateString()); // Using readable format for comparison
+      bookedDates.add(current.toDateString());
       current.setDate(current.getDate() + 1);
     }
   })
@@ -117,14 +117,19 @@ function Calendar({
      */
     if (firstDayOfMonth > 0 && firstDayOfMonth <= 6) {
       for (let i = lastDayOfPrevMonth.getDay(); i >= 0; i--) {
-        const date = new Date(year, month, i);
+        const previousDay = lastDayOfPrevMonth.getDate() - i;
+        const date = new Date(year, month - 1, previousDay);
         const isBooked = bookedDates.has(date.toDateString());
         days.push(
           <div
             key={`previous-month-${i}`}
-            className={`${day} ${isBooked ? bookedDate : ''} ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
+            className={`${day} ${isBooked ? bookedDate : ''} ${isSelected(date) ? selectedDate : ''} ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleDateClick(date);
+            }}
           >
-            {lastDayOfPrevMonth.getDate() - i}
+            {previousDay}
           </div>
         );
       }

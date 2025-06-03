@@ -36,7 +36,7 @@ async function addBooking(req, res, next) {
   const data = req.body;
   try {
     if (!data) data['userId'] = userId
-    const result = await BookingRepository.addBooking(userId, data);
+    const result = await UserRepository.addBooking(userId, data);
     res.status(200).json();
   } catch (error) {
     next(error);

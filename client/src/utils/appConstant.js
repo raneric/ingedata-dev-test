@@ -41,5 +41,6 @@ export {
   BASE_URL,
   AppPath,
   DEFAULT_DATE_FORMAT,
-  monthList
+  monthList,
+  DUMMY_USER
 }

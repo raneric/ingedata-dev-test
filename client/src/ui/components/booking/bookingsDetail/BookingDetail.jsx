@@ -6,7 +6,7 @@ import Icon from "../../../core/Icon";
 import calendar from '../../../../assets/calendar.png';
 import cart from '../../../../assets/cart.png';
 import { format } from 'date-fns';
-import { AppPath, DEFAULT_DATE_FORMAT } from "../../../../utils/appConstant";
+import { AppPath, DEFAULT_DATE_FORMAT, DUMMY_USER } from "../../../../utils/appConstant";
 import { Button } from "../../../core/Button";
 import { cancelBooking } from "../../../../services/userService";
 import AppError from "../../../../utils/AppError";
@@ -25,14 +25,14 @@ function BookingDetail() {
   const navigate = useNavigate();
 
   const handleCancel = async (userId, bookingId) => {
-    const confirmed = window.confirm('Are you sure you want to cancel this booking?');
+    const confirmed = window.confirm('Are you sure you want to cancel this booking?'); //TODO: Add custom confirmation 
     if (!confirmed) return;
     try {
       cancelBooking(userId, bookingId);
     } catch (error) {
       throw new AppError(error);
     }
-    navigate('/user/1/bookings'); // TODO: authentication and use real user id
+    navigate(`/user/${DUMMY_USER.id}/bookings`); // TODO: authentication and use real user id
   }
 
 

@@ -62,7 +62,7 @@ async function createBooking(userId, roomId, bookedDate, price) {
   };
 
   try {
-    await axios.post(`${BASE_URL}/user/${userId}/booking/new`, data);
+    return await axios.post(`${BASE_URL}/user/${userId}/booking/new`, data);
   } catch (error) {
     throw new AppError(error);
   }

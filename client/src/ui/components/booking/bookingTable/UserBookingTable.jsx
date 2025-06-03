@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { format } from 'date-fns';
-import { DEFAULT_DATE_FORMAT } from '../../../../utils/appConstant';
+import { DEFAULT_DATE_FORMAT, DUMMY_USER } from '../../../../utils/appConstant';
 import Icon from '../../../core/Icon';
 import link from '../../../../assets/link.png';
 import Table from '../../table/Table';
@@ -13,6 +13,7 @@ function UserBookingTable() {
 
   return (
     <>
+      <h2>Your Bookings</h2>
       <Table>
         <TableHead>
           <tr>
@@ -34,7 +35,7 @@ function UserBookingTable() {
               <td>{format(booking.checkInDate, DEFAULT_DATE_FORMAT)}</td>
               <td>{format(booking.checkOutDate, DEFAULT_DATE_FORMAT)}</td>
               <td>{booking.price} $</td>
-              <td><a href={`/user/1/booking/${booking.id}` /* TODO: authentication and use real user id*/}>
+              <td><a href={`/user/${DUMMY_USER.id}/booking/${booking.id}` /* TODO: authentication and use real user id*/}>
                 <Icon iconFile={link} />
               </a></td>
             </tr>

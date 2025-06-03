@@ -43,6 +43,10 @@ class UserRepository {
     });
   }
 
+  async addBooking(userId, data) {
+    return await Booking.create({ ...data, userId });
+  }
+
 }
 
 export default new UserRepository();

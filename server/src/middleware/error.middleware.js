@@ -17,6 +17,16 @@ function errorHandler(err, req, res, _) {
   });
 }
 
+/**
+ * Middleware to handle requests made to routes that do not exist.
+ *
+ * Sends a 404 Not Found response with a JSON error message indicating
+ * that the requested route does not exist.
+ *
+ * @param {Object} req The Express request object
+ * @param {Object} res The Express response object
+ */
+
 function defaultResourceNotFoundError(req, res, _) {
   res.status(404).json({
     error: 'Not Found',

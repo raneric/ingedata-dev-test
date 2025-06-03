@@ -35,29 +35,58 @@ function BookingDetail() {
 
   const userBooking = useLoaderData();
 
-  const handleCancel = async () => {
+
+  /**
+   * Booking cancel button handler which open Sets the confirmation showDialog and 
+   */
+  const openDialogConfirmation = async () => {
     setShowDialog(true);
   }
 
+  /**
+   * Closes the confirmation dialog and launches the booking cancellation process by making a DELETE request to the API
+   * It calls handleDialogCancel which performs the actual cancellation and navigates back to the user's bookings page.
+   */
   const handleDialogOk = () => {
     setShowDialog(false);
-    handleDialogCancel();
+    launchCancelationRequest();
   }
 
-  const handleDialogCancel = () => {
+  /**
+   * Cancels the booking and navigates back to the user's bookings page.
+   *
+   * It calls the cancelBooking function which makes a DELETE request to the API.
+   * If the request fails, it throws an AppError.
+   *
+   * If the request succeeds, it navigates back to the user's bookings page.
+   *
+   * Note: This function is called when the user clicks 'No' in the confirmation dialog.
+   */
+  const launchCancelationRequest = () => {
     setShowDialog(false);
     setShowDialog(true);
     try {
       cancelBooking(userBooking.userId, userBooking.bookings[0].id);
     } catch (error) {
       throw new AppError(error);
-    } 
-    navigate(`/user/${DUMMY_USER.id}/bookings`); 
+    }
+    navigate(`/user/${DUMMY_USER.id}/bookings`);
+  }
+
+  /**
+   * Closes the confirmation dialog.
+   * 
+   * This function is called when the user clicks 'No' in the confirmation dialog.
+   */
+  const closeDialog = () => {
+    setShowDialog(false);
   }
 
   return (
     <>
-      {showDialog && <ConfirmationDialog handleDialogYes={handleDialogOk} handleDialogNo={handleDialogCancel} />}
+      {showDialog && <ConfirmationDialog
+        handleDialogYes={handleDialogOk}
+        handleDialogNo={closeDialog} />}
       <div className={booking}>
         <RoomCard room={userBooking.bookings[0].Room} />
         <div className={bookingInfo}>
@@ -74,7 +103,7 @@ function BookingDetail() {
             <span> Price : <span className={price}> {userBooking.bookings[0].price} $</span></span>
           </div>
           <Button
-            onClick={() => handleCancel(userBooking.id, userBooking.bookings[0].id)}
+            onClick={openDialogConfirmation}
             className={cancelButton}>
             Cancel
           </Button>

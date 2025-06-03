@@ -48,6 +48,17 @@ async function findRoom(req, res, next) {
 
 }
 
+/**
+ * Controller to fetch a room's bookings by the room's ID.
+ *
+ * Route parameter:
+ *   - id (string): the ID of the room to retrieve its bookings.
+ *
+ * Response:
+ *   - 200 OK with a list of booking objects if found.
+ *   - 404 Not Found if the room does not exist.
+ *   - 500 Internal Server Error for other failures.
+ */
 async function findRoomBookings(req, res, next) {
   const roomId = req.params.id;
   try {

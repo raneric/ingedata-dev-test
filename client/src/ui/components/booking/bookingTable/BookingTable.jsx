@@ -5,6 +5,14 @@ import Table from '../../table/Table';
 import TableHead from '../../table/TableHead';
 import TableBody from '../../table/TableBody';
 
+/**
+ * BookingTable component renders a table of bookings for the Admin.
+ *
+ * It receive bookings from a router loader which load all bookings with all user information
+ * 
+ * The table columns are: Room ID, Customer Name, Customer Email, Customer Phone,
+ * Check-in Date, Check-out Date and Price.
+ */
 function BookingTable() {
 
   const bookings = useLoaderData();

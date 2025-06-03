@@ -119,6 +119,7 @@ These tools have been used during the development :
    - No authentication for now so the user data is based on a DUMMY_USER no constant defined in `ingedata-dev-test/client/src/utils/appConstant.js`
    - Admin endpoints are assumed to be protected (even if not implemented yet).
    - The system supports only one type of room price (no discounts or promo logic).
+   - Room picture are just an asset picture for the UI to simulate picture from the server
 
 #### Limitations
    - No user authentication implemented yet.
@@ -127,4 +128,5 @@ These tools have been used during the development :
    - Limited error feedback on the frontend UI.
    - Admin stats are basic limited to the current month a filter should have done.
    - All tables are not paginated which can lead to a performance issues when the database grow
+   - Calendar component should be refactored to make it more reusable
 

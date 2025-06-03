@@ -1,6 +1,13 @@
 import BookingRepository from "../repositories/BookingRepository.js";
 import { calculateFulfillmentRates } from '../utils/statsHelper.js';
 
+/**
+ * Controller to fetch the fulfillment rates for rooms.
+ *
+ * Response:
+ *   - 200 OK with the fulfillment rates data.
+ *   - 500 Internal Server Error for other failures.
+ */
 async function getStats(req, res, next) {
   let bookings;
   try {
@@ -12,6 +19,13 @@ async function getStats(req, res, next) {
   }
 }
 
+/**
+ * Controller to fetch all bookings for admin space including their user details.
+ *
+ * Response:
+ *   - 200 OK with a list of booking objects if found.
+ *   - 500 Internal Server Error for other failures.
+ */
 async function getBookings(req, res, next) {
   try {
     let bookings;

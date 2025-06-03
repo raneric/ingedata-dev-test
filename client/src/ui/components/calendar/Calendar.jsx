@@ -30,6 +30,15 @@ const {
   disableClick
 } = styles
 
+/**
+ * A calendar component for selecting a range of dates.
+ *
+ * @param {Object[]} bookings An array of booking objects with checkInDate and checkOutDate properties.
+ * @param {Function} onRangeChange A callback function that is called when the user selects a range of dates.
+ * @param {boolean} isRangeSelectable A boolean indicating whether the calendar should allow selecting a range of dates.
+ *
+ * @returns {ReactElement} A React component representing the calendar.
+ */
 function Calendar({
   bookings,
   onRangeChange = () => { },
@@ -61,20 +70,47 @@ function Calendar({
 
   const todayDate = new Date();
 
+  /**
+   * Click handler for the previous month button.
+   *
+   * Decrements the month of the calendar's current date by one month.
+   */
   const prevMonthClickHandler = () => {
     setCurrentDate((currentDate) => subMonths(currentDate, 1));
   };
+
+  /**
+   * Click handler for the next month button.
+   *
+   * Increments the month of the calendar's current date by one month.
+   */
 
   const nextMonthClickHandler = () => {
     setCurrentDate((currentDate) => addMonths(currentDate, 1));
   };
 
 
+  /**
+   * Closes the confirmation dialog.
+   */
   const handleDialogClose = () => {
     setShowDialog(false)
   }
 
-  const handleDateClick = (clickedDate) => {
+  /**
+   * Click handler for a date in the calendar.
+   *
+   * If no date has been selected yet, sets the selected start and end dates to the
+   * clicked date and calls the onRangeChange callback.
+   *
+   * If the clicked date is after the selected start date, checks if there are any
+   * booked dates in the range. If there are, shows the confirmation dialog and does
+   * not change the selected end date. If there are not, sets the selected end date to
+   * the clicked date and calls the onRangeChange callback.
+   *
+   * @param {Date} clickedDate - The date that has been clicked.
+   */
+  const handleDateCellClick = (clickedDate) => {
     if (isBefore(startOfDay(clickedDate), startOfDay(todayDate))) return;
 
     if (!selectedStartDate) {
@@ -107,6 +143,19 @@ function Calendar({
     }
   };
 
+  /**
+   * Returns a boolean indicating whether a given date is selected.
+   *
+   * A date is considered selected if it is the same day as the selected start date
+   * or if it is within the range of the selected start and end dates.
+   *
+   * If the selected start date is null, the function returns false.
+   * If the selected end date is null, the function returns true if the date is the
+   * same day as the selected start date.
+   *
+   * @param {Date} date - The date to check.
+   * @return {boolean} Whether the date is selected.
+   */
   const isSelected = (date) => {
     if (!selectedStartDate || isBefore(startOfDay(date), startOfDay(todayDate))) return false;
 
@@ -153,7 +202,7 @@ function Calendar({
             className={`${day} ${isBooked ? bookedDate : ''} ${isSelected(date) ? selectedDate : ''} ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
             onClick={(e) => {
               e.stopPropagation()
-              handleDateClick(date);
+              handleDateCellClick(date);
             }}
           >
             {previousDay}
@@ -180,7 +229,7 @@ function Calendar({
           className={`${day} ${isToday ? today : ''} ${isSelected(date) ? selectedDate : ''} ${isBooked ? bookedDate : ''}  ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
           onClick={(e) => {
             e.stopPropagation()
-            handleDateClick(date);
+            handleDateCellClick(date);
           }}
         >
           {i}
@@ -202,7 +251,7 @@ function Calendar({
             className={`${day} ${isSelected(date) ? selectedDate : ''}  ${isBooked ? bookedDate : ''} ${daysOtherMonth} ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
             onClick={(e) => {
               e.stopPropagation()
-              handleDateClick(date);
+              handleDateCellClick(date);
             }}
           >
             {i + 1}

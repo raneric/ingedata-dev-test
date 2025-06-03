@@ -8,6 +8,14 @@ const {
   gridItemCenter
 } = appLayoutStyles
 
+/**
+ * A Dialog component that displays a notification message and an Ok button.
+ *
+ * @param {function} onClick - The function to call when the Ok button is clicked.
+ * @param {string} message - The message to be displayed.
+ *
+ * @returns A JSX element representing the notification dialog.
+ */
 function NotificationDialog({ onClick, message }) {
   return (
     <>

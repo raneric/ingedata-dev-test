@@ -5,7 +5,6 @@ const {
   iconButton } = styles
 
 function Button({ className, children, onClick, isDisabled }) {
-
   return (
     <>
       <button

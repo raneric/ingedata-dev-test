@@ -4,6 +4,12 @@ const {
   filterElement
 } = styles
 
+/**
+ * A reusable date picker component.
+ *
+ * @param {{ id: string, label: string, onChange: (e: React.FormEvent<HTMLInputElement>) => void, value: string }} props
+ * @returns {JSX.Element} The date picker component.
+ */
 function DatePicker({ id, label, onChange, value }) {
   return (
     <>

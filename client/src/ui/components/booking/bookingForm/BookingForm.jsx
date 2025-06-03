@@ -39,6 +39,16 @@ function BookingForm() {
 
   const [bookedDates, setBookedDates] = useState({});
 
+
+  /**
+   * Handler function which get selected dates range and count the number of days with the 
+   * differenceInDays function start and the end date included that's why + 1 is added.
+   * Calculate the price based on price per day and the number of days
+   *
+   * @param {Date} selectedStartDate - The start date of the booking
+   * @param {Date} clickedDate - The date that has been clicked
+   * @param {Date} selectedEndDate - The end date of the booking
+   */
   const handleDateSelect = (selectedStartDate, clickedDate, selectedEndDate) => {
     if (!selectedStartDate && !selectedEndDate) return;
 
@@ -51,9 +61,13 @@ function BookingForm() {
       checkInDate: selectedStartDate,
       checkOutDate: selectedEndDate
     })
-
   }
 
+
+  /**
+   * Submits the booking by making a POST request to the API.
+   * Shows the confirmation dialog if the response status is 200.
+   */
   const handleSubmit = async () => {
     const res = await createBooking(DUMMY_USER.id, room.id, bookedDates, totalPrice);
     if (res.status === 200) {
@@ -61,6 +75,10 @@ function BookingForm() {
     }
   }
 
+  /**
+   * Handles the click event to close the dialog and navigate to the room listing page
+   * when the request response is ok.
+   */
   const handleClick = () => {
     setShowDialog(false);
     navigate(AppPath.room.all);

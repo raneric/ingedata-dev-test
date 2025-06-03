@@ -12,6 +12,12 @@ const {
   gridRowGapXLarge } = appLayoutStyles
 
 
+/**
+ * CustomerHome is the home page for user space which display a list of rooms for user space.
+ * It uses the useLoaderData hook from react-router-dom to get the list of rooms from the loader data.
+ * The room list can be filtered by date with the SearchFilter component.
+ * 
+ */
 function CustomerHome() {
   const rooms = useLoaderData();
   return (

@@ -9,7 +9,6 @@ import AppError from '../utils/AppError';
  * @returns {Promise<object>} A promise that resolves to the room stats data.
  * @throws {AppError} Throws an AppError if the request fails.
  */
-
 async function getRoomStats({ month } = {}) {
   const query = new URLSearchParams({ month }).toString();
   const url = `${BASE_URL}/admin?${query}`;

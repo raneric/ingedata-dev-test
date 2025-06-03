@@ -1,3 +1,8 @@
+/**
+ * A custom error wrapper object for all error in the frontend
+ * it display a default "Unexpected error has been thrown" if the error is unknown
+ * 
+ */
 class AppError extends Error {
   constructor(error) {
     const code = error.status || error.statusCode || 500;

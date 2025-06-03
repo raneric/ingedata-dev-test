@@ -25,6 +25,12 @@ class BookingRepository {
     });
   }
 
+  /**
+   * Retrieves all bookings with their associated users.
+   *
+   * @returns {Promise<Array>} A promise that resolves to an array of booking objects
+   *  with their associated users.
+   */
   async findAllBookingWithUsers() {
 
     return await Booking.findAll({

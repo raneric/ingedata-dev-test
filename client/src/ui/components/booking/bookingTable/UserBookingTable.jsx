@@ -7,6 +7,14 @@ import Table from '../../table/Table';
 import TableHead from '../../table/TableHead';
 import TableBody from '../../table/TableBody';
 
+/**
+ * UserBookingTable component renders a table of a user's bookings.
+ *
+ * It receives booking data from a router loader which load all bookings with room information
+ * 
+ * The table columns are: Room ID, Room category, Amenities, Check-in Date, Check-out Date, Price
+ * and Link to details.
+ */
 function UserBookingTable() {
 
   const bookings = useLoaderData();

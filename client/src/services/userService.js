@@ -27,7 +27,6 @@ async function getBookings(userId) {
  * @returns {Promise<object>} A promise that resolves to the booking object.
  * @throws {AppError} Throws an AppError if the request fails.
  */
-
 async function getBooking(userId, bookingId) {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}/booking/${bookingId}`);
@@ -54,6 +53,18 @@ async function cancelBooking(userId, bookingId) {
   }
 }
 
+/**
+ * Creates a new booking for a user.
+ *
+ * @param {string} userId - The ID of the user making the booking.
+ * @param {string} roomId - The ID of the room to be booked.
+ * @param {Object} bookedDate - The dates for the booking.
+ * @param {string} bookedDate.checkInDate - The check-in date.
+ * @param {string} bookedDate.checkOutDate - The check-out date.
+ * @param {number} price - The total price for the booking.
+ * @returns {Promise<object>} A promise that resolves to the created booking object.
+ * @throws {AppError} Throws an AppError if the request fails.
+ */
 async function createBooking(userId, roomId, bookedDate, price) {
   const data = {
     roomId,

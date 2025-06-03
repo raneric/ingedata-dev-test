@@ -18,6 +18,16 @@ const {
 } = appLayoutStyles
 
 
+/**
+ * StatsCard component renders a card displaying the fulfillment rates for
+ * rooms.
+ *
+ * The component takes data from the route loader and renders a card with
+ * a progress bar for the overall fulfillment rate and a section with
+ * progress bars for each room.
+ *
+ * @returns {JSX.Element} A JSX element containing the StatsCard component.
+ */
 function StatsCard() {
 
   const data = useLoaderData()

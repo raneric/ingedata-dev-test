@@ -30,7 +30,6 @@ async function getRooms({ checkInDate, checkOutDate } = {}) {
  * @returns {Promise<object>} A promise that resolves to the room data.
  * @throws {AppError} Throws an AppError if the request fails.
  */
-
 async function getRoom(id) {
   let response;
   try {
@@ -48,7 +47,6 @@ async function getRoom(id) {
  * @returns {Promise<object>} A promise that resolves to the room with its bookings.
  * @throws {AppError} Throws an AppError if the request fails.
  */
-
 async function getRoomWithBookings(id) {
   let response;
   try {

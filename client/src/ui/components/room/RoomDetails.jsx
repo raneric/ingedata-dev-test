@@ -8,6 +8,13 @@ import RoomLargeCard from './roomCards/RoomLargeCard';
 
 const { roomDetails, roomAvailability, availabilityLabel } = roomStyles
 
+/**
+ * RoomDetails component renders the details of a room with all booked dates displayed in a calendar.
+ *
+ * The room details are obtained from the router dom loader.
+ *
+ * @returns {JSX.Element} A JSX element containing the room details and its availability.
+ */
 function RoomDetails() {
   const room = useLoaderData();
   return (

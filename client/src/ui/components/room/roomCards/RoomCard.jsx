@@ -10,20 +10,6 @@ import Description from './Description';
 import Amenities from './Amenities';
 
 import getRoomPicture from '../../../../utils/getRoomPicture.js';
-/**
- * A card component for displaying a single room's details.
- *
- * The component displays an image of the room, the room's category, id, price per night,
- * description, amenities, and a "Book now" button.
- *
- * @param {Object} props - The properties object.
- * @param {Object} props.room - The room object.
- * @param {string} props.room.id - The id of the room.
- * @param {string} props.room.category - The category of the room.
- * @param {string} props.room.description - The description of the room.
- * @param {Array<string>} props.room.amenities - The amenities available in the room.
- * @param {number} props.room.pricePerNight - The price per night of the room.
- */
 
 const {
   cardImg,
@@ -39,11 +25,19 @@ const {
   gridItemCenter,
   gridRowGapSmall } = appLayoutStyles;
 
+
 /**
- * A card component for displaying a single room's details.
- *
- *
+ * A UI component for displaying a single room in a list of rooms.
+ * 
+ * The component displays the room's details such as the category, price per night,
+ * description and amenities. It also displays a button to book the room.
+ * 
+ * @param {Object} props - The properties object.
  * @param {Object} props.room - The room object.
+ * @param {boolean} props.isNewBooking - If true, the component displays a button
+ * to book the room.
+ * 
+ * @returns {JSX.Element} A JSX element containing the room component.
  */
 function RoomCard({ room, isNewBooking }) {
 
@@ -63,7 +57,7 @@ function RoomCard({ room, isNewBooking }) {
   }
 
   /**
-   * Handler for when a room is clicked.
+   * Handler for when the entire room card is clicked.
    *
    * Navigates to the room's details page. /room/:id
    *

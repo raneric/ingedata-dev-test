@@ -1,5 +1,15 @@
 import { differenceInDays, lastDayOfMonth } from 'date-fns';
 
+
+/**
+ * Calculates the fulfillment rate for all bookings in the given month
+ * the current by default. Filter is not implemented yet on the front-end.
+ *
+ *
+ * @param {Object[]} bookings - The bookings to calculate the fulfillment rate for.
+ * @param {Date} fulfillmentDate - The date to use for calculating the fulfillment rate. Defaults to the current date.
+ * @returns {Object} An object with a rooms property which is an array of objects with roomId and occupancyRate properties, and an overall property which is the average occupancy rate across all rooms.
+ */
 function calculateFulfillmentRates(bookings, fulfillmentDate = new Date()) {
   const totalDayOfTheMonth = lastDayOfMonth(fulfillmentDate).getDate();
   const totalBookingByRoom = {};

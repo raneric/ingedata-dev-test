@@ -18,6 +18,14 @@ async function userBookingDetailLoader({ params }) {
   return await getBooking(userId, id);
 }
 
+
+/**
+ * Loader which fetches room details along with its bookings for a new booking process.
+ *
+ * @param {Request} request - The current request object.
+ * @returns {Promise<object>} A promise that resolves to the room with its bookings.
+ */
+
 async function userNewBookingLoader({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const roomId = searchParams.get('roomId');

@@ -106,7 +106,7 @@ These tools have been used during the development :
   - Chat GPT : 
     - used as an AI assistant documentation for all libraries that I've used (react, express, sequelize). 
     - Helping on creating all fake data as database seeds
-    - These tools helped to generate some standard with their css module and then just refined as need example :
+    - These tools helped to generate some component with their css module and then just refined as need example :
       - The Table component
       - Calendar 
   - Codeium (windsurf) : 

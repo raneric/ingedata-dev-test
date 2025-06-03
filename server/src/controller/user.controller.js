@@ -1,5 +1,4 @@
 import UserRepository from '../repositories/UserRepository.js';
-import BookingRepository from '../repositories/BookingRepository.js';
 
 /**
  * Controller to fetch a all specific user's bookings.
@@ -84,7 +83,7 @@ async function addBooking(req, res, next) {
   try {
     if (!data) data['userId'] = userId
     const result = await UserRepository.addBooking(userId, data);
-    res.status(200).json();
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }

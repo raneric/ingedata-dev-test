@@ -1,5 +1,5 @@
 import UserRepository from '../repositories/UserRepository.js';
-
+import BookingRepository from '../repositories/BookingRepository.js';
 
 async function getUserBookings(req, res, next) {
   const uid = req.params.userId;
@@ -31,8 +31,21 @@ async function deleteBooking(req, res, next) {
   }
 }
 
+async function addBooking(req, res, next) {
+  const userId = req.params.userId;
+  const data = req.body;
+  try {
+    if (!data) data['userId'] = userId
+    const result = await BookingRepository.addBooking(userId, data);
+    res.status(200).json();
+  } catch (error) {
+    next(error);
+  }
+}
+
 export {
   getUserBookings,
   getUserBooking,
-  deleteBooking
+  deleteBooking,
+  addBooking
 }

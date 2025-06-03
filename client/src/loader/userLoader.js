@@ -1,3 +1,4 @@
+import { getRoomWithBookings } from "../services/roomService";
 import { getBookings, getBooking } from "../services/userService"
 
 async function userBookingsLoader({ params }) {
@@ -17,7 +18,14 @@ async function userBookingDetailLoader({ params }) {
   return await getBooking(userId, id);
 }
 
+async function userNewBookingLoader({ request }) {
+  const searchParams = new URL(request.url).searchParams;
+  const roomId = searchParams.get('roomId');
+  return getRoomWithBookings(roomId);
+}
+
 export {
   userBookingsLoader,
-  userBookingDetailLoader
+  userBookingDetailLoader,
+  userNewBookingLoader
 }

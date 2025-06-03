@@ -15,7 +15,7 @@ function Home() {
   }
 
   return (
-    <div class={styles.home}>
+    <div className={styles.home}>
       <Button onClick={userSpaceClickHandler}>
         User space
       </Button>

@@ -11,13 +11,13 @@ import RootLayout from "./ui/layouts/RootLayout";
 import RoomDetails from "./ui/components/room/RoomDetails";
 
 import { AppPath } from "./utils/appConstant";
-import BookingForm from "./ui/components/booking/BookingForm";
+import BookingForm from "./ui/components/booking/bookingForm/BookingForm";
 import Error from "./ui/components/error/Error";
 import { roomLoader, roomsLoader } from "./loader/roomsLoader";
 import BookingTable from "./ui/components/booking/bookingTable/BookingTable";
 import { bookingsLoader } from "./loader/bookingLoader";
 import { adminLoader } from "./loader/adminLoader";
-import { userBookingDetailLoader, userBookingsLoader } from "./loader/userLoader";
+import { userBookingDetailLoader, userBookingsLoader, userNewBookingLoader } from "./loader/userLoader";
 import UserBookingTable from "./ui/components/booking/bookingTable/UserBookingTable";
 import Home from "./ui/layouts/home/Home";
 
@@ -54,7 +54,8 @@ const router = createBrowserRouter(
             }, {
               path: AppPath.booking.new,
               errorElement: <Error />,
-              element: <BookingForm />
+              element: <BookingForm />,
+              loader: userNewBookingLoader
             }, {
               path: AppPath.booking.userBookingsPath,
               errorElement: <Error />,

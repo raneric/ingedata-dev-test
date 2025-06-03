@@ -4,11 +4,13 @@ const {
   simpleButton,
   iconButton } = styles
 
-function Button({ className, children, onClick }) {
+function Button({ className, children, onClick, isDisabled }) {
 
   return (
     <>
-      <button onClick={(e) => {
+      <button
+        disabled={isDisabled}
+        onClick={(e) => {
         e.stopPropagation();
         onClick();
       }

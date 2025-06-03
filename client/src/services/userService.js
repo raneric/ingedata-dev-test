@@ -54,8 +54,24 @@ async function cancelBooking(userId, bookingId) {
   }
 }
 
+async function createBooking(userId, roomId, bookedDate, price) {
+  const data = {
+    roomId,
+    ...bookedDate,
+    price
+  };
+
+  try {
+    await axios.post(`${BASE_URL}/user/${userId}/booking/new`, data);
+  } catch (error) {
+    throw new AppError(error);
+  }
+}
+
+
 export {
   getBookings,
   getBooking,
-  cancelBooking
+  cancelBooking,
+  createBooking
 }

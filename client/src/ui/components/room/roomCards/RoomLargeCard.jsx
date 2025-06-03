@@ -23,7 +23,7 @@ const {
   grid2Cols,
   gridRowGapSmall } = appLayoutStyles;
 
-function RoomLargeCard({ room }) {
+function RoomLargeCard({ room, showBookButton }) {
 
   const navigate = useNavigate();
 
@@ -59,10 +59,11 @@ function RoomLargeCard({ room }) {
 
       <Amenities amenities={room.amenities} />
 
-      <Button onClick={() => onBookClickHandler(room.id)}
+      {showBookButton && <Button onClick={() => onBookClickHandler(room.id)}
         className={bookButton}>
         <span>Book now</span>
-      </Button>
+      </Button>}
+
 
     </article>
   )

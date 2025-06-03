@@ -5,7 +5,11 @@ import {
   subMonths,
   endOfMonth,
   startOfMonth,
-  addMonths
+  addMonths,
+  isWithinInterval,
+  isSameDay,
+  isBefore,
+  startOfDay
 } from 'date-fns';
 
 import { Button } from '../../core/Button';
@@ -20,12 +24,20 @@ const {
   day,
   daysOtherMonth,
   today,
-  bookedDate
+  bookedDate,
+  selectedDate,
+  disableClick
 } = styles
 
-function Calendar({ bookings }) {
+function Calendar({
+  bookings,
+  onRangeChange = () => { },
+  isRangeSelectable = false }) {
 
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
 
   const bookedDates = new Set();
 
@@ -33,7 +45,7 @@ function Calendar({ bookings }) {
     let current = new Date(checkInDate);
     const end = new Date(checkOutDate);
 
-    while (current < end) {
+    while (current <= end) {
       bookedDates.add(current.toDateString()); // Using readable format for comparison
       current.setDate(current.getDate() + 1);
     }
@@ -53,6 +65,34 @@ function Calendar({ bookings }) {
   const nextMonthClickHandler = () => {
     setCurrentDate((currentDate) => addMonths(currentDate, 1));
   };
+
+
+  const handleDateClick = (clickedDate) => {
+    if (isBefore(startOfDay(clickedDate), startOfDay(todayDate))) return;
+
+    if (!selectedStartDate) {
+      setSelectedStartDate(clickedDate);
+      setSelectedEndDate(clickedDate);
+      onRangeChange?.(clickedDate, clickedDate, clickedDate);
+    } else if (clickedDate >= selectedStartDate) {
+      setSelectedEndDate(clickedDate);
+      onRangeChange?.(selectedStartDate, clickedDate, clickedDate);
+    }
+  };
+
+  const isSelected = (date) => {
+    if (!selectedStartDate || isBefore(startOfDay(date), startOfDay(todayDate))) return false;
+
+    if (!selectedEndDate) {
+      return isSameDay(startOfDay(date), startOfDay(selectedStartDate));
+    }
+    return isWithinInterval(date, {
+      start: startOfDay(selectedStartDate),
+      end: startOfDay(selectedEndDate)
+    });
+
+  };
+
 
   /**
    * Generate the days of the month for the calendar, including days
@@ -82,7 +122,7 @@ function Calendar({ bookings }) {
         days.push(
           <div
             key={`previous-month-${i}`}
-            className={`${day} ${isBooked ? bookedDate : ''}`}
+            className={`${day} ${isBooked ? bookedDate : ''} ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
           >
             {lastDayOfPrevMonth.getDate() - i}
           </div>
@@ -105,7 +145,11 @@ function Calendar({ bookings }) {
       days.push(
         <div
           key={`current-month-${i}`}
-          className={`${day} ${isBooked ? bookedDate : ''} ${isToday ? today : ''}`}
+          className={`${day} ${isToday ? today : ''} ${isSelected(date) ? selectedDate : ''} ${isBooked ? bookedDate : ''}  ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleDateClick(date);
+          }}
         >
           {i}
         </div>
@@ -118,12 +162,16 @@ function Calendar({ bookings }) {
      */
     if (nextMonthStartIndex > 0 && nextMonthStartIndex <= 6) {
       for (let i = 0; i <= 6 - nextMonthStartIndex; i++) {
-        const date = new Date(year, month, i);
+        const date = new Date(year, month + 1, i);
         const isBooked = bookedDates.has(date.toDateString());
         days.push(
           <div
             key={`next-month-${i}`}
-            className={`${day} ${isBooked ? bookedDate : ''} ${daysOtherMonth}`}
+            className={`${day} ${isSelected(date) ? selectedDate : ''}  ${isBooked ? bookedDate : ''} ${daysOtherMonth} ${(isBooked || !isRangeSelectable) ? disableClick : ''}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleDateClick(date);
+            }}
           >
             {i + 1}
           </div>

@@ -12,7 +12,7 @@ function RoomDetails() {
   const room = useLoaderData();
   return (
     <div className={roomDetails}>
-      <RoomLargeCard room={room[0]} />
+      <RoomLargeCard showBookButton={true} room={room[0]} />
       <div className={roomAvailability}>
         <h3 className={availabilityLabel}>Availability</h3>
         <Divider />

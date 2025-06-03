@@ -61,7 +61,7 @@ function RoomLargeCard({ room, showBookButton }) {
 
       {showBookButton && <Button onClick={() => onBookClickHandler(room.id)}
         className={bookButton}>
-        <span>Book now</span>
+        <span>Go booking</span>
       </Button>}
 
 

@@ -9,7 +9,8 @@ import { useState } from 'react';
 import Divider from '../../../core/Divider';
 import { useLoaderData, useNavigate } from 'react-router';
 import { createBooking } from '../../../../services/userService';
-import { DUMMY_USER } from '../../../../utils/appConstant';
+import { AppPath, DUMMY_USER } from '../../../../utils/appConstant';
+import NotificationDialog from '../../dialog/NotificationDialog';
 
 
 
@@ -19,11 +20,22 @@ const {
   cart,
   price } = styles;
 
+/**
+ * Booking UI which let user to book a specific for a specific range of date
+ *
+ * It includes the room details, a calendar for selecting the booking dates,
+ * the total price and a button to book the room.
+ *
+ * It handles the date selection and the booking submission.
+ *
+ */
 function BookingForm() {
   const room = useLoaderData()[0];
   const navigate = useNavigate();
   const [bookedDaysNumber, setBookedDaysNumber] = useState();
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const [showDialog, setShowDialog] = useState(false);
 
   const [bookedDates, setBookedDates] = useState({});
 
@@ -43,12 +55,25 @@ function BookingForm() {
   }
 
   const handleSubmit = async () => {
-    await createBooking(DUMMY_USER.id, room.id, bookedDates, totalPrice);
-    navigate()
+    const res = await createBooking(DUMMY_USER.id, room.id, bookedDates, totalPrice);
+    if (res.status === 200) {
+      setShowDialog(true);
+    }
+  }
+
+  const handleClick = () => {
+    setShowDialog(false);
+    navigate(AppPath.room.all);
   }
 
   return (
     <>
+      {showDialog &&
+        <NotificationDialog
+          message="Booked! ;)"
+          onClick={handleClick}
+        />}
+
       <div className={form} >
         <RoomLargeCard showBookButton={false} room={room} />
         <div className={cart}>

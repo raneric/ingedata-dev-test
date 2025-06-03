@@ -2,6 +2,7 @@ import styles from './dialog.module.css';
 import appLayoutStyles from '../../appLayout.module.css';
 import Dialog from './Dialog';
 import { Button } from '../../core/Button';
+
 const {
   grid,
   gridItemFullRow,
@@ -9,6 +10,15 @@ const {
   gridItemCenter
 } = appLayoutStyles
 
+/**
+ * A Dialog that asks the user for confirmation.
+ *
+ *
+ * @param {function} handleDialogYes - The function to call when the user clicks 'Yes'.
+ * @param {function} handleDialogNo - The function to call when the user clicks 'No'.
+ *
+ * @returns A JSX element representing the confirmation dialog.
+ */
 function ConfirmationDialog({ handleDialogYes, handleDialogNo }) {
   return (
     <>

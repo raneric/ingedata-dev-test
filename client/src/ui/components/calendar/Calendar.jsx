@@ -14,6 +14,7 @@ import {
 
 import { Button } from '../../core/Button';
 import { monthList } from '../../../utils/appConstant';
+import NotificationDialog from '../dialog/NotificationDialog';
 
 const {
   calendar,
@@ -38,6 +39,8 @@ function Calendar({
 
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
+
+  const [showDialog, setShowDialog] = useState(false);
 
   const bookedDates = new Set();
 
@@ -67,6 +70,10 @@ function Calendar({
   };
 
 
+  const handleDialogClose = () => {
+    setShowDialog(false)
+  }
+
   const handleDateClick = (clickedDate) => {
     if (isBefore(startOfDay(clickedDate), startOfDay(todayDate))) return;
 
@@ -91,7 +98,7 @@ function Calendar({
       }
 
       if (hasBooked) {
-        alert("Selected range includes a booked date. Please choose a different range.");
+        setShowDialog(true);
         return;
       }
 
@@ -208,21 +215,28 @@ function Calendar({
   };
 
   return (
-    <div className={calendar}>
-      <div className={header}>
-        <Button onClick={prevMonthClickHandler}><span>&lt;</span></Button>
-        <span>{monthList[month]} {year}</span>
-        <Button onClick={nextMonthClickHandler}><span>&gt;</span></Button>
-      </div>
+    <>
+      {showDialog && <NotificationDialog
+        onClick={handleDialogClose}
+        message="You can't select  dates with a booked date"
+      />}
 
-      <div className={daysOfWeek}>
-        {daysOfWeekLabel.map((day) => (
-          <div key={day} className={dayOfWeek}>{day}</div>
-        ))}
-      </div>
+      <div className={calendar}>
+        <div className={header}>
+          <Button onClick={prevMonthClickHandler}><span>&lt;</span></Button>
+          <span>{monthList[month]} {year}</span>
+          <Button onClick={nextMonthClickHandler}><span>&gt;</span></Button>
+        </div>
 
-      <div className={daysGrid}>{generateCalendarDays()}</div>
-    </div>
+        <div className={daysOfWeek}>
+          {daysOfWeekLabel.map((day) => (
+            <div key={day} className={dayOfWeek}>{day}</div>
+          ))}
+        </div>
+
+        <div className={daysGrid}>{generateCalendarDays()}</div>
+      </div>
+    </>
   );
 }
 

@@ -115,16 +115,16 @@ These tools have been used during the development :
 
 ### Assumptions and Limitations
 #### Assumptions  
-    - A user cannot book dates that overlap with existing bookings they have to make a separate booking if there is another booked date between the range of date.
-    - No authentication for now so the user data is based on a DUMMY_USER no constant defined in `ingedata-dev-test/client/src/utils/appConstant.js`
-    - Admin endpoints are assumed to be protected (even if not implemented yet).
-    - The system supports only one type of room price (no discounts or promo logic).
+   - A user cannot book dates that overlap with existing bookings they have to make a separate booking if there is another booked date between the range of date.
+   - No authentication for now so the user data is based on a DUMMY_USER no constant defined in `ingedata-dev-test/client/src/utils/appConstant.js`
+   - Admin endpoints are assumed to be protected (even if not implemented yet).
+   - The system supports only one type of room price (no discounts or promo logic).
 
 #### Limitations
-    - No user authentication implemented yet.
-    - Using typescript on the back-end would have improved abstraction, like for the repository pattern where controllers still use concrete classes. Although it adds an abstraction between the model and the controller, we can’t change the database without modifying the repository which does not respect the open-closed principle. With an abstraction using an interface and dependency injection for example will add a full abstraction between the repository and the model. 
-    - No role-based authorization - all routes are publicly accessible.
-    - Limited error feedback on the frontend UI.
-    - Admin stats are basic limited to the current month a filter should have done.
-    - All tables are not paginated which can lead to a performance issues when the database grow
+   - No user authentication implemented yet.
+   - Using typescript on the back-end would have improved abstraction, like for the repository pattern where controllers still use concrete classes. Although it adds an abstraction between the model and the controller, we can’t change the database without modifying the repository which does not respect the open-closed principle. With an abstraction using an interface and dependency injection for example will add a full abstraction between the repository and the model. 
+   - No role-based authorization - all routes are publicly accessible.
+   - Limited error feedback on the frontend UI.
+   - Admin stats are basic limited to the current month a filter should have done.
+   - All tables are not paginated which can lead to a performance issues when the database grow
 

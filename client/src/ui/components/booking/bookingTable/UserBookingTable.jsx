@@ -1,19 +1,20 @@
 import { useLoaderData } from 'react-router';
-import styles from './bookingTable.module.css';
 import { format } from 'date-fns';
 import { DEFAULT_DATE_FORMAT } from '../../../../utils/appConstant';
 import Icon from '../../../core/Icon';
 import link from '../../../../assets/link.png';
+import Table from '../../table/Table';
+import TableHead from '../../table/TableHead';
+import TableBody from '../../table/TableBody';
 
-const { tableWrapper, table } = styles;
 function UserBookingTable() {
 
   const bookings = useLoaderData();
 
   return (
-    <div className={tableWrapper}>
-      <table className={table}>
-        <thead>
+    <>
+      <Table>
+        <TableHead>
           <tr>
             <th>Room ID</th>
             <th>Room category</th>
@@ -23,8 +24,8 @@ function UserBookingTable() {
             <th>Price ($)</th>
             <th>Link to details</th>
           </tr>
-        </thead>
-        <tbody>
+        </TableHead>
+        <TableBody>
           {bookings.map((booking) => (
             <tr key={booking.id}>
               <td>{booking.roomId}</td>
@@ -38,9 +39,9 @@ function UserBookingTable() {
               </a></td>
             </tr>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </>
   );
 }
 

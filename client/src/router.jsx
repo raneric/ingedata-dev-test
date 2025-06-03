@@ -19,6 +19,7 @@ import { bookingsLoader } from "./loader/bookingLoader";
 import { adminLoader } from "./loader/adminLoader";
 import { userBookingDetailLoader, userBookingsLoader } from "./loader/userLoader";
 import UserBookingTable from "./ui/components/booking/bookingTable/UserBookingTable";
+import Home from "./ui/layouts/home/Home";
 
 const router = createBrowserRouter(
   [
@@ -27,6 +28,10 @@ const router = createBrowserRouter(
       element: <RootLayout />,
       errorElement: <Error />,
       children: [
+        {
+          element: <Home />,
+          path: '/'
+        },
         {
           element: <CustomerLayout />,
           children: [

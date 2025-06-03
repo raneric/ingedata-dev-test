@@ -13,7 +13,7 @@ const AppPath = {
   booking: {
     all: '/user/:userId/bookings',
     detailsPath: '/user/:userId/booking/:id',
-    userBookingsPath: 'user/:userId/bookings/',
+    userBookingsPath: '/user/:userId/bookings/',
     new: '/booking/new',
     details: '/booking'
   },

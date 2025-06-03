@@ -45,7 +45,7 @@ const {
  *
  * @param {Object} props.room - The room object.
  */
-function RoomCard({ room, showBookButton }) {
+function RoomCard({ room, isNewBooking }) {
 
   const navigate = useNavigate()
 
@@ -94,11 +94,12 @@ function RoomCard({ room, showBookButton }) {
 
         <Amenities amenities={room.amenities} />
 
-        {showBookButton && <Button onClick={() => onBookClickHandler(room.id)}
-          className={bookButton}
-        >
-          <span>Book now</span>
-        </Button>}
+        {isNewBooking &&
+          <Button
+            onClick={() => onBookClickHandler(room.id)}
+            className={bookButton} >
+            <span>Book now</span>
+          </Button>}
 
       </div>
     </article>

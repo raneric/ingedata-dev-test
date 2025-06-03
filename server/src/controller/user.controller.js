@@ -22,7 +22,17 @@ async function getUserBooking(req, res, next) {
   }
 }
 
+async function deleteBooking(req, res, next) {
+  const id = req.params.id;
+  try {
+    UserRepository.deleteBooking(id);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export {
   getUserBookings,
-  getUserBooking
+  getUserBooking,
+  deleteBooking
 }

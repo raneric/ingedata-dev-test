@@ -1,18 +1,42 @@
 //import styles from './bookingDetails.module.css';
 import RoomCard from "../../room/roomCards/RoomCard"
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import styles from "./bookingDetails.module.css";
 import Icon from "../../../core/Icon";
 import calendar from '../../../../assets/calendar.png';
 import cart from '../../../../assets/cart.png';
 import { format } from 'date-fns';
-import { DEFAULT_DATE_FORMAT } from "../../../../utils/appConstant";
+import { AppPath, DEFAULT_DATE_FORMAT } from "../../../../utils/appConstant";
+import { Button } from "../../../core/Button";
+import { cancelBooking } from "../../../../services/userService";
+import AppError from "../../../../utils/AppError";
 
-const { booking, bookingInfo, infoItem, price } = styles
+const { booking, bookingInfo, infoItem, price, cancelButton } = styles
 
+/**
+ * BookingDetail component renders the details of a user's booking.
+ *
+ * It includes the room details, check-in and check-out dates, and the price.
+ * Allows the user to cancel the booking and navigates back to the user's bookings page.
+ *
+ */
 function BookingDetail() {
+
+  const navigate = useNavigate();
+
+  const handleCancel = async (userId, bookingId) => {
+    const confirmed = window.confirm('Are you sure you want to cancel this booking?');
+    if (!confirmed) return;
+    try {
+      cancelBooking(userId, bookingId);
+    } catch (error) {
+      throw new AppError(error);
+    }
+    navigate('/user/1/bookings'); // TODO: authentication and use real user id
+  }
+
+
   const userBooking = useLoaderData();
-  console.log(userBooking);
   return (
     <div className={booking}>
       <RoomCard room={userBooking.bookings[0].Room} />
@@ -29,9 +53,14 @@ function BookingDetail() {
           <Icon iconFile={cart} />
           <span> Price : <span className={price}> {userBooking.bookings[0].price} $</span></span>
         </div>
+        <Button
+          onClick={() => handleCancel(userBooking.id, userBooking.bookings[0].id)}
+          className={cancelButton}>
+          Cancel
+        </Button>
       </div>
     </div>
   )
 }
 
-export default BookingDetail
+export default BookingDetail;

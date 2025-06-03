@@ -34,6 +34,15 @@ class UserRepository {
         ],
       })
   }
+
+  async deleteBooking(bookingId) {
+    return await Booking.destroy({
+      where: {
+        id: bookingId
+      }
+    });
+  }
+
 }
 
 export default new UserRepository();

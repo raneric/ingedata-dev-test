@@ -12,6 +12,7 @@
   flex-direction: column;
   gap: 0.8em;
   justify-self: center;
+  position: relative;
 }
 
 .infoItem {
@@ -25,4 +26,10 @@
 
 .price {
   color: var(--secondary-accent-color)
+}
+.cancelButton {
+  bottom: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

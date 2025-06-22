@@ -1,0 +1,35 @@
+services:
+  booking_db:
+    image: postgres
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: b00king
+      POSTGRES_DB: booking_db
+
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: booking_db           # <== use service name
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: b00king
+      DB_NAME: booking_db
+    volumes:
+      - ./server:/app
+    restart: always
+    depends_on:
+      - booking_db
+
+  client:
+    build: ./client
+    ports:
+      - "5173:80"
+    volumes:
+      - ./client:/app
+    restart: always
+    depends_on:
+      - server

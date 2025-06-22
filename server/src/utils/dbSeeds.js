@@ -2,6 +2,9 @@ import Room from '../models/room.model.js';
 import Booking from '../models/booking.model.js';
 import sequelize from '../config/sequelize.js';
 import User from '../models/user.model.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const rooms = [
   { id: 'S1', category: 'Simple', description: 'Comfort and convenience come together in our Simple Room — the perfect choice for budget-conscious travelers who don’t want to compromise on quality.', pricePerNight: 50, amenities: ['Wi-Fi', 'Fan'] },
@@ -55,6 +58,8 @@ const users = [
 ];
 
 async function seed() {
+
+  console.log("USER NAME PLEASE " + process.env.POSTGRES_USER);
   await sequelize.sync({ force: true });
   await Room.bulkCreate(rooms);
   await User.bulkCreate(users);

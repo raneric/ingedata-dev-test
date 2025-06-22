@@ -12,8 +12,12 @@ import AppError from '../utils/AppError';
  * @throws {AppError} Throws an AppError if the request fails.
  */
 async function getRooms({ checkInDate, checkOutDate } = {}) {
-  const query = new URLSearchParams({ checkInDate, checkOutDate }).toString();
-  const url = `${BASE_URL}/rooms?${query}`;
+  let url = `${BASE_URL}/rooms`;
+  if (checkInDate && checkOutDate) {
+    const query = new URLSearchParams({ checkInDate, checkOutDate }).toString();
+    url = `?${query}`;
+  }
+
   try {
     const response = await axios.get(url);
     return response.data;

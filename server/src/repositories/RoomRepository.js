@@ -1,5 +1,5 @@
 import { Booking, Room } from "../models/index.js";
-import sequelize from '../config/psql_sequilize.js';
+import sequelize from '../config/sequelize.js';
 import { QueryTypes } from "sequelize";
 
 

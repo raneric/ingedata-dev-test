@@ -21,7 +21,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./client/src
-          file: ./client/src/Dockerfile
+          context: ./client
+          file: ./client/Dockerfile
           push: true
           tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.REACT_APP_IMAGE_REPO }}:latest

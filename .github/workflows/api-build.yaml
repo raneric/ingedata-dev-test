@@ -1,4 +1,4 @@
-name: Build and Push Docker Image for booking-react-app
+name: Build and Push Docker Image for booking-api-app
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./client
-          file: ./client/Dockerfile
+          context: ./server
+          file: ./server/Dockerfile
           push: true
-          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.REACT_APP_IMAGE_REPO }}:latest
+          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:latest

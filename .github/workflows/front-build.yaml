@@ -23,4 +23,4 @@ jobs:
         with:
           context: .
           push: true
-          tags:  ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ secrets.REACT_APP_IMAGE_REPO }}:latest
+          tags:  ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.REACT_APP_IMAGE_REPO }}:latest

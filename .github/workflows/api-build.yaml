@@ -2,8 +2,8 @@ name: Build and Push Docker Image for booking-api-app
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - './server'
 jobs:
   build:
     runs-on: ubuntu-latest

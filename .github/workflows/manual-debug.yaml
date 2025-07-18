@@ -10,4 +10,4 @@ jobs:
       - id: step1
         run: echo "$DATA_TEST"
         env:
-          DATA_TEST: ${{ github.job }}
+          DATA_TEST: ${{ github.sha }}

@@ -61,7 +61,7 @@ async function seed() {
   await Room.bulkCreate(rooms);
   await User.bulkCreate(users);
   await Booking.bulkCreate(bookings);
-  console.log('Database seeded');
+  // console.log('Database seeded');
   process.exit();
 }
 

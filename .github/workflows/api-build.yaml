@@ -17,11 +17,15 @@ jobs:
           registry: jnb.ocir.io
           username: ${{ secrets.TENANCY }}/${{ secrets.EMAIL }}
           password: ${{ secrets.OCI_REGISTRY_PWD }}
-
+      - name: get commist short sha
+        id: short-sha-step
+        uses: ./.github/actions/get-short-sha-action/
+        with:
+          full-sha: ${{ github.sha }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: ./server
           file: ./server/Dockerfile
           push: true
-          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:latest
+          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:${{ steps.short-sha-step.outputs.short-sha }}"

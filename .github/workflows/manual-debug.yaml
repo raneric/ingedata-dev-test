@@ -15,4 +15,6 @@ jobs:
         with:
           full-sha: ${{ github.sha }}
       - name: test data
-        run: echo $FULL_SHA
+        run: echo $SHORT_SHA
+        env:
+          SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}

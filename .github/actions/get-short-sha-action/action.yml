@@ -13,7 +13,7 @@ runs:
   steps:
     - name: Get short commit sha
       id: short-commit-sha
-      run: echo "short-sha=$(git rev-parse --short $FULL_SHA)" >> $GITHUB_OUTPUT
+      run: echo "short-sha=$(git rev-parse --short ) $FULL_SHA" >> $GITHUB_OUTPUT
       shell: bash
       env:
         FULL_SHA: ${{ inputs.full-sha }}

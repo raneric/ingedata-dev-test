@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: step1
-        run: echo "$DATA_TEST"
+        run: git rev-parse --short ${{ github.sha }}
         env:
           DATA_TEST: ${{ github.sha }}

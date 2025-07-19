@@ -3,7 +3,7 @@ name: Build and Push Docker Image for booking-react-app
 on:
   push:
     paths:
-      - './client'
+      - 'client/**'
 jobs:
   build:
     runs-on: ubuntu-latest

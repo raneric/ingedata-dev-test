@@ -9,7 +9,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - id: step1
-        run: git rev-parse --short ${{ github.sha }}
-        env:
-          DATA_TEST: ${{ github.sha }}
+      - name: test custom action
+        id: custom-sha
+        uses: ./.github/actions/get-short-sha-action/
+        with:
+          full-sha: ${{ github.sha }}
+      - name: test data
+        run: echo $FULL_SHA

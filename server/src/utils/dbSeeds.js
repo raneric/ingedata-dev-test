@@ -54,7 +54,6 @@ const users = [
   { id: 17, name: 'Sam Hall', email: 'sam@example.com', phone: '901-333-5678' }
 ];
 
-// test psush
 async function seed() {
 
   console.log("USER NAME PLEASE " + process.env.POSTGRES_USER);

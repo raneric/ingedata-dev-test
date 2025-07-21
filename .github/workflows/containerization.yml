@@ -22,7 +22,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: jnb.ocir.io
+          registry: ${{ secrets.OCI_REGION }}
           username: ${{ secrets.TENANCY }}/${{ secrets.EMAIL }}
           password: ${{ secrets.OCI_REGISTRY_PWD }}
       - name: get commist short sha

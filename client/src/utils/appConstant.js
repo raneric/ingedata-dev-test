@@ -2,7 +2,7 @@
  * this should be stored in .env file but for simplicity 
  * and in order tp avoid a lot of configuration I kept it here
  */
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000'; //TODO: update using env
 
 const AppPath = {
   room: {

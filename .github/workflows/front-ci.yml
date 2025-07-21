@@ -1,0 +1,13 @@
+name: booking-react-app-build
+run-name: Build and Push Docker Image for booking-react-app
+on:
+  push:
+    paths:
+      - 'client/**'
+jobs:
+  containerize:
+    uses: ./.github/workflows/containerization.yml
+    with:
+      image-repo: ${{ vars.REACT_APP_IMAGE_REPO }}
+      docker-context: ./client
+      docker-file: ./client/Dockerfile

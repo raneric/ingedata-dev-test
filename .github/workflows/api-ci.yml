@@ -1,0 +1,13 @@
+name: booking-api-app-build
+run-name: Build and Push Docker Image for booking-api-app
+on:
+  push:
+    paths:
+      - 'server/**'
+jobs:
+  containerize:
+    uses: ./.github/workflows/containerization.yml
+    with:
+      image-repo: ${{ vars.API_APP_IMAGE_REPO }}
+      docker-context: ./server
+      docker-file: ./server/Dockerfile

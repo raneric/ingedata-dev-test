@@ -1,5 +1,5 @@
-name: Build and Push Docker Image for booking-api-app
-
+name: booking-api-app-build
+run-name: Build and Push Docker Image for booking-api-app
 on:
   push:
     paths:

@@ -1,5 +1,5 @@
-name: manual test workfolw
-
+name: manual-workfolw
+run-name: Manual workflow for test purpose
 on:
   workflow_dispatch: 
 

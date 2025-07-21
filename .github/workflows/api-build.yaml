@@ -28,4 +28,4 @@ jobs:
           context: ./server
           file: ./server/Dockerfile
           push: true
-          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:${{ steps.short-sha-step.outputs.short-sha }}"
+          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:${{ steps.short-sha-step.outputs.short-sha }}

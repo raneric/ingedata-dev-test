@@ -24,7 +24,7 @@ jobs:
       - name: run-test
         run: |
             cd server
-            pm test
+            npm test
 
   containerize:
     needs: [unit-test]

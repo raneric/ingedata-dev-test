@@ -10,10 +10,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: run-test
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: install dep
         run: |
             cd server
-            npm test
+            npm install
+
+      - name: run-test
+        run: npm test
+        
   containerize:
     needs: [unit-test]
     runs-on: ubuntu-latest

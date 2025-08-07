@@ -23,7 +23,7 @@ function calculateFulfillmentRates(bookings, fulfillmentDate = new Date()) {
   });
 
   const occupancyRate = { rooms: [], overall: 0 };
-
+  //test
   let sumRate = 0;
   Object.entries(totalBookingByRoom).forEach(([key, value]) => {
     const rate = (value / totalDayOfTheMonth) * 100;

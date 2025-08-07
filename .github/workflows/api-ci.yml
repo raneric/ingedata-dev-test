@@ -6,8 +6,26 @@ on:
       - 'server/**'
 jobs:
   containerize:
-    uses: ./.github/workflows/containerization.yml
-    with:
-      image-repo: ${{ vars.API_APP_IMAGE_REPO }}
-      docker-context: ./server
-      docker-file: ./server/Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.OCI_REGION }}
+          username: ${{ secrets.TENANCY }}/${{ secrets.EMAIL }}
+          password: ${{ secrets.OCI_REGISTRY_PWD }}
+      - name: get commist short sha
+        id: short-sha-step
+        uses: ./.github/actions/get-short-sha-action/
+        with:
+          full-sha: ${{ github.sha }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./server
+          file: ./server/Dockerfile
+          push: true
+          tags: ${{ secrets.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:${{ steps.short-sha-step.outputs.short-sha }}

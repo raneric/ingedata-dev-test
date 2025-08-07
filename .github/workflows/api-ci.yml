@@ -22,8 +22,10 @@ jobs:
             npm install
 
       - name: run-test
-        run: npm test
-        
+        run: |
+            cd server
+            pm test
+
   containerize:
     needs: [unit-test]
     runs-on: ubuntu-latest

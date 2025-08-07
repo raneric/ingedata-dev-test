@@ -15,6 +15,7 @@ jobs:
             cd server
             npm test
   containerize:
+    needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

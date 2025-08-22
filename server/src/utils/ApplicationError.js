@@ -1,5 +1,5 @@
 class ApplicationError extends Error {
-  constructor(message = 'Internal server error', statusCode = 500) {
+  constructor(message = "Internal server error", statusCode = 500) {
     super(message);
     this.statusCode = statusCode;
     Error.captureStackTrace(this, this.constructor);
@@ -18,8 +18,22 @@ class ValidatorError extends ApplicationError {
   }
 }
 
-export {
-  ResourceNotFoundError,
-  ApplicationError,
-  ValidatorError
+class AuthenticationError extends ApplicationError {
+  constructor(message) {
+    super(message, 401);
+  }
 }
+
+class AuthorizationError extends ApplicationError {
+  constructor(message) {
+    super(message, 403);
+  }
+}
+
+class ResourceConflictError() ApplicationError{
+   constructor(message) {
+    super(message, 409);
+  }
+}
+
+export { ResourceNotFoundError, ApplicationError, ValidatorError, AuthenticationError, AuthorizationError,ResourceConflictError };

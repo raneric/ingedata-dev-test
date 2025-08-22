@@ -1,6 +1,36 @@
 import { Booking, Room, User } from "../models/index.js";
-
+import { Op } from "sequelize";
+import { ResourceConflictError } from "../utils/ApplicationError.js";
 class UserRepository {
+  async signIn(user) {
+    const existingUser = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+            username: user.username,
+          },
+          {
+            email: user.email,
+          },
+        ],
+      },
+    });
+
+    if (existingUser.length > 0) {
+      throw new ResourceConflictError("");
+    }
+
+    return User.create(user);
+  }
+
+  async findOneById(userId) {
+    return User.findByPk(userId);
+  }
+
+  async findOneByUsername(username) {
+    return await User.findOne({ where: { username } });
+  }
+
   /**
    * Retrieves all bookings for a specific user.
    *
@@ -11,13 +41,13 @@ class UserRepository {
   async findBookings(userId) {
     return await Booking.findAll({
       where: {
-        userId: userId
+        userId: userId,
       },
       include: [
         {
           model: Room,
-        }
-      ]
+        },
+      ],
     });
   }
 
@@ -30,23 +60,22 @@ class UserRepository {
    *  or null if no booking is found.
    */
   async findBooking(userId, bookingId) {
-    return await User.findByPk(userId,
-      {
-        include: [
-          {
-            model: Booking,
-            as: 'bookings',
-            where: {
-              id: bookingId
-            },
-            include: [
-              {
-                model: Room,
-              }
-            ]
+    return await User.findByPk(userId, {
+      include: [
+        {
+          model: Booking,
+          as: "bookings",
+          where: {
+            id: bookingId,
           },
-        ],
-      })
+          include: [
+            {
+              model: Room,
+            },
+          ],
+        },
+      ],
+    });
   }
 
   /**
@@ -59,8 +88,8 @@ class UserRepository {
   async deleteBooking(bookingId) {
     return await Booking.destroy({
       where: {
-        id: bookingId
-      }
+        id: bookingId,
+      },
     });
   }
 
@@ -75,7 +104,6 @@ class UserRepository {
   async addBooking(userId, data) {
     return await Booking.create({ ...data, userId });
   }
-
 }
 
 export default new UserRepository();

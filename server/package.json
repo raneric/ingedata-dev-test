@@ -13,18 +13,21 @@
   "description": "",
   "dependencies": {
     "@sequelize/postgres": "^7.0.0-alpha.46",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
-    "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "sequelize": "^6.37.7",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "dotenv": "^17.2.1",
     "eslint": "^9.27.0",
     "globals": "^16.1.0",
-    "jest": "^30.0.5"
+    "jest": "^30.0.5",
+    "sequelize-cli": "^6.6.3"
   }
 }

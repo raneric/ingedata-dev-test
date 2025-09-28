@@ -30,10 +30,10 @@ class AuthorizationError extends ApplicationError {
   }
 }
 
-class ResourceConflictError() ApplicationError{
-   constructor(message) {
+class ResourceConflictError extends ApplicationError {
+  constructor(message) {
     super(message, 409);
   }
 }
 
-export { ResourceNotFoundError, ApplicationError, ValidatorError, AuthenticationError, AuthorizationError,ResourceConflictError };
+export { ResourceNotFoundError, ApplicationError, ValidatorError, AuthenticationError, AuthorizationError, ResourceConflictError };

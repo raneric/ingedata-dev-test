@@ -13,7 +13,6 @@ async function login(req, res, next) {
   try {
     const user = await UserRepository.findOneByUsername(username);
     const passwordMatch = await bcrypt.compare(password, user.password);
-    console.log(passwordMatch);
 
     if (!passwordMatch) {
       throw new AuthenticationError("Password or username  doesn't match");
@@ -29,10 +28,6 @@ async function login(req, res, next) {
   }
 }
 
-async function logout(req, res, next) {
-  res.json({ status: "ok" });
-}
-
 async function signin(req, res, next) {
   const userInfo = req.body;
   const salt = await bcrypt.genSalt();
@@ -46,4 +41,4 @@ async function signin(req, res, next) {
   }
 }
 
-export { login, logout, signin };
+export { login, signin };

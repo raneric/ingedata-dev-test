@@ -2,7 +2,8 @@
  * this should be stored in .env file but for simplicity
  * and in order tp avoid a lot of configuration I kept it here
  */
-const BASE_URL = "http://localhost:3000"; //TODO: update using env
+// eslint-disable-next-line no-undef
+const BASE_URL = process.env.API_ENDPOINT;
 
 const AppPath = {
   room: {
@@ -30,7 +31,20 @@ const AppPath = {
 
 const DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
 
-const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthList = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const DUMMY_USER = {
   id: 1,

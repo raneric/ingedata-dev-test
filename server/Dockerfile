@@ -15,7 +15,6 @@ WORKDIR /app
 COPY --from=build /app /app
 
 ENV NODE_ENV=production
-ENV HOST=0.0.0.0
 
 EXPOSE 3000
 

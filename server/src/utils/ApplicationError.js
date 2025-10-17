@@ -36,4 +36,11 @@ class ResourceConflictError extends ApplicationError {
   }
 }
 
-export { ResourceNotFoundError, ApplicationError, ValidatorError, AuthenticationError, AuthorizationError, ResourceConflictError };
+export {
+  ResourceNotFoundError,
+  ApplicationError,
+  ValidatorError,
+  AuthenticationError,
+  AuthorizationError,
+  ResourceConflictError,
+};

@@ -1,0 +1,58 @@
+- name: Kubernetes Control Plane Health Check
+  hosts: master_node
+  become: true
+  tasks:
+    - name: Check static pod manifest validity
+      find:
+        paths: /etc/kubernetes/manifests
+        patterns: "*.yaml"
+      register: manifest_files
+
+    - name: Display static pod manifests
+      debug:
+        var: manifest_files.files
+
+    - name: Check containerd status
+      systemd:
+        name: containerd
+        state: started
+      register: containerd_status
+
+    - name: Show containerd status
+      debug:
+        var: containerd_status
+
+    - name: Check kubelet status
+      systemd:
+        name: kubelet
+        state: started
+      register: kubelet_status
+
+    - name: Show kubelet status
+      debug:
+        var: kubelet_status
+
+    - name: Check memory usage
+      shell: free -m
+      register: memory_output
+
+    - name: Show memory usage
+      debug:
+        var: memory_output.stdout_lines
+
+    - name: Check disk usage
+      shell: df -h
+      register: disk_output
+
+    - name: Show disk usage
+      debug:
+        var: disk_output.stdout_lines
+
+    - name: Check CNI plugin pods
+      shell: kubectl get pods -n kube-system | grep -E 'calico|flannel|cni'
+      register: cni_status
+      ignore_errors: true
+
+    - name: Show CNI plugin status
+      debug:
+        var: cni_status.stdout_lines

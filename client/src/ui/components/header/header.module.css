@@ -1,24 +1,28 @@
 .welcomeMessage {
   font-style: italic;
-  font-family: 'Caveat';
+  font-family: "Caveat";
 }
 
 .header ul {
   list-style: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 4em;
 }
 
 .header ul li a {
   text-decoration: none;
-  color: var(--on-primary-color);
   font-size: var(--font-h6);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .header ul li a:hover {
   cursor: pointer;
   color: var(--secondary-accent-color);
+}
+.header ul li a:visited {
+  cursor: pointer;
+  color: var(--on-primary-color);
 }

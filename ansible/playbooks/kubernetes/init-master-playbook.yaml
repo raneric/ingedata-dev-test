@@ -1,0 +1,19 @@
+- name: Initialize Kubernetes Master Node
+  hosts: master_node
+  become: true
+  tasks:
+    - name: Initialize Kubernetes cluster
+      command: kubeadm init --apiserver-advertise-address=192.168.60.11 --control-plane-endpoint=192.168.60.11
+      register: kubeadm_output
+      ignore_errors: yes
+
+    - name: Save kubeadm output to log file
+      copy:
+        content: "{{ kubeadm_output.stdout }}"
+        dest: /home/master01/kubeadm-init.log
+        owner: master01
+        mode: "0644"
+
+    - name: Show kubeadm output
+      debug:
+        var: kubeadm_output.stdout

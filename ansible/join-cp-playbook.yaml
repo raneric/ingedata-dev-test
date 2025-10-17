@@ -1,0 +1,9 @@
+- name: Join the control plane
+  hosts: workers
+  become: true
+  vars_files:
+    - secrets/secret.yml
+
+  tasks:
+    - name: Join the control plane
+      command: kubeadm join 192.168.60.11:6443 --token {{ kubeadm_token }} --discovery-token-ca-cert-hash sha256:{{ kubeadm_sha }}

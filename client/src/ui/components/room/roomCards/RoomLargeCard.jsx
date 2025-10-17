@@ -1,30 +1,21 @@
-import { Button } from '../../../core/Button';
-import Divider from '../../../core/Divider';
+import { Button } from "../../../core/Button";
+import Divider from "../../../core/Divider";
 
-import roomCardsStyles from './roomCards.module.css';
-import appLayoutStyles from '../../../appLayout.module.css';
-import { useNavigate } from 'react-router';
-import { AppPath } from '../../../../utils/appConstant';
-import PriceSection from './PriceSection';
-import Description from './Description';
-import Amenities from './Amenities';
+import roomCardsStyles from "./roomCards.module.css";
+import appLayoutStyles from "../../../appLayout.module.css";
+import { useNavigate } from "react-router";
+import { AppPath } from "../../../../utils/appConstant";
+import PriceSection from "./PriceSection";
+import Description from "./Description";
+import Amenities from "./Amenities";
 
-import getRoomPicture from '../../../../utils/getRoomPicture.js';
+import getRoomPicture from "../../../../utils/getRoomPicture.js";
 
-const {
-  largeCardImg,
-  roomLargeCard,
-  category,
-  bookButton } = roomCardsStyles;
+const { largeCardImg, roomLargeCard, category, bookButton } = roomCardsStyles;
 
-const {
-  gridItemFullRow,
-  grid,
-  grid2Cols,
-  gridRowGapSmall } = appLayoutStyles;
+const { gridItemFullRow, grid, grid2Cols, gridRowGapSmall } = appLayoutStyles;
 
 function RoomLargeCard({ room, showBookButton }) {
-
   const navigate = useNavigate();
 
   const cardImageFile = getRoomPicture(room.category);
@@ -38,18 +29,24 @@ function RoomLargeCard({ room, showBookButton }) {
    */
   const onBookClickHandler = (roomId) => {
     navigate(`${AppPath.booking.new}?roomId=${roomId}`);
-  }
+  };
 
   return (
     <article
-      className={`${roomLargeCard} ${grid} ${grid2Cols} ${gridRowGapSmall}`}>
-      <span className={category}>{room.category} room {room.id}</span>
+      className={`${roomLargeCard} ${grid} ${grid2Cols} ${gridRowGapSmall}`}
+    >
+      <span className={category}>
+        {room.category} room {room.id}
+      </span>
 
       <PriceSection pricePerNight={room.pricePerNight} />
 
       <Divider className={gridItemFullRow} />
 
-      <img className={`${largeCardImg} ${gridItemFullRow}`} src={cardImageFile} />
+      <img
+        className={`${largeCardImg} ${gridItemFullRow}`}
+        src={cardImageFile}
+      />
 
       <Divider className={gridItemFullRow} />
 
@@ -59,14 +56,16 @@ function RoomLargeCard({ room, showBookButton }) {
 
       <Amenities amenities={room.amenities} />
 
-      {showBookButton && <Button onClick={() => onBookClickHandler(room.id)}
-        className={bookButton}>
-        <span>Go booking</span>
-      </Button>}
-
-
+      {showBookButton && (
+        <Button
+          onClick={() => onBookClickHandler(room.id)}
+          className={bookButton}
+        >
+          <span>Go booking</span>
+        </Button>
+      )}
     </article>
-  )
+  );
 }
 
 export default RoomLargeCard;

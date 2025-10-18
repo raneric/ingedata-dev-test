@@ -1,4 +1,4 @@
-header {
+nav {
   background-color: var(--background-color);
   color: var(--on-primary-color);
   font-size: var(--font-h6);
@@ -8,9 +8,13 @@ header {
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   min-height: 3.5em;
   padding: 0 1.5em;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
 }
 
-.header ul {
+.navBar ul {
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -20,20 +24,29 @@ header {
   flex: 1;
 }
 
-.header ul li a {
+.navBar ul li a {
   text-decoration: none;
   font-size: var(--font-h6);
   font-weight: 500;
 }
 
-.header ul li a:hover {
+.navBar ul li a:hover {
   cursor: pointer;
   color: var(--secondary-accent-color);
 }
-.header ul li a:visited {
+.navBar ul li a:visited {
   cursor: pointer;
   color: var(--on-primary-color);
 }
 .logo {
   justify-self: self-start;
+}
+.buttonText {
+  font-weight: 500;
+  font-size: var(--font-p-big);
+}
+.transparent {
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+  opacity: 0.9;
 }

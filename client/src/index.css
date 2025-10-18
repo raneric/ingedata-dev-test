@@ -72,4 +72,5 @@ main {
   flex-direction: column;
   align-items: center;
   min-height: 90vh;
+  gap: 2em;
 }

@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Header from "../../components/header/Header";
+import NavBar from "../../components/nav/NavBar";
 import { AppPath, DUMMY_USER } from "../../../utils/appConstant";
-import Hero from "../../components/heroes/Hero";
+import Hero from "../../components/hero/Hero";
 
 function CustomerLayout() {
   const linkList = [
     {
-      path: AppPath.room.all,
+      path: AppPath.public.home,
       label: "Home",
     },
     {
@@ -25,7 +25,7 @@ function CustomerLayout() {
 
   return (
     <>
-      <Header linkList={linkList} />
+      <NavBar linkList={linkList} />
       <Hero />
       <main>
         <Outlet />

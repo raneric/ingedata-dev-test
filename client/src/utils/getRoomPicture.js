@@ -1,6 +1,6 @@
-import premium_room from '../assets/premium_room.jpg';
-import royal_room from '../assets/royal_room.jpg';
-import simple_room from '../assets/simple_room.jpg';
+import premium_room from "../assets/img/premium_room.jpg";
+import royal_room from "../assets/img/royal_room.jpg";
+import simple_room from "../assets/img/simple_room.jpg";
 
 /**
  * A halper function which return a dummy room picture from the assets folder
@@ -9,14 +9,13 @@ import simple_room from '../assets/simple_room.jpg';
  * @returns {string} The path to the correct room image.
  */
 const getRoomPicture = (roomCategory) => {
-
   let cardImageFile;
 
   switch (roomCategory) {
-    case 'Simple':
-      cardImageFile = simple_room
+    case "Simple":
+      cardImageFile = simple_room;
       break;
-    case 'Premium':
+    case "Premium":
       cardImageFile = premium_room;
       break;
     default:
@@ -24,6 +23,6 @@ const getRoomPicture = (roomCategory) => {
   }
 
   return cardImageFile;
-}
+};
 
 export default getRoomPicture;

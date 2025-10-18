@@ -1,13 +1,18 @@
 .container {
-  width: 100%;
+  width: 95%;
   height: 45em;
   background-image: linear-gradient(
       rgba(34, 34, 34, 0.39),
       rgba(34, 34, 34, 0.295)
     ),
-    url("../../../assets/hero.jpg");
+    url("../../../assets/img/hero.jpg");
   background-size: fill;
   color: #fff;
+  border-radius: 2em;
+  align-self: center;
+  position: relative;
+  margin-top: 6em;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .container img {
@@ -36,7 +41,7 @@
 
 .description {
   text-align: start;
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: 300;
   line-height: 1.6em;
 }

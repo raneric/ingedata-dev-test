@@ -1,29 +1,37 @@
-import styles from './home.module.css'
-import { Button } from "../../core/Button";
-import { useNavigate } from 'react-router';
-import { AppPath } from '../../../utils/appConstant';
+import { AppPath } from "../../../utils/appConstant";
+import NavBar from "../../components/nav/NavBar";
+import Hero from "../../components/hero/Hero";
+import Features from "../../components/features/Features";
 
 function Home() {
-
-  const navigate = useNavigate();
-
-  const userSpaceClickHandler = () => {
-    navigate(AppPath.room.all);
-  }
-  const adminSpaceClickHandler = () => {
-    navigate(AppPath.admin.home);
-  }
+  const linkList = [
+    {
+      path: AppPath.public.home,
+      label: "Home",
+    },
+    {
+      path: "#",
+      label: "Room list",
+    },
+    {
+      path: "#",
+      label: "Contact",
+    },
+    {
+      path: `#`,
+      label: "About us",
+    },
+  ];
 
   return (
-    <div className={styles.home}>
-      <Button onClick={userSpaceClickHandler}>
-        User space
-      </Button>
-      <Button onClick={adminSpaceClickHandler}>
-        Admin space
-      </Button>
-    </div>
-  )
+    <>
+      <NavBar linkList={linkList} />
+      <main>
+        <Hero />
+        <Features />
+      </main>
+    </>
+  );
 }
 
 export default Home;

@@ -22,6 +22,9 @@ const AppPath = {
     home: "/admin",
     bookings: "/admin/bookings",
   },
+  public: {
+    home: "/",
+  },
 };
 
 const DEFAULT_DATE_FORMAT = "yyyy-MM-dd";

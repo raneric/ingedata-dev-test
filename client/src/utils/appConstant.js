@@ -2,7 +2,7 @@
  * this should be stored in .env file but for simplicity
  * and in order tp avoid a lot of configuration I kept it here
  */
-// eslint-disable-next-line no-undef
+
 const BASE_URL = "http://localhost:3000";
 
 const AppPath = {
@@ -22,14 +22,6 @@ const AppPath = {
     home: "/admin",
     bookings: "/admin/bookings",
   },
-<<<<<<< HEAD
-  auth: {
-    login: "auth/login",
-    signin: "auth/signin",
-    logout: "auth/logout",
-  },
-=======
->>>>>>> 1db1c18 (adding heroes section and auth base)
 };
 
 const DEFAULT_DATE_FORMAT = "yyyy-MM-dd";

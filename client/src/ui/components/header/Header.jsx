@@ -1,11 +1,15 @@
 import { Link } from "react-router";
 import styles from "./header.module.css";
-
-const { header } = styles;
+import Logo from "../../core/Logo";
+import { Button, IconButton } from "../../core/Button";
+import Icon from "../../core/Icon";
+import login from "../../../assets/login.png";
+const { header, logo } = styles;
 
 function Header({ linkList }) {
   return (
     <header className={header}>
+      <Logo className={logo} />
       <ul>
         {linkList.map((item, index) => (
           <li key={index}>
@@ -13,6 +17,10 @@ function Header({ linkList }) {
           </li>
         ))}
       </ul>
+      <IconButton>
+        <span>Login</span>
+        <Icon iconFile={login} />
+      </IconButton>
     </header>
   );
 }

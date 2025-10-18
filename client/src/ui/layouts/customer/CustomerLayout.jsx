@@ -14,6 +14,10 @@ function CustomerLayout() {
       label: "Room list",
     },
     {
+      path: "#",
+      label: "Contact",
+    },
+    {
       path: `/user/${DUMMY_USER.id}/bookings`, // TODO: authentication and use real user id
       label: "My bookings",
     },

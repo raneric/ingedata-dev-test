@@ -51,4 +51,18 @@ const DUMMY_USER = {
   phone: "123-456-7890",
 };
 
-export { BASE_URL, AppPath, DEFAULT_DATE_FORMAT, monthList, DUMMY_USER };
+const FAKE_IMAGE_DATA = [
+  "https://images.immediate.co.uk/production/volatile/sites/30/2024/01/30-best-side-dishes-76bad62.jpg",
+  "https://ginkgospa.com/cape-town-spas/wp-content/uploads/2016/03/sauna-spa-special.jpg",
+  "https://img.freepik.com/free-photo/beautiful-green-park_1417-1447.jpg",
+  "https://www.lequipe.fr/_medias/img-photo-jpg/choisir-sa-salle-de-sport-n-est-pas-une-mince-affaire-dr/1500000001493791/137:92,1860:1240-828-552-75/7d418.jpg",
+];
+
+export {
+  BASE_URL,
+  AppPath,
+  DEFAULT_DATE_FORMAT,
+  monthList,
+  DUMMY_USER,
+  FAKE_IMAGE_DATA,
+};

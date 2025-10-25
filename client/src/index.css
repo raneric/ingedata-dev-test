@@ -46,9 +46,11 @@ h5 {
 h6 {
   font-size: var(--font-h6);
 }
+
 h1 {
   font-size: var(--font-h1);
 }
+
 body {
   background-color: var(--surface-color);
 }
@@ -72,5 +74,5 @@ main {
   flex-direction: column;
   align-items: center;
   min-height: 90vh;
-  gap: 2em;
+  gap: 2rem;
 }

@@ -2,6 +2,7 @@ import { AppPath } from "../../../utils/appConstant";
 import NavBar from "../../components/nav/NavBar";
 import Hero from "../../components/hero/Hero";
 import Features from "../../components/features/Features";
+import LoginDialog from "../../components/dialog/LoginDialog";
 
 function Home() {
   const linkList = [

@@ -1,12 +1,12 @@
 .featuresContainer {
-  width: 95%;
+  max-width: 95%;
   padding: 1.2em;
 }
 
 .featureCard {
   border-radius: 8px;
   background-color: var(--background-color);
-  padding: 16px;
+  padding: 8px;
 }
 
 .cardImage {
@@ -14,16 +14,56 @@
   height: 15em;
   object-fit: cover;
 }
+
 .leftImage {
   grid-row: 1 / -3;
+  align-self: center;
 }
 
 .rightImage {
   grid-row: 1 / -3;
   grid-column: 2/3;
+  justify-self: end;
+  align-self: center;
 }
 
 .sectionTitle {
   grid-row: 1 / -4;
   align-self: center;
+}
+
+.titleStyle {
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  color: var(--on-surface-color);
+  font-size: var(--font-h6);
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1b5454f;
+}
+
+.descriptionStyle {
+  text-align: justify;
+  color: var(--on-background-color);
+}
+
+@media (max-width: 100em) {
+  /* .featureCard {
+    display: flex;
+    flex-direction: column;
+    max-width: 28em;
+  }
+  .featuresContainer {
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+  }*/
+  .sectionTitle {
+    grid-column: 1; /* Place the item in the first column */
+    grid-row: 1 / -1;
+  }
+  .featuresContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    place-items: center;
+  }
 }

@@ -15,19 +15,19 @@
 }
 
 .gridRowGapSmall {
-  gap: 0.4em;
+  gap: 0.4rem;
 }
 
 .gridRowGapMedium {
-  gap: 0.6em;
+  gap: 0.6rem;
 }
 
 .gridRowGapLarge {
-  gap: 0.8em;
+  gap: 0.8rem;
 }
 
 .gridRowGapXLarge {
-  gap: 1em;
+  gap: 1rem;
 }
 
 /* Grid items properties */

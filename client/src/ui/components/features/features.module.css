@@ -1,12 +1,14 @@
 .featuresContainer {
   max-width: 95%;
   padding: 1.2em;
+  gap: var(--grid-gap-xlarge);
 }
 
 .featureCard {
-  border-radius: 8px;
+  border-radius: var(--border-radius-m);
   background-color: var(--background-color);
-  padding: 8px;
+  padding: var(--padding-s);
+  gap: var(--grid-gap-large);
 }
 
 .cardImage {
@@ -30,15 +32,16 @@
 .sectionTitle {
   grid-row: 1 / -4;
   align-self: center;
+  color: var(--on-surface-color);
 }
 
-.titleStyle {
+.itemTitle {
   font-weight: bold;
-  margin-top: 12px;
-  margin-bottom: 8px;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
   color: var(--on-surface-color);
   font-size: var(--font-h6);
-  padding-bottom: 8px;
+  padding-bottom: var(--padding-s);
   border-bottom: 1px solid #f1b5454f;
 }
 

@@ -1,22 +1,13 @@
 import ProgressBar from "../../../core/ProgressBar";
 import styles from "./stats.module.css";
-import appLayoutStyles from '../../../appLayout.module.css';
-import Divider from '../../../core/Divider'
+import appLayoutStyles from "../../../appLayout.module.css";
+import Divider from "../../../core/Divider";
 import { useLoaderData } from "react-router";
 
-const {
-  statsCard,
-  statsDetails
-} = styles;
+const { statsCard, statsDetails } = styles;
 
-const {
-  grid,
-  grid2Cols,
-  gridItemFullRow,
-  gridRowGapMedium,
-  gridItemAlignCenter
-} = appLayoutStyles
-
+const { grid, grid2Cols, gridItemFullRow, gridItemAlignCenter } =
+  appLayoutStyles;
 
 /**
  * StatsCard component renders a card displaying the fulfillment rates for
@@ -29,11 +20,10 @@ const {
  * @returns {JSX.Element} A JSX element containing the StatsCard component.
  */
 function StatsCard() {
-
-  const data = useLoaderData()
+  const data = useLoaderData();
 
   return (
-    <div className={`${statsCard} ${grid} ${statsCard} ${grid2Cols} ${gridRowGapMedium}`}>
+    <div className={`${statsCard} ${grid} ${grid2Cols}`}>
       <h6>Fulfillment rates for this month</h6>
       <Divider className={gridItemFullRow} />
       <ProgressBar
@@ -41,21 +31,21 @@ function StatsCard() {
         value={data.overall.toFixed(2)}
         max={100}
         index={0}
-        dataInfo='Overall occupation' />
+        dataInfo="Overall occupation"
+      />
       <div className={statsDetails}>
-        {
-          data.rooms.map((element, index) =>
-            <ProgressBar
-              key={index}
-              value={element.occupancyRate.toFixed(2)}
-              max={100}
-              index={element.id}
-              dataInfo={`Room ${element.roomId}`} />
-          )
-        }
+        {data.rooms.map((element, index) => (
+          <ProgressBar
+            key={index}
+            value={element.occupancyRate.toFixed(2)}
+            max={100}
+            index={element.id}
+            dataInfo={`Room ${element.roomId}`}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default StatsCard;

@@ -13,7 +13,7 @@ import getRoomPicture from "../../../../utils/getRoomPicture.js";
 
 const { largeCardImg, roomLargeCard, category, bookButton } = roomCardsStyles;
 
-const { gridItemFullRow, grid, grid2Cols, gridRowGapSmall } = appLayoutStyles;
+const { gridItemFullRow, grid, grid2Cols } = appLayoutStyles;
 
 function RoomLargeCard({ room, showBookButton }) {
   const navigate = useNavigate();
@@ -32,9 +32,7 @@ function RoomLargeCard({ room, showBookButton }) {
   };
 
   return (
-    <article
-      className={`${roomLargeCard} ${grid} ${grid2Cols} ${gridRowGapSmall}`}
-    >
+    <article className={`${roomLargeCard} ${grid} ${grid2Cols}`}>
       <span className={category}>
         {room.category} room {room.id}
       </span>

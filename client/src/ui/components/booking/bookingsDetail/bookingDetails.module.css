@@ -5,12 +5,12 @@
 
 .bookingInfo {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-m);
   background-color: var(--background-color);
   padding: 1em;
   display: flex;
   flex-direction: column;
-  gap: 0.8em;
+  gap: var(--grid-gap-large);
   justify-self: center;
   position: relative;
 }
@@ -18,15 +18,16 @@
 .infoItem {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: var(--grid-gap-medium);
   font-size: var(--font-p-medium);
   font-weight: bold;
   color: var(--on-background-color);
 }
 
 .price {
-  color: var(--secondary-accent-color)
+  color: var(--secondary-accent-color);
 }
+
 .cancelButton {
   bottom: 0;
   position: absolute;

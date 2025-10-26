@@ -1,20 +1,20 @@
 .roomDetails {
   display: flex;
   flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    gap: 48px;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--grid-gap-xxxlarge);
 }
 
 .roomAvailability {
   display: flex;
   align-items: center;
   flex-direction: column;
-    background-color: var(--background-color);
-    padding: 8px;
-    border-radius: 8px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    gap: 8px;
+  background-color: var(--background-color);
+  padding: var(--padding-s);
+  border-radius: var(--border-radius-m);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  gap: var(--grid-gap-medium);
 }
 
 .availabilityLabel {

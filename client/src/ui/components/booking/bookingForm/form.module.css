@@ -1,17 +1,16 @@
 .form {
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: var(--grid-gap-xlarge);
   justify-content: center;
 }
 
 .cart {
-  padding: 3em;
+  padding: var(--padding-xxxl);
   background-color: white;
   display: flex;
   flex-direction: column;
-  gap: 1em;
-
+  gap: var(--grid-gap-xlarge);
 }
 
 .price {

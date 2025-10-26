@@ -4,13 +4,11 @@ import FeatureItem from "./FeatureItem";
 import { FAKE_FEATURES_DATA } from "../../../utils/appConstant";
 
 function Features() {
-  const { grid, grid3Cols, gridRowGapXLarge } = layoutStyles;
+  const { grid, grid3Cols } = layoutStyles;
   const { featuresContainer, sectionTitle } = styles;
   return (
     <>
-      <section
-        className={`${featuresContainer} ${grid} ${grid3Cols} ${gridRowGapXLarge}`}
-      >
+      <section className={`${featuresContainer} ${grid} ${grid3Cols}`}>
         <h1 className={sectionTitle}>
           A Complete Hotel Experience, Comfort, Cuisine, relaxation & Luxury All
           in One Place

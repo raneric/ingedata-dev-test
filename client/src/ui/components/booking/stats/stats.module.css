@@ -12,6 +12,7 @@
   align-items: center;
   padding: 1em;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-m);
   background-color: var(--background-color);
+  gap: var(--grid-gap-medium);
 }

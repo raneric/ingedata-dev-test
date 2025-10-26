@@ -1,5 +1,5 @@
 .calendar {
-  max-width: 320px;
+  max-width: 20rem;
   background-color: var(--background-color);
 }
 
@@ -48,6 +48,7 @@
   color: white;
   opacity: 0.3;
 }
+
 .disableClick {
   pointer-events: none;
 }

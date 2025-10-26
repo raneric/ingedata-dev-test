@@ -34,17 +34,21 @@ nav {
   cursor: pointer;
   color: var(--secondary-accent-color);
 }
+
 .navBar ul li a:visited {
   cursor: pointer;
   color: var(--on-primary-color);
 }
+
 .logo {
   justify-self: self-start;
 }
+
 .buttonText {
   font-weight: 500;
   font-size: var(--font-p-big);
 }
+
 .transparent {
   transition: all 0.3s ease-in-out;
   background-color: var(--background-color);

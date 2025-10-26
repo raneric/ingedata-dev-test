@@ -1,47 +1,35 @@
-import { Button } from '../../../core/Button';
-import Divider from '../../../core/Divider';
+import { Button } from "../../../core/Button";
+import Divider from "../../../core/Divider";
 
-import roomCardsStyles from './roomCards.module.css';
-import appLayoutStyles from '../../../appLayout.module.css';
-import { useNavigate } from 'react-router';
-import { AppPath } from '../../../../utils/appConstant';
-import PriceSection from './PriceSection';
-import Description from './Description';
-import Amenities from './Amenities';
+import roomCardsStyles from "./roomCards.module.css";
+import appLayoutStyles from "../../../appLayout.module.css";
+import { useNavigate } from "react-router";
+import { AppPath } from "../../../../utils/appConstant";
+import PriceSection from "./PriceSection";
+import Description from "./Description";
+import Amenities from "./Amenities";
 
-import getRoomPicture from '../../../../utils/getRoomPicture.js';
+import getRoomPicture from "../../../../utils/getRoomPicture.js";
 
-const {
-  cardImg,
-  roomInfo,
-  roomCard,
-  category,
-  bookButton } = roomCardsStyles;
+const { cardImg, roomInfo, roomCard, category, bookButton } = roomCardsStyles;
 
-const {
-  gridItemFullRow,
-  grid,
-  grid2Cols,
-  gridItemCenter,
-  gridRowGapSmall } = appLayoutStyles;
-
+const { gridItemFullRow, grid, grid2Cols, gridItemCenter } = appLayoutStyles;
 
 /**
  * A UI component for displaying a single room in a list of rooms.
- * 
+ *
  * The component displays the room's details such as the category, price per night,
  * description and amenities. It also displays a button to book the room.
- * 
+ *
  * @param {Object} props - The properties object.
  * @param {Object} props.room - The room object.
  * @param {boolean} props.isNewBooking - If true, the component displays a button
  * to book the room.
- * 
+ *
  * @returns {JSX.Element} A JSX element containing the room component.
  */
 function RoomCard({ room, isNewBooking }) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const cardImageFile = getRoomPicture(room.category);
 
@@ -54,7 +42,7 @@ function RoomCard({ room, isNewBooking }) {
    */
   const onBookClickHandler = (roomId) => {
     navigate(`${AppPath.booking.new}?roomId=${roomId}`);
-  }
+  };
 
   /**
    * Handler for when the entire room card is clicked.
@@ -70,13 +58,14 @@ function RoomCard({ room, isNewBooking }) {
   return (
     <article
       className={`${roomCard}  ${gridItemCenter}`}
-      onClick={(e) => onRoomClickedHandler(e, room.id)} >
-
+      onClick={(e) => onRoomClickedHandler(e, room.id)}
+    >
       <img className={cardImg} src={cardImageFile} />
 
-      <div className={`${roomInfo} ${grid} ${grid2Cols} ${gridRowGapSmall}`}>
-
-        <span className={category}>{room.category} room {room.id}</span>
+      <div className={`${roomInfo} ${grid} ${grid2Cols}`}>
+        <span className={category}>
+          {room.category} room {room.id}
+        </span>
 
         <PriceSection pricePerNight={room.pricePerNight} />
 
@@ -88,16 +77,17 @@ function RoomCard({ room, isNewBooking }) {
 
         <Amenities amenities={room.amenities} />
 
-        {isNewBooking &&
+        {isNewBooking && (
           <Button
             onClick={() => onBookClickHandler(room.id)}
-            className={bookButton} >
+            className={bookButton}
+          >
             <span>Book now</span>
-          </Button>}
-
+          </Button>
+        )}
       </div>
     </article>
-  )
+  );
 }
 
 export default RoomCard;

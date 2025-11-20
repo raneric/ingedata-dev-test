@@ -17,3 +17,54 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: var(--border-radius-m);
 }
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffffe8;
+  padding: 1em;
+  width: 18rem;
+  align-content: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: var(--border-radius-m);
+  color: var(--on-surface-color);
+}
+
+.loginForm label {
+  font-size: var(--font-small);
+}
+
+.loginForm h2 {
+  align-self: center;
+}
+
+.loginForm .submitButton {
+  align-self: center;
+  width: 100%;
+}
+
+.loginForm input {
+  border: none;
+  border-bottom: 1px solid var(--accent-color);
+  min-height: 2.5em;
+  font-size: var(--font-p-medium);
+  color: #3d2010c4;
+  background-color: #ffffffe8;
+  padding: var(--padding-xs);
+  border-top-left-radius: var(--border-radius-s);
+  border-top-right-radius: var(--border-radius-s);
+}
+
+.loginForm input:focus,
+.loginForm input:focus-visible {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--accent-color);
+  /*TODO*/
+}
+
+.loginForm .inputGroup {
+  display: flex;
+  flex-direction: column;
+}

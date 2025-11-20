@@ -1,28 +1,30 @@
-import { AppPath } from "../../../utils/appConstant";
-import NavBar from "../../components/nav/NavBar";
-import Hero from "../../components/hero/Hero";
-import Features from "../../components/features/Features";
-import LoginDialog from "../../components/dialog/LoginDialog";
+import { AppPath } from '../../../utils/appConstant';
+import NavBar from '../../components/nav/NavBar';
+import Hero from '../../components/hero/Hero';
+import Features from '../../components/features/Features';
+import LoginDialog from '../../components/dialog/LoginDialog';
 
 function Home() {
   const linkList = [
     {
       path: AppPath.public.home,
-      label: "Home",
+      label: 'Home',
     },
     {
-      path: "#",
-      label: "Room list",
+      path: '#',
+      label: 'Room list',
     },
     {
-      path: "#",
-      label: "Contact",
+      path: '#',
+      label: 'Contact',
     },
     {
       path: `#`,
-      label: "About us",
+      label: 'About us',
     },
   ];
+
+  // const [showLoginDialog, setShowLoginDialog] = useState(true);
 
   return (
     <>
@@ -30,6 +32,7 @@ function Home() {
       <main>
         <Hero />
         <Features />
+        <LoginDialog />
       </main>
     </>
   );

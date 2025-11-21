@@ -9,7 +9,9 @@ function Button({ className, children, onClick, isDisabled }) {
         disabled={isDisabled}
         onClick={(e) => {
           e.stopPropagation();
-          onClick();
+          if (onClick) {
+            onClick();
+          }
         }}
         className={`${simpleButton} ${className}`}
       >

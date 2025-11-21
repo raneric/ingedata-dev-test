@@ -1,7 +1,7 @@
-import styles from "./features.module.css";
-import layoutStyles from "../../appLayout.module.css";
-import FeatureItem from "./FeatureItem";
-import { FAKE_FEATURES_DATA } from "../../../utils/appConstant";
+import styles from './features.module.css';
+import layoutStyles from '../../appLayout.module.css';
+import FeatureItem from './FeatureItem';
+import { FAKE_FEATURES_DATA } from '../../../utils/appConstant';
 
 function Features() {
   const { grid, grid3Cols } = layoutStyles;
@@ -10,11 +10,11 @@ function Features() {
     <>
       <section className={`${featuresContainer} ${grid} ${grid3Cols}`}>
         <h1 className={sectionTitle}>
-          A Complete Hotel Experience, Comfort, Cuisine, relaxation & Luxury All
-          in One Place
+          A Complete Hotel Experience, Comfort, Cuisine, relaxation & Luxury All in One Place
         </h1>
         {FAKE_FEATURES_DATA.map((item, index) => (
           <FeatureItem
+            key={index}
             imageSrc={item.image}
             title={item.title}
             index={index}

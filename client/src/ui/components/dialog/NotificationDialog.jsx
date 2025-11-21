@@ -1,7 +1,7 @@
-import styles from "./dialog.module.css";
-import appLayoutStyles from "../../appLayout.module.css";
-import Dialog from "./Dialog";
-import { Button } from "../../core/Button";
+import styles from './dialog.module.css';
+import appLayoutStyles from '../../appLayout.module.css';
+import Dialog from './Dialog';
+import { Button } from '../../core/Button';
 
 const { grid, gridItemCenter } = appLayoutStyles;
 

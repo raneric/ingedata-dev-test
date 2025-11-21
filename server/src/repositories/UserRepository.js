@@ -1,7 +1,12 @@
-import { Booking, Room, User } from "../models/index.js";
-import { Op } from "sequelize";
-import { ResourceConflictError } from "../utils/ApplicationError.js";
+import { Booking, Room, User } from '../models/index.js';
+import { Op } from 'sequelize';
+import { ResourceConflictError } from '../utils/ApplicationError.js';
 class UserRepository {
+  /**
+   *
+   * @param {*} user
+   * @returns
+   */
   async signIn(user) {
     const existingUser = await User.findAll({
       where: {
@@ -17,7 +22,7 @@ class UserRepository {
     });
 
     if (existingUser.length > 0) {
-      throw new ResourceConflictError("");
+      throw new ResourceConflictError('');
     }
 
     return User.create(user);
@@ -64,7 +69,7 @@ class UserRepository {
       include: [
         {
           model: Booking,
-          as: "bookings",
+          as: 'bookings',
           where: {
             id: bookingId,
           },

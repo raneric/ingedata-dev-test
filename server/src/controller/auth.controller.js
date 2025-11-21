@@ -1,17 +1,22 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import UserRepository from "../repositories/UserRepository.js";
-import { AuthenticationError } from "../utils/ApplicationError.js";
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import UserRepository from '../repositories/UserRepository.js';
+import { AuthenticationError } from '../utils/ApplicationError.js';
 
 async function login(req, res, next) {
   const { username, password } = req.body;
 
   if (!username && !password) {
-    next(new AuthenticationError("You must provide username and password"));
+    next(new AuthenticationError('You must provide username and password'));
   }
 
   try {
     const user = await UserRepository.findOneByUsername(username);
+
+    if (!user) {
+      throw new AuthenticationError(`User with ${username} doesn't exist`);
+    }
+
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
@@ -34,8 +39,8 @@ async function signin(req, res, next) {
   const hashedPassword = await bcrypt.hash(userInfo.password, salt);
   userInfo.password = hashedPassword;
   try {
-    UserRepository.signIn(userInfo);
-    res.json({ status: "ok" });
+    await UserRepository.signIn(userInfo);
+    res.json({ status: 'ok' });
   } catch (error) {
     next(error);
   }

@@ -4,18 +4,46 @@ import Dialog from './Dialog';
 import styles from './dialog.module.css';
 
 import close from '../../../assets/icons/close.png';
+import { useState } from 'react';
+import { login } from '../../../services/authServices';
 
 function LoginDialog({ onClose }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    const userCredentials = {
+      username,
+      password,
+    };
+
+    const result = await login(userCredentials);
+    if (result.success) {
+      console.log(result);
+    }
+  };
+
+  const userNameOnchangeHandler = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const passwordOnchangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
     <>
       <Dialog>
-        <form className={styles.loginForm}>
+        <form onSubmit={onSubmitHandler} method="post" className={styles.loginForm}>
           <IconButton onClick={onClose} className={styles.closeButton}>
             <Icon iconFile={close} />
           </IconButton>
           <div className={styles.inputGroup}>
             <label htmlFor="username">Username :</label>
             <input
+              onChange={userNameOnchangeHandler}
               type="text"
               id="username"
               name="username"
@@ -26,6 +54,7 @@ function LoginDialog({ onClose }) {
           <div className={styles.inputGroup}>
             <label htmlFor="password">Password :</label>
             <input
+              onChange={passwordOnchangeHandler}
               type="password"
               id="password"
               name="password"

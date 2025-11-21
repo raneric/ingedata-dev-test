@@ -8,6 +8,7 @@
   top: 0;
   left: 0;
   background-color: rgba(128, 128, 128, 0.253);
+  transition: all 1s ease;
 }
 
 .confirmationDialog {
@@ -19,6 +20,7 @@
 }
 
 .loginForm {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: #ffffffe8;
@@ -59,12 +61,18 @@
 .loginForm input:focus,
 .loginForm input:focus-visible {
   outline: none;
-  border: none;
-  border-bottom: 2px solid var(--accent-color);
-  /*TODO*/
+  border-bottom-width: 2px;
 }
 
 .loginForm .inputGroup {
   display: flex;
   flex-direction: column;
+  gap: 0.3em;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateY(-100%);
 }

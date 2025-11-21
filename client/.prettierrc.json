@@ -1,0 +1,9 @@
+{
+  "singleQuote": true,
+  "prettier.semi": false,
+  "printWidth": 100,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "objectWrap": "preserve",
+  "bracketSameLine": false
+}

@@ -1,4 +1,3 @@
-
 import styles from './dialog.module.css';
 /**
  * A Dialog component that provides a backdrop and a wrapper for a dialog.
@@ -11,11 +10,7 @@ import styles from './dialog.module.css';
  * @returns {Object} A div element containing the children of the component.
  */
 function Dialog({ children }) {
-  return (
-    <div className={styles.dialog}>
-      {children}
-    </div>
-  )
+  return <div className={styles.dialog}>{children}</div>;
 }
 
 export default Dialog;

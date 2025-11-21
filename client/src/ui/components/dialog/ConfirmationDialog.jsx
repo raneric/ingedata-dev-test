@@ -3,12 +3,7 @@ import appLayoutStyles from '../../appLayout.module.css';
 import Dialog from './Dialog';
 import { Button } from '../../core/Button';
 
-const {
-  grid,
-  gridItemFullRow,
-  grid2Cols,
-  gridItemCenter
-} = appLayoutStyles
+const { grid, gridItemFullRow, grid2Cols, gridItemCenter } = appLayoutStyles;
 
 /**
  * A Dialog that asks the user for confirmation.
@@ -22,15 +17,15 @@ const {
 function ConfirmationDialog({ handleDialogYes, handleDialogNo }) {
   return (
     <>
-      <Dialog >
+      <Dialog>
         <div className={`${grid} ${grid2Cols} ${styles.confirmationDialog}`}>
           <p className={`${gridItemFullRow} ${gridItemCenter}`}>Are you sure?</p>
-          <Button onClick={handleDialogYes} >Yes</Button>
-          <Button onClick={handleDialogNo} >No</Button>
+          <Button onClick={handleDialogYes}>Yes</Button>
+          <Button onClick={handleDialogNo}>No</Button>
         </div>
       </Dialog>
     </>
-  )
+  );
 }
 
 export default ConfirmationDialog;

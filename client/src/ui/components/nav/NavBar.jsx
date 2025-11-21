@@ -1,13 +1,13 @@
-import { Link } from "react-router";
-import styles from "./nav.module.css";
-import Logo from "../../core/Logo";
-import { Button, IconButton } from "../../core/Button";
-import Icon from "../../core/Icon";
-import login from "../../../assets/icons/login.png";
-import { useEffect, useState } from "react";
+import { Link } from 'react-router';
+import styles from './nav.module.css';
+import Logo from '../../core/Logo';
+import { Button, IconButton } from '../../core/Button';
+import Icon from '../../core/Icon';
+import login from '../../../assets/icons/login.png';
+import { useEffect, useState } from 'react';
 const { navBar, logo, buttonText, transparent } = styles;
 
-function NavBar({ linkList }) {
+function NavBar({ linkList, onLoginClick }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -19,16 +19,16 @@ function NavBar({ linkList }) {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     // cleanup
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <nav className={`${navBar} ${scrolled ? transparent : ""}`}>
+    <nav className={`${navBar} ${scrolled ? transparent : ''}`}>
       <Logo className={logo} />
       <ul>
         {linkList.map((item, index) => (
@@ -37,7 +37,7 @@ function NavBar({ linkList }) {
           </li>
         ))}
       </ul>
-      <IconButton>
+      <IconButton onClick={onLoginClick}>
         <span className={buttonText}>Login</span>
         <Icon iconFile={login} />
       </IconButton>

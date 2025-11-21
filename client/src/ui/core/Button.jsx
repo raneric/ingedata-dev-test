@@ -1,4 +1,4 @@
-import styles from "./core.module.css";
+import styles from './core.module.css';
 
 const { simpleButton, iconButton } = styles;
 
@@ -19,10 +19,12 @@ function Button({ className, children, onClick, isDisabled }) {
   );
 }
 
-function IconButton({ children }) {
+function IconButton({ children, className, onClick }) {
   return (
     <>
-      <button className={iconButton}>{children}</button>
+      <button onClick={onClick} className={`${iconButton} ${className}`}>
+        {children}
+      </button>
     </>
   );
 }

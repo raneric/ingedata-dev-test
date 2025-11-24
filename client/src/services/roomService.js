@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { BASE_URL } from '../utils/appConstant';
 import AppError from '../utils/AppError';
+import axiosInstance from '../loader/config';
+import { AppPath } from '../utils/appConstant';
 
 /**
  * Fetches rooms based on check-in and check-out dates.
@@ -12,20 +12,19 @@ import AppError from '../utils/AppError';
  * @throws {AppError} Throws an AppError if the request fails.
  */
 async function getRooms({ checkInDate, checkOutDate } = {}) {
-  let url = `${BASE_URL}/rooms`;
+  let endpoint = AppPath.room.all;
   if (checkInDate && checkOutDate) {
     const query = new URLSearchParams({ checkInDate, checkOutDate }).toString();
-    url = `?${query}`;
+    endpoint = `?${query}`;
   }
 
   try {
-    const response = await axios.get(url);
+    const response = await axiosInstance.get(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
   }
 }
-
 
 /**
  * Fetches room details by room ID.
@@ -37,7 +36,7 @@ async function getRooms({ checkInDate, checkOutDate } = {}) {
 async function getRoom(id) {
   let response;
   try {
-    response = await axios.get(`${BASE_URL}/room/${id}`);
+    response = await axiosInstance.get(`${AppPath.room.details}/${id}`);
   } catch (error) {
     throw new AppError(error.response);
   }
@@ -54,15 +53,11 @@ async function getRoom(id) {
 async function getRoomWithBookings(id) {
   let response;
   try {
-    response = await axios.get(`${BASE_URL}/room/${id}/bookings`);
+    response = await axiosInstance.get(`/room/${id}/bookings`);
   } catch (error) {
     throw new AppError(error.response);
   }
   return response.data;
 }
 
-export{
-  getRooms,
-  getRoom,
-  getRoomWithBookings
-}
+export { getRooms, getRoom, getRoomWithBookings };

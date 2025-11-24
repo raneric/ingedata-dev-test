@@ -7,9 +7,12 @@ import close from '../../../assets/icons/close.png';
 import { useState } from 'react';
 import { login } from '../../../services/authServices';
 
+const errorInitialState = { has: false, message: '' };
+
 function LoginDialog({ onClose }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(errorInitialState);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -22,15 +25,30 @@ function LoginDialog({ onClose }) {
     const result = await login(userCredentials);
     if (result.success) {
       console.log(result);
+    } else {
+      setError({
+        has: true,
+        message: result.message,
+      });
     }
   };
 
   const userNameOnchangeHandler = (e) => {
     setUsername(e.target.value);
+    if (error.has) {
+      resetError();
+    }
   };
 
   const passwordOnchangeHandler = (e) => {
     setPassword(e.target.value);
+    if (error.has) {
+      resetError();
+    }
+  };
+
+  const resetError = () => {
+    setError(errorInitialState);
   };
 
   return (
@@ -40,6 +58,7 @@ function LoginDialog({ onClose }) {
           <IconButton onClick={onClose} className={styles.closeButton}>
             <Icon iconFile={close} />
           </IconButton>
+          {error.has && <span className={styles.errorMessage}>{error.message}</span>}
           <div className={styles.inputGroup}>
             <label htmlFor="username">Username :</label>
             <input

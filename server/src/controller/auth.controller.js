@@ -14,13 +14,13 @@ async function login(req, res, next) {
     const user = await UserRepository.findOneByUsername(username);
 
     if (!user) {
-      throw new AuthenticationError(`User with ${username} doesn't exist`);
+      throw new AuthenticationError(`Username ${username} doesn't exist`);
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AuthenticationError("Password or username  doesn't match");
+      throw new AuthenticationError("Password and username  doesn't match");
     }
 
     const token = await jwt.sign(user.dataValues, process.env.AUTH_SECRET, {

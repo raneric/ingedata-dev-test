@@ -1,11 +1,9 @@
-import axios from 'axios';
-import { AppPath, BASE_URL } from '../utils/appConstant';
+import { AppPath } from '../utils/appConstant';
+import axiosInstance from '../loader/config';
 
 async function login(userCredentials) {
   try {
-    const loginPath = `${BASE_URL}${AppPath.auth.login}`;
-    const response = await axios.post(loginPath, userCredentials);
-
+    const response = await axiosInstance.post(AppPath.auth.login, userCredentials);
     return {
       success: true,
       token: response.data.token,

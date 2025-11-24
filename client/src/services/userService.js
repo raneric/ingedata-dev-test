@@ -1,6 +1,7 @@
-import axios from 'axios';
-import { BASE_URL } from '../utils/appConstant';
 import AppError from '../utils/AppError';
+import axiosInstance from '../loader/config';
+import { AppPath } from '../utils/appConstant';
+import pathBuilder from '../utils/pathBuilder';
 
 /**
  * Fetches a user's bookings.
@@ -11,13 +12,17 @@ import AppError from '../utils/AppError';
  */
 async function getBookings(userId) {
   try {
-    const response = await axios.get(`${BASE_URL}/user/${userId}/bookings`);
+    const pathVariable = {
+      userId,
+    };
+
+    const endpoint = pathBuilder(pathVariable, AppPath.booking.all);
+    const response = await axiosInstance.get(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
   }
 }
-
 
 /**
  * Fetches a specific booking for a user by booking ID.
@@ -29,7 +34,13 @@ async function getBookings(userId) {
  */
 async function getBooking(userId, bookingId) {
   try {
-    const response = await axios.get(`${BASE_URL}/user/${userId}/booking/${bookingId}`);
+    const pathVariable = {
+      userId,
+      id: bookingId,
+    };
+
+    const endpoint = pathBuilder(pathVariable, AppPath.booking.detailsPath);
+    const response = await axiosInstance.get(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
@@ -37,7 +48,7 @@ async function getBooking(userId, bookingId) {
 }
 
 /**
- * Delete a booking for a user.n  
+ * Delete a booking for a user.n
  *
  * @param {string} userId - The ID of the user whose booking to cancel.
  * @param {string} bookingId - The ID of the booking to cancel.
@@ -46,7 +57,14 @@ async function getBooking(userId, bookingId) {
  */
 async function cancelBooking(userId, bookingId) {
   try {
-    const response = await axios.delete(`${BASE_URL}/user/${userId}/booking/${bookingId}`);
+    const pathVariable = {
+      userId,
+      id: bookingId,
+    };
+
+    const endpoint = pathBuilder(pathVariable, AppPath.booking.detailsPath);
+
+    const response = await axiosInstance.delete(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
@@ -69,20 +87,20 @@ async function createBooking(userId, roomId, bookedDate, price) {
   const data = {
     roomId,
     ...bookedDate,
-    price
+    price,
   };
 
+  const pathVariable = {
+    userId,
+  };
+
+  const endpoint = pathBuilder(pathVariable, AppPath.booking.new);
+
   try {
-    return await axios.post(`${BASE_URL}/user/${userId}/booking/new`, data);
+    return await axiosInstance.post(endpoint, data);
   } catch (error) {
     throw new AppError(error);
   }
 }
 
-
-export {
-  getBookings,
-  getBooking,
-  cancelBooking,
-  createBooking
-}
+export { getBookings, getBooking, cancelBooking, createBooking };

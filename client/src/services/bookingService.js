@@ -1,6 +1,6 @@
 import { AppPath } from '../utils/appConstant';
 import AppError from '../utils/AppError';
-import axiosInstance from '../loader/config';
+import api from '../api/api';
 
 /**
  * Fetches all bookings with all user info for admin page.
@@ -10,7 +10,7 @@ import axiosInstance from '../loader/config';
  */
 async function getBookings() {
   try {
-    const response = await axiosInstance.get(AppPath.admin.bookings);
+    const response = await api.get(AppPath.admin.bookings);
     return response.data;
   } catch (error) {
     throw new AppError(error);

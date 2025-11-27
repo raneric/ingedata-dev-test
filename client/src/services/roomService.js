@@ -1,5 +1,5 @@
 import AppError from '../utils/AppError';
-import axiosInstance from '../loader/config';
+import api from '../api/api';
 import { AppPath } from '../utils/appConstant';
 
 /**
@@ -19,7 +19,7 @@ async function getRooms({ checkInDate, checkOutDate } = {}) {
   }
 
   try {
-    const response = await axiosInstance.get(endpoint);
+    const response = await api.get(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
@@ -36,7 +36,7 @@ async function getRooms({ checkInDate, checkOutDate } = {}) {
 async function getRoom(id) {
   let response;
   try {
-    response = await axiosInstance.get(`${AppPath.room.details}/${id}`);
+    response = await api.get(`${AppPath.room.details}/${id}`);
   } catch (error) {
     throw new AppError(error.response);
   }
@@ -53,7 +53,7 @@ async function getRoom(id) {
 async function getRoomWithBookings(id) {
   let response;
   try {
-    response = await axiosInstance.get(`/room/${id}/bookings`);
+    response = await api.get(`/room/${id}/bookings`);
   } catch (error) {
     throw new AppError(error.response);
   }

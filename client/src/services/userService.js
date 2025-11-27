@@ -1,5 +1,5 @@
 import AppError from '../utils/AppError';
-import axiosInstance from '../loader/config';
+import api from '../api/api';
 import { AppPath } from '../utils/appConstant';
 import pathBuilder from '../utils/pathBuilder';
 
@@ -17,7 +17,7 @@ async function getBookings(userId) {
     };
 
     const endpoint = pathBuilder(pathVariable, AppPath.booking.all);
-    const response = await axiosInstance.get(endpoint);
+    const response = await api.get(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
@@ -40,7 +40,7 @@ async function getBooking(userId, bookingId) {
     };
 
     const endpoint = pathBuilder(pathVariable, AppPath.booking.detailsPath);
-    const response = await axiosInstance.get(endpoint);
+    const response = await api.get(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
@@ -64,7 +64,7 @@ async function cancelBooking(userId, bookingId) {
 
     const endpoint = pathBuilder(pathVariable, AppPath.booking.detailsPath);
 
-    const response = await axiosInstance.delete(endpoint);
+    const response = await api.delete(endpoint);
     return response.data;
   } catch (error) {
     throw new AppError(error);
@@ -97,7 +97,7 @@ async function createBooking(userId, roomId, bookedDate, price) {
   const endpoint = pathBuilder(pathVariable, AppPath.booking.new);
 
   try {
-    return await axiosInstance.post(endpoint, data);
+    return await api.post(endpoint, data);
   } catch (error) {
     throw new AppError(error);
   }

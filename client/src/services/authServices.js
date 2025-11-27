@@ -1,16 +1,24 @@
 import { AppPath } from '../utils/appConstant';
-import axiosInstance from '../loader/config';
+import api from '../api/api';
+
+let accessToken = null;
+
+const setAccessToken = (token) => {
+  accessToken = token;
+};
+
+const getAccessToken = () => accessToken;
 
 async function login(userCredentials) {
   try {
-    const response = await axiosInstance.post(AppPath.auth.login, userCredentials);
+    const response = await api.post(AppPath.auth.login, userCredentials);
+    setAccessToken(response.data.token);
     return {
       success: true,
       token: response.data.token,
     };
   } catch (error) {
     console.log(error);
-
     return {
       success: false,
       message: error.response.data.message,
@@ -18,4 +26,4 @@ async function login(userCredentials) {
   }
 }
 
-export { login };
+export { login, getAccessToken, setAccessToken };

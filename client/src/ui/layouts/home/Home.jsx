@@ -4,6 +4,7 @@ import Hero from '../../components/hero/Hero';
 import Features from '../../components/features/Features';
 import LoginDialog from '../../components/dialog/LoginDialog';
 import { useState } from 'react';
+import { UserProvider } from '../../../context/UserProvider';
 
 function Home() {
   const linkList = [
@@ -37,12 +38,14 @@ function Home() {
 
   return (
     <>
-      <NavBar onLoginClick={onLoginClickHandler} linkList={linkList} />
-      <main>
-        <Hero />
-        <Features />
-        {showLoginDialog && <LoginDialog onClose={onCloseDialogHandler} />}
-      </main>
+      <UserProvider>
+        <NavBar onLoginClick={onLoginClickHandler} linkList={linkList} />
+        <main>
+          <Hero />
+          <Features />
+          {showLoginDialog && <LoginDialog onClose={onCloseDialogHandler} />}
+        </main>
+      </UserProvider>
     </>
   );
 }

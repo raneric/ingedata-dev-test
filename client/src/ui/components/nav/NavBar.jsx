@@ -9,7 +9,6 @@ const { navBar, logo, buttonText, transparent } = styles;
 
 function NavBar({ linkList, onLoginClick }) {
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {

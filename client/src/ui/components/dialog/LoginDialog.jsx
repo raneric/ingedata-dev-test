@@ -6,13 +6,18 @@ import styles from './dialog.module.css';
 import close from '../../../assets/icons/close.png';
 import { useState } from 'react';
 import { login } from '../../../services/authServices';
+import { useUserContext } from '../../../context/UserProvider';
+
+import { jwtDecode } from 'jwt-decode';
 
 const errorInitialState = { has: false, message: '' };
 
+//TODO: Use user context for user info
 function LoginDialog({ onClose }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(errorInitialState);
+  const { saveNewUserCredentials } = useUserContext();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -23,8 +28,16 @@ function LoginDialog({ onClose }) {
     };
 
     const result = await login(userCredentials);
+
     if (result.success) {
       console.log(result);
+      const { email, name } = jwtDecode(result.token);
+      const user = {
+        name,
+        email,
+        isLoggedIn: true,
+      };
+      saveNewUserCredentials(user);
     } else {
       setError({
         has: true,

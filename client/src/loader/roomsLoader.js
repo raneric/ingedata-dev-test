@@ -1,4 +1,4 @@
-import { getRoomWithBookings, getRooms } from "../services/roomService";
+import { getRoomWithBookings, getRooms } from '../services/roomService';
 
 /**
  * A loader which fetches the rooms based on checkInDate and checkOutDate.
@@ -10,7 +10,7 @@ function roomsLoader({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const query = {
     checkInDate: searchParams.get('checkInDate'),
-    checkOutDate: searchParams.get('checkOutDate')
+    checkOutDate: searchParams.get('checkOutDate'),
   };
   return getRooms(query);
 }
@@ -26,7 +26,4 @@ function roomLoader({ params }) {
   return getRoomWithBookings(params.id);
 }
 
-export {
-  roomsLoader,
-  roomLoader
-}
+export { roomsLoader, roomLoader };

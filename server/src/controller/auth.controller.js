@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UserRepository from '../repositories/UserRepository.js';
-import { AuthenticationError } from '../utils/ApplicationError.js';
+import { AuthenticationError, AuthorizationError } from '../utils/ApplicationError.js';
+import { generateAccessToken, generateRefreshToken } from '../utils/tokenHelper.js';
 
 async function login(req, res, next) {
   const { username, password } = req.body;
@@ -23,11 +24,24 @@ async function login(req, res, next) {
       throw new AuthenticationError("Password and username  doesn't match");
     }
 
-    const token = await jwt.sign(user.dataValues, process.env.AUTH_SECRET, {
-      expiresIn: 8600,
+    const tokenData = {
+      id: user.id,
+      email: user.dataValues.email,
+      name: user.dataValues.name,
+      username: user.dataValues.usename,
+    };
+
+    const accessToken = generateAccessToken(tokenData);
+    const refreshToken = generateRefreshToken(tokenData);
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      path: '/auth/refresh',
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token: accessToken });
   } catch (error) {
     next(error);
   }
@@ -46,4 +60,22 @@ async function signin(req, res, next) {
   }
 }
 
-export { login, signin };
+async function refreshToken(req, res, next) {
+  const token = req.cookies?.refreshToken;
+  if (!token) {
+    const error = new AuthenticationError('Refresh token invalid or not found');
+    next(error);
+  }
+
+  jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      const error = AuthorizationError(err.message);
+      next(error);
+    }
+
+    const accessToken = generateAccessToken({ user });
+    res.json({ accessToken });
+  });
+}
+
+export { login, signin, refreshToken };

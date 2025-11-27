@@ -1,5 +1,5 @@
 import AppError from '../utils/AppError';
-import axiosInstance from '../loader/config';
+import api from '../api/api';
 
 /**
  * Fetches fulfillment rates for rooms.
@@ -12,7 +12,7 @@ async function getRoomStats({ month } = {}) {
   const query = new URLSearchParams({ month }).toString();
   const url = `/admin?${query}`;
   try {
-    const response = await axiosInstance.get(url);
+    const response = await api.get(url);
     return response.data;
   } catch (error) {
     throw new AppError(error);

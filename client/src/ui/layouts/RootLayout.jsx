@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router';
+import { UserProvider } from '../../context/UserProvider';
 
 function RootLayout() {
   return (
     <>
-      <Outlet />
+      <UserProvider>
+        <Outlet />
+      </UserProvider>
     </>
   );
 }

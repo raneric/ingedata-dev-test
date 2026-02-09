@@ -8,7 +8,7 @@ async function login(req, res, next) {
   const { username, password } = req.body;
 
   if (!username && !password) {
-    next(new AuthenticationError('You must provide username and password'));
+    return next(new AuthenticationError('You must provide username and password'));
   }
 
   try {
@@ -37,13 +37,13 @@ async function login(req, res, next) {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: true,
-      sameSite: 'strict',
+      sameSite: 'lax',
       path: '/auth/refresh',
     });
 
     res.status(200).json({ token: accessToken });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -56,21 +56,22 @@ async function signin(req, res, next) {
     await UserRepository.signIn(userInfo);
     res.json({ status: 'ok' });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
 async function refreshToken(req, res, next) {
   const token = req.cookies?.refreshToken;
+
   if (!token) {
     const error = new AuthenticationError('Refresh token invalid or not found');
-    next(error);
+    return next(error);
   }
 
   jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
     if (err) {
-      const error = AuthenticationError(err.message);
-      next(error);
+      const error = new AuthenticationError(err.message);
+      return next(error);
     }
 
     const accessToken = generateAccessToken({ user });

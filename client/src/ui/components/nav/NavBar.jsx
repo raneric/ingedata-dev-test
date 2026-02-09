@@ -38,6 +38,13 @@ function NavBar({ linkList, onLoginClick }) {
             <Link to={item.path}>{item.label}</Link>
           </li>
         ))}
+        {isAuthenticated ? (
+          <li key={1000}>
+            <Link to="/">My bookings</Link>
+          </li>
+        ) : (
+          <></>
+        )}
       </ul>
       {isAuthenticated ? (
         <IconButton onClick={onLoginClick}>

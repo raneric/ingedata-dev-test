@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UserRepository from '../repositories/UserRepository.js';
-import { AuthenticationError, AuthorizationError } from '../utils/ApplicationError.js';
+import { AuthenticationError } from '../utils/ApplicationError.js';
 import { generateAccessToken, generateRefreshToken } from '../utils/tokenHelper.js';
 
 async function login(req, res, next) {
@@ -69,7 +69,7 @@ async function refreshToken(req, res, next) {
 
   jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
     if (err) {
-      const error = AuthorizationError(err.message);
+      const error = AuthenticationError(err.message);
       next(error);
     }
 

@@ -5,10 +5,7 @@ import styles from './dialog.module.css';
 
 import close from '../../../assets/icons/close.png';
 import { useState } from 'react';
-import { login } from '../../../services/authServices';
-import { useUserContext } from '../../../context/UserProvider';
-
-import { jwtDecode } from 'jwt-decode';
+import { useUserContext } from '../../../context/useUserContext';
 
 const errorInitialState = { has: false, message: '' };
 
@@ -17,7 +14,8 @@ function LoginDialog({ onClose }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(errorInitialState);
-  const { saveNewUserCredentials } = useUserContext();
+
+  const { login } = useUserContext();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -31,14 +29,9 @@ function LoginDialog({ onClose }) {
 
     if (result.success) {
       console.log(result);
-      const { email, name } = jwtDecode(result.token);
-      const user = {
-        name,
-        email,
-        isLoggedIn: true,
-      };
-      saveNewUserCredentials(user);
+      onClose();
     } else {
+      console.log(result);
       setError({
         has: true,
         message: result.message,

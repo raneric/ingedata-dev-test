@@ -27,6 +27,7 @@ const AppPath = {
   },
   auth: {
     login: '/auth/login',
+    refresh: '/auth/refresh',
   },
 };
 

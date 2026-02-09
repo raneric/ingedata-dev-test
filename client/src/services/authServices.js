@@ -18,10 +18,9 @@ async function login(userCredentials) {
       token: response.data.token,
     };
   } catch (error) {
-    console.log(error);
     return {
       success: false,
-      message: error.response.data.message,
+      message: error.response.data.message ?? error.message,
     };
   }
 }

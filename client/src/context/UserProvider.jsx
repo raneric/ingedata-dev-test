@@ -8,6 +8,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    console.log('use effect executed');
     const restoreSession = async () => {
       try {
         const response = await api.post(AppPath.auth.refresh);

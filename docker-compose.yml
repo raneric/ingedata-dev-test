@@ -10,7 +10,6 @@ services:
         required: true
     volumes:
       - ./server:/app
-    restart: always
 
   client:
     build: ./client
@@ -20,7 +19,6 @@ services:
       - '5173:80'
     volumes:
       - ./client:/app
-    restart: always
     depends_on:
       - server
 

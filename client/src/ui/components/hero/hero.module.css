@@ -6,7 +6,7 @@
       rgba(34, 34, 34, 0.295)
     ),
     url("../../../assets/img/hero.jpg");
-  background-size: fill;
+  background-size: cover;
   color: #fff;
   border-radius: var(--border-radius-xxxxxl);
   align-self: center;

@@ -1,25 +1,13 @@
 import styles from "./features.module.css";
-import layoutStyles from "../../appLayout.module.css";
-function FeatureItem({ imageSrc, title, description, className, index }) {
-  const { grid, grid2Cols } = layoutStyles;
 
-  const {
-    cardImage,
-    leftImage,
-    rightImage,
-    featureCard,
-    itemTitle,
-    descriptionStyle,
-  } = styles;
+function FeatureItem({ imageSrc, title, description, className }) {
+  const { cardImage, featureCard, itemTitle, descriptionStyle } = styles;
 
   return (
     <>
-      <article className={`${className} ${featureCard} ${grid} ${grid2Cols}`}>
+      <article className={`${className} ${featureCard}`}>
         <span className={itemTitle}>{`${title}`}</span>
-        <img
-          className={`${cardImage}  ${index < 2 ? leftImage : rightImage}`}
-          src={imageSrc}
-        />
+        <img className={`${cardImage}`} src={imageSrc} />
         <span className={descriptionStyle}>{description}</span>
       </article>
     </>

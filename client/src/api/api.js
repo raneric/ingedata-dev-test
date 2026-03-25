@@ -37,30 +37,25 @@ api.interceptors.response.use(
     const currentConfig = err?.config;
     const status = err?.response?.status;
 
-    // basic guards
     if (!currentConfig || !err) return Promise.reject(err);
     if (status !== 401) return Promise.reject(err);
 
-    // avoid retrying refresh/login endpoints (prevent recursion)
     const url = (currentConfig.url || '').toString();
     if (url.includes(AppPath.auth.refresh) || url.includes(AppPath.auth.login)) {
       return Promise.reject(err);
     }
 
-    // avoid retrying same request multiple times
     if (currentConfig._retry) {
       return Promise.reject(err);
     }
     currentConfig._retry = true;
 
-    // optional per-request limit
     currentConfig.__retryCount = currentConfig.__retryCount || 0;
     if (currentConfig.__retryCount >= MAX_REFRESH_ATTEMPTS) {
       return Promise.reject(err);
     }
     currentConfig.__retryCount += 1;
 
-    // dedupe refresh calls: create single pendingRefresh used by concurrent 401 handlers
     const doRefresh = () => {
       if (!pendingRefresh) {
         pendingRefresh = authApi
@@ -71,12 +66,10 @@ api.interceptors.response.use(
             return newToken;
           })
           .catch((refreshErr) => {
-            // clear pending so future attempts can try again if desired
             pendingRefresh = null;
             throw refreshErr;
           })
           .finally(() => {
-            // ensure pendingRefresh is cleared after resolution/failure
             pendingRefresh = null;
           });
       }
@@ -87,7 +80,6 @@ api.interceptors.response.use(
       const newToken = await doRefresh();
       if (!newToken) return Promise.reject(err);
 
-      // attach new token and retry original request once
       currentConfig.headers = currentConfig.headers || {};
       currentConfig.headers['Authorization'] = `Bearer ${newToken}`;
 

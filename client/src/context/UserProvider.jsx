@@ -3,6 +3,7 @@ import { UserContext } from './useUserContext';
 import { AppPath } from '../utils/appConstant';
 import api from '../api/api';
 import { parseJwt } from '../utils/jwtDecoder';
+import { setAccessToken } from '../services/authServices';
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -12,7 +13,8 @@ export function UserProvider({ children }) {
     const restoreSession = async () => {
       try {
         const response = await api.post(AppPath.auth.refresh);
-        setUserInfoFromToken(response.data.token);
+        setAccessToken(response.data.accessToken);
+        setUserInfoFromToken(response.data.accessToken);
       } catch {
         setUser(null);
       }
@@ -24,6 +26,7 @@ export function UserProvider({ children }) {
   const login = async (userCredentials) => {
     try {
       const response = await api.post(AppPath.auth.login, userCredentials);
+      setAccessToken(response.data.token);
       return setUserInfoFromToken(response.data.token);
     } catch (error) {
       return {

@@ -4,8 +4,7 @@ services:
     networks:
       - local-shared-network
     ports:
-      - '3000:3000'
-      - '9229:9229'
+      - "3000:3000"
     env_file:
       - path: ./server/db.env
         required: true
@@ -17,7 +16,8 @@ services:
     networks:
       - local-shared-network
     ports:
-      - '5173:80'
+      - "5173:80"
+      - "9229:9229"
     volumes:
       - ./client:/app
     depends_on:

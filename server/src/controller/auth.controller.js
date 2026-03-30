@@ -7,6 +7,10 @@ import { generateAccessToken, generateRefreshToken } from '../utils/tokenHelper.
 async function login(req, res, next) {
   const { username, password } = req.body;
 
+  if (!username && !password) {
+    return next(new AuthenticationError(AUTH_ERROR_MESSAGE.missingPwdAndUserName));
+  }
+
   try {
     const user = await UserRepository.findOneByUsername(username);
 

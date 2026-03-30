@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  job1:
+  test-short-sha:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,15 +18,19 @@ jobs:
         run: echo $SHORT_SHA
         env:
           SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}
-      - name: Test sub-workflow client docker login/build
-        uses: ./.github/workflows/containerization.yml
-        with:
-          image-repo: 'react-front'
-          docker-context: './client'
-          docker-file: './client/Dockerfile'
-      - name: Test sub-workflow server docker login/build
-        uses: ./.github/workflows/containerization.yml
-        with:
-          image-repo: 'booking-ap'
-          docker-context: './server'
-          docker-file: './server/Dockerfile'
+
+  test-sub-server:
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/containerization.yml
+    with:
+      image-repo: 'react-front'
+      docker-context: './client'
+      docker-file: './client/Dockerfile'
+
+  test-sub-client:
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/containerization.yml
+    with:
+      image-repo: 'booking-ap'
+      docker-context: './server'
+      docker-file: './server/Dockerfile'

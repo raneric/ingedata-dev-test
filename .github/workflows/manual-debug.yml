@@ -21,16 +21,20 @@ jobs:
 
   test-sub-server:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/containerization.yml
-    with:
-      image-repo: 'react-front'
-      docker-context: './client'
-      docker-file: './client/Dockerfile'
+    steps:
+      - name: test sub-workflow for server
+        uses: ./.github/workflows/containerization.yml
+        with:
+          image-repo: 'react-front'
+          docker-context: './client'
+          docker-file: './client/Dockerfile'
 
   test-sub-client:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/containerization.yml
-    with:
-      image-repo: 'booking-ap'
-      docker-context: './server'
-      docker-file: './server/Dockerfile'
+    steps:
+      - name: test sub-workflow for cleint
+        uses: ./.github/workflows/containerization.yml
+        with:
+          image-repo: 'booking-ap'
+          docker-context: './server'
+          docker-file: './server/Dockerfile'

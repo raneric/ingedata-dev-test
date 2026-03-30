@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { AppPath, BASE_URL } from '../utils/appConstant';
+import { AppPath } from '../utils/appConstant';
 import { getAccessToken, setAccessToken } from '../services/authServices';
 
-//const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const BASE_URL = process.env.API_ENDPOINT;
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -18,18 +18,14 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// ...existing code...
-
-// dedicated auth instance without the app interceptors to avoid recursion
 const authApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
 
-// single shared promise to dedupe concurrent refreshes
 let pendingRefresh = null;
-const MAX_REFRESH_ATTEMPTS = 1; // per-request refresh attempts
+const MAX_REFRESH_ATTEMPTS = 1;
 
 api.interceptors.response.use(
   (res) => res,
@@ -87,7 +83,7 @@ api.interceptors.response.use(
     } catch (refreshError) {
       return Promise.reject(refreshError);
     }
-  },
+  }
 );
 
 export default api;

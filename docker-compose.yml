@@ -5,6 +5,7 @@ services:
       - local-shared-network
     ports:
       - '3000:3000'
+      - '9229:9229'
     env_file:
       - path: ./server/db.env
         required: true

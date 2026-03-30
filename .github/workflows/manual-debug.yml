@@ -1,7 +1,7 @@
 name: manual-workfolw
 run-name: Manual workflow for test purpose
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   job1:
@@ -18,3 +18,15 @@ jobs:
         run: echo $SHORT_SHA
         env:
           SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}
+      - name: Test sub-workflow client docker login/build
+        uses: ./.github/workflows/containerization.yml
+        with:
+          image-repo: 'react-front'
+          docker-context: './client'
+          docker-file: './client/Dockerfile'
+      - name: Test sub-workflow server docker login/build
+        uses: ./.github/workflows/containerization.yml
+        with:
+          image-repo: 'booking-ap'
+          docker-context: './server'
+          docker-file: './server/Dockerfile'

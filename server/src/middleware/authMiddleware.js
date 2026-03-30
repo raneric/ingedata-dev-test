@@ -11,8 +11,8 @@ function validateToken(req, res, next) {
     next(new AuthorizationError(AUTH_ERROR_MESSAGE.missingCredentials));
   } else {
     const token = auth.split(' ').at(-1);
-    // eslint-disable-next-line no-undef
-    jwt.verify(token, process.env.AUTH_SECRET, (err, user) => {
+
+    jwt.verify(token, process.env.AUTH_SECRET, (err) => {
       if (err) {
         next(new AuthenticationError(err.message));
       } else {

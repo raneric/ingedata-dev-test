@@ -1,4 +1,4 @@
-import { differenceInDays, lastDayOfMonth } from "date-fns";
+import { differenceInDays, lastDayOfMonth } from 'date-fns';
 
 /**
  * Calculates the fulfillment rate for all bookings in the given month
@@ -23,7 +23,7 @@ function calculateFulfillmentRates(bookings, fulfillmentDate = new Date()) {
   });
 
   const occupancyRate = { rooms: [], overall: 0 };
-  //testest
+
   let sumRate = 0;
   Object.entries(totalBookingByRoom).forEach(([key, value]) => {
     const rate = (value / totalDayOfTheMonth) * 100;

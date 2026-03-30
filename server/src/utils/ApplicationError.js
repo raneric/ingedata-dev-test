@@ -1,5 +1,5 @@
 class ApplicationError extends Error {
-  constructor(message = "Internal server error", statusCode = 500) {
+  constructor(message = 'Internal server error', statusCode = 500) {
     super(message);
     this.statusCode = statusCode;
     Error.captureStackTrace(this, this.constructor);
@@ -36,6 +36,12 @@ class ResourceConflictError extends ApplicationError {
   }
 }
 
+const AUTH_ERROR_MESSAGE = {
+  missingCredentials: 'Missing credentials',
+  missingPwdAndUserName: 'You must provide username and password',
+  usernamePwdNotMatch: "Password and username doesn't match",
+};
+
 export {
   ResourceNotFoundError,
   ApplicationError,
@@ -43,4 +49,5 @@ export {
   AuthenticationError,
   AuthorizationError,
   ResourceConflictError,
+  AUTH_ERROR_MESSAGE,
 };

@@ -1,7 +1,9 @@
 name: booking-api-app-build
 run-name: Build and Push Docker Image for booking-api-app
 on:
-  workflow_dispatch:
+  push:
+    path:
+      - ../../server/**
 jobs:
   unit-test:
     runs-on: ubuntu-latest

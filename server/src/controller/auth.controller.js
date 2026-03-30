@@ -1,15 +1,11 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UserRepository from '../repositories/UserRepository.js';
-import { AuthenticationError } from '../utils/ApplicationError.js';
+import { AUTH_ERROR_MESSAGE, AuthenticationError } from '../utils/ApplicationError.js';
 import { generateAccessToken, generateRefreshToken } from '../utils/tokenHelper.js';
 
 async function login(req, res, next) {
   const { username, password } = req.body;
-
-  if (!username && !password) {
-    return next(new AuthenticationError('You must provide username and password'));
-  }
 
   try {
     const user = await UserRepository.findOneByUsername(username);
@@ -21,7 +17,7 @@ async function login(req, res, next) {
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AuthenticationError("Password and username  doesn't match");
+      throw new AuthenticationError(AUTH_ERROR_MESSAGE.usernamePwdNotMatch);
     }
 
     const tokenData = {

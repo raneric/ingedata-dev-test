@@ -1,7 +1,7 @@
 name: booking-api-app-build
 run-name: Build and Push Docker Image for booking-api-app
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
 jobs:
   unit-test:
     runs-on: ubuntu-latest
@@ -16,13 +16,13 @@ jobs:
 
       - name: install dep
         run: |
-            cd server
-            npm install
+          cd server
+          npm install
 
       - name: run-test
         run: |
-            cd server
-            npm test
+          cd server
+          npm test
 
   containerize:
     needs: [unit-test]
@@ -30,13 +30,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.OCI_REGION }}
-          username: ${{ secrets.TENANCY }}/${{ secrets.EMAIL }}
-          password: ${{ secrets.OCI_REGISTRY_PWD }}
-      - name: get commist short sha
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT_SECRET }}
+      - name: get commit short sha
         id: short-sha-step
         uses: ./.github/actions/get-short-sha-action/
         with:
@@ -47,4 +48,4 @@ jobs:
           context: ./server
           file: ./server/Dockerfile
           push: true
-          tags: ${{ vars.OCI_REGION }}/${{ secrets.TENANCY }}/${{ vars.API_APP_IMAGE_REPO }}:${{ steps.short-sha-step.outputs.short-sha }}
+          tags: ghcr.io/${{ github.actor }}/booking-api:${{ steps.short-sha-step.outputs.short-sha }}

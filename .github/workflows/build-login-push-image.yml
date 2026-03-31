@@ -23,6 +23,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug server folder
+        run: |
+          echo "Listing server folder:"
+          ls -R ${{ inputs.docker-context }}
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:

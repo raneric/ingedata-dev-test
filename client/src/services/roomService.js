@@ -13,6 +13,7 @@ import { AppPath } from '../utils/appConstant';
  */
 async function getRooms({ checkInDate, checkOutDate } = {}) {
   let endpoint = AppPath.room.all;
+  const roomList = [];
 
   if (checkInDate && checkOutDate) {
     const query = new URLSearchParams({ checkInDate, checkOutDate }).toString();
@@ -21,10 +22,14 @@ async function getRooms({ checkInDate, checkOutDate } = {}) {
 
   try {
     const response = await api.get(endpoint);
-    return response.data;
+    if (response.data) {
+      roomList.push(...response.data);
+    }
   } catch (error) {
     throw new AppError(error);
   }
+
+  return roomList;
 }
 
 /**

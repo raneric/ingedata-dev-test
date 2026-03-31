@@ -3,7 +3,7 @@
  * and in order tp avoid a lot of configuration I kept it here
  */
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://10.103.176.43';
 
 const AppPath = {
   room: {

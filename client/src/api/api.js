@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { AppPath } from '../utils/appConstant';
+import { AppPath, BASE_URL } from '../utils/appConstant';
 import { getAccessToken, setAccessToken } from '../services/authServices';
-
-const BASE_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,

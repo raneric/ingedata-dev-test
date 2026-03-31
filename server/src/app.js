@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://10.96.70.90:5173",
+    origin: process.env.FRONT_END_HOST,
     credentials: true,
   })
 );

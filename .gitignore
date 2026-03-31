@@ -1,4 +1,3 @@
-k8s
 ansible/secrets/secret.yml
 *.env
 client/dist/*

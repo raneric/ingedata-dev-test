@@ -3,7 +3,13 @@ run-name: Build and Push Docker Image for booking-react-app
 on:
   workflow_dispatch:
 jobs:
+  check-deps_vulnerability:
+    uses: ./.github/workflows/vulnerabilities-checker.yml
+    with:
+      working-directory: 'client'
+
   build-push-react-app-image:
+    needs: [check-deps_vulnerability]
     uses: ./.github/workflows/build-login-push-image.yml
     with:
       image-repo: 'react-front'

@@ -24,8 +24,14 @@ jobs:
           cd server
           npm test
 
-  build-push-api-image:
+  check-deps_vulnerability:
     needs: [unit-test]
+    uses: ./.github/workflows/vulnerabilities-checker.yml
+    with:
+      working-directory: 'server'
+
+  build-push-api-image:
+    needs: [check-deps_vulnerability]
     uses: ./.github/workflows/build-login-push-image.yml
     with:
       image-repo: 'booking-api'

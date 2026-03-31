@@ -29,11 +29,6 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
 
-      - name: install dep
-        run: |
-          cd ${{ inputs.working-directory }}
-          npm install
-
       - name: Run npm audit
         run: |
           cd ${{ inputs.working-directory }}

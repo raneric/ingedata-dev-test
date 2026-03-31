@@ -1,15 +1,15 @@
 name: 'Get short sha'
 description: Getting the short sha from the commit'
 inputs:
-  full-sha:  # id of input
+  full-sha:
     description: 'Full sha'
     required: true
 outputs:
   short-sha:
-    description: "Returned short sha"
+    description: 'Returned short sha'
     value: ${{ steps.short-commit-sha.outputs.short-sha }}
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Get short commit sha
       id: short-commit-sha
@@ -17,4 +17,3 @@ runs:
       shell: bash
       env:
         FULL_SHA: ${{ inputs.full-sha }}
-

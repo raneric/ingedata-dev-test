@@ -12,6 +12,10 @@ on:
       docker-file:
         required: true
         type: string
+    secrets:
+      token:
+        required: true
+
 jobs:
   containerize:
     runs-on: ubuntu-latest
@@ -24,7 +28,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.PAT_SECRET }}
+          password: ${{ secrets.token }}
       - name: get commit short sha
         id: short-sha-step
         uses: ./.github/actions/get-short-sha-action/

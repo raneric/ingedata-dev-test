@@ -25,6 +25,8 @@ jobs:
       image-repo: 'react-front'
       docker-context: './client'
       docker-file: './client/Dockerfile'
+    secrets:
+      token: ${{ secrets.PAT_SECRET }}
 
   test-sub-client:
     uses: ./.github/workflows/containerization.yml
@@ -32,3 +34,5 @@ jobs:
       image-repo: 'booking-ap'
       docker-context: './server'
       docker-file: './server/Dockerfile'
+    secrets:
+      token: ${{ secrets.PAT_SECRET }}

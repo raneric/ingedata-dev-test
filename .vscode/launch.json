@@ -11,9 +11,8 @@
       "restart": true,
       "port": 9229,
       "address": "localhost",
-      "localRoot": "/media/eric/Peso/MyProject/ingedata-dev-test/client",
-      "remoteRoot": "/app",
-      "protocol": "inspector"
+      "localRoot": "${workspaceFolder}/server",
+      "remoteRoot": "/app"
     }
   ]
 }

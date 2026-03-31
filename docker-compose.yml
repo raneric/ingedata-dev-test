@@ -4,7 +4,9 @@ services:
     networks:
       - local-shared-network
     ports:
-      - "3000:3000"
+      - '3000:3000'
+      - '9229:9229'
+    command: ['node', '--inspect=0.0.0.0:9229', 'src/server.js']
     env_file:
       - path: ./server/db.env
         required: true
@@ -16,8 +18,7 @@ services:
     networks:
       - local-shared-network
     ports:
-      - "5173:80"
-      - "9229:9229"
+      - '5173:80'
     volumes:
       - ./client:/app
     depends_on:

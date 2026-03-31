@@ -1,10 +1,8 @@
-import { Booking, Room } from "../models/index.js";
+import { Booking, Room } from '../models/index.js';
 import sequelize from '../config/sequelize.js';
-import { QueryTypes } from "sequelize";
-
+import { QueryTypes } from 'sequelize';
 
 class RoomRepository {
-
   /**
    * Retrieves all rooms from the database.
    *
@@ -26,31 +24,22 @@ class RoomRepository {
    * @returns {Promise<Array>} A promise that resolves to an array of room objects.
    */
   async findAvailableWithin(checkInDate, checkOutDate) {
-
     const query = `SELECT * from rooms WHERE id NOT IN (
-                  SELECT roomId FROM Bookings
+                  SELECT "roomId" FROM Bookings
                   WHERE NOT (
-                    checkOutDate <= :checkInDate OR
-                    checkInDate >= :checkOutDate
+                    "checkOutDate" <= :checkInDate OR
+                    "checkInDate" >= :checkOutDate
                   )
                 )`;
 
-    const rawRooms = await sequelize.query(
-      query,
-      {
-        replacements: {
-          checkInDate: checkInDate,
-          checkOutDate: checkOutDate
-        },
-        type: QueryTypes.SELECT,
-      });
-    const rooms = rawRooms.map((room) => {
-      return {
-        ...room,
-        amenities: JSON.parse(room.amenities),
-      };
+    const rawRooms = await sequelize.query(query, {
+      replacements: {
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+      },
+      type: QueryTypes.SELECT,
     });
-    return rooms;
+    return rawRooms;
   }
 
   /**
@@ -75,17 +64,16 @@ class RoomRepository {
   async findRoomBookings(roomId) {
     const room = await Room.findAll({
       where: {
-        id: roomId
+        id: roomId,
       },
       include: [
         {
           model: Booking,
-        }
-      ]
-      });
+        },
+      ],
+    });
     return room;
   }
 }
-
 
 export default new RoomRepository();

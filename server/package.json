@@ -7,6 +7,7 @@
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint": "eslint . ",
     "lint:fix": "eslint . --fix ",
+    "start-debug": "node --inspect=0.0.0.0:9229 src/server.js",
     "build": "esbuild src/server.js --bundle --platform=node --outfile=dist/app.js"
   },
   "author": "Eric",

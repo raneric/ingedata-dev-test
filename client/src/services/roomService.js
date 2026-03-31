@@ -13,9 +13,10 @@ import { AppPath } from '../utils/appConstant';
  */
 async function getRooms({ checkInDate, checkOutDate } = {}) {
   let endpoint = AppPath.room.all;
+
   if (checkInDate && checkOutDate) {
     const query = new URLSearchParams({ checkInDate, checkOutDate }).toString();
-    endpoint = `?${query}`;
+    endpoint += `?${query}`;
   }
 
   try {

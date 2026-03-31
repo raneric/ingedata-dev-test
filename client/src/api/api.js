@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { AppPath } from '../utils/appConstant';
+import { AppPath, BASE_URL } from '../utils/appConstant';
 import { getAccessToken, setAccessToken } from '../services/authServices';
-
-const BASE_URL = process.env.API_ENDPOINT;
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -83,7 +81,7 @@ api.interceptors.response.use(
     } catch (refreshError) {
       return Promise.reject(refreshError);
     }
-  }
+  },
 );
 
 export default api;

@@ -19,7 +19,7 @@ async function findAllRooms(req, res, next) {
     }
     res.json(rooms);
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
@@ -39,13 +39,12 @@ async function findRoom(req, res, next) {
   try {
     const room = await RoomRepository.findById(roomId);
     if (!room) {
-      throw new ResourceNotFoundError(`Room with ID ${roomId} doesn't exist`)
+      throw new ResourceNotFoundError(`Room with ID ${roomId} doesn't exist`);
     }
     res.json(room);
   } catch (error) {
-    next(error)
+    next(error);
   }
-
 }
 
 /**
@@ -65,12 +64,8 @@ async function findRoomBookings(req, res, next) {
     const roomBookings = await RoomRepository.findRoomBookings(roomId);
     res.json(roomBookings);
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
-export {
-  findAllRooms,
-  findRoom,
-  findRoomBookings
-}
+export { findAllRooms, findRoom, findRoomBookings };

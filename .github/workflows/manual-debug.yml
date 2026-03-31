@@ -20,7 +20,7 @@ jobs:
           SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}
 
   test-sub-server:
-    uses: ./.github/workflows/containerization.yml
+    uses: ./.github/workflows/build-login-push-image.yml
     with:
       image-repo: 'react-front'
       docker-context: './client'
@@ -29,9 +29,9 @@ jobs:
       token: ${{ secrets.PAT_SECRET }}
 
   test-sub-client:
-    uses: ./.github/workflows/containerization.yml
+    uses: ./.github/workflows/build-login-push-image.yml
     with:
-      image-repo: 'booking-ap'
+      image-repo: 'booking-api'
       docker-context: './server'
       docker-file: './server/Dockerfile'
     secrets:

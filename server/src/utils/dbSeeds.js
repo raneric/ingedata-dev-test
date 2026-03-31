@@ -2,8 +2,6 @@ import Room from "../models/room.model.js";
 import Booking from "../models/booking.model.js";
 import sequelize from "../config/sequelize.js";
 import User from "../models/user.model.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 const rooms = [
   {

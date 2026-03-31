@@ -7,6 +7,8 @@ COPY package*.json ./
 
 RUN npm ci --omit=dev
 
+COPY . .
+
 # ---------- Stage 3: Runtime ----------
 FROM node:24-alpine AS runner
 

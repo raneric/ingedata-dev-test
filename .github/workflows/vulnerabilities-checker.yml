@@ -1,0 +1,40 @@
+name: NPM Audit Job
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+      node-version:
+        required: false
+        type: string
+        default: '22'
+      audit-level:
+        required: false
+        type: string
+        default: 'high'
+
+jobs:
+  npm-audit:
+    name: Run npm audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: install dep
+        run: |
+          cd ${{ inputs.working-directory }}
+          npm install
+
+      - name: Run npm audit
+        run: |
+          cd ${{ inputs.working-directory }}
+          npm audit --audit-level=${{ inputs.audit-level }}

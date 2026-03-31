@@ -20,19 +20,11 @@ jobs:
           SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}
 
   test-sub-server:
-    uses: ./.github/workflows/build-login-push-image.yml
+    uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
-      image-repo: 'react-front'
-      docker-context: './client'
-      docker-file: './client/Dockerfile'
-    secrets:
-      token: ${{ secrets.PAT_SECRET }}
+      working-directory: 'server'
 
   test-sub-client:
-    uses: ./.github/workflows/build-login-push-image.yml
+    uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
-      image-repo: 'booking-api'
-      docker-context: './server'
-      docker-file: './server/Dockerfile'
-    secrets:
-      token: ${{ secrets.PAT_SECRET }}
+      working-directory: 'client'

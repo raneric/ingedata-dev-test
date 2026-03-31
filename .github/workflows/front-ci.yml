@@ -15,7 +15,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.PAT_SECRET }}
-      - name: get commist short sha
+      - name: get commit short sha
         id: short-sha-step
         uses: ./.github/actions/get-short-sha-action/
         with:

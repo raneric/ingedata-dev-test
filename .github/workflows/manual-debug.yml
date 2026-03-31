@@ -20,21 +20,15 @@ jobs:
           SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}
 
   test-sub-server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: test sub-workflow for server
-        uses: ./.github/workflows/containerization.yml
-        with:
-          image-repo: 'react-front'
-          docker-context: './client'
-          docker-file: './client/Dockerfile'
+    uses: ./.github/workflows/containerization.yml
+    with:
+      image-repo: 'react-front'
+      docker-context: './client'
+      docker-file: './client/Dockerfile'
 
   test-sub-client:
-    runs-on: ubuntu-latest
-    steps:
-      - name: test sub-workflow for cleint
-        uses: ./.github/workflows/containerization.yml
-        with:
-          image-repo: 'booking-ap'
-          docker-context: './server'
-          docker-file: './server/Dockerfile'
+    uses: ./.github/workflows/containerization.yml
+    with:
+      image-repo: 'booking-ap'
+      docker-context: './server'
+      docker-file: './server/Dockerfile'

@@ -1,6 +1,6 @@
 apiVersion: v2
-name: booking-app
-description: Booking app (API + Frontend)
+name: backend-booking-app
+description: Booking node.js API 
 type: application
 version: 0.1.0
 appVersion: '1.0.0'

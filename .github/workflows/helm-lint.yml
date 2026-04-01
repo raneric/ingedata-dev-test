@@ -1,0 +1,30 @@
+name: helm-lint
+run-name: Run helm lint with the provided args
+
+on:
+  workflow_call:
+    inputs:
+      commit-sha:
+        required: true
+        type: string
+      helm-folder:
+        required: true
+        type: string
+
+jobs:
+  helm-lint:
+    name: Run helm lint command to check helm files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.14.0
+
+      - name: Run helm lint
+        run: |
+          helm lint ${{ inputs.helm-folder }}

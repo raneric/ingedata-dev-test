@@ -34,11 +34,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.token }}
+
       - name: get commit short sha
         id: short-sha-step
         uses: ./.github/actions/get-short-sha-action/
         with:
           full-sha: ${{ github.sha }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:

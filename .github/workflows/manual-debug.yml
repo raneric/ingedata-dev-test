@@ -1,4 +1,4 @@
-name: manual-workfolw
+name: manual-workflow
 run-name: Manual workflow for test purpose
 on:
   workflow_dispatch:
@@ -6,6 +6,8 @@ on:
 jobs:
   test-short-sha:
     runs-on: ubuntu-latest
+    outputs:
+      short-sha: ${{ steps.custom-sha.outputs.short-sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -14,17 +16,29 @@ jobs:
         uses: ./.github/actions/get-short-sha-action/
         with:
           full-sha: ${{ github.sha }}
-      - name: test data
-        run: echo $SHORT_SHA
-        env:
-          SHORT_SHA: ${{ steps.custom-sha.outputs.short-sha }}
+      - name: Set short-sha output
+        run: echo "short-sha=${{ steps.custom-sha.outputs.short-sha }}" >> $GITHUB_OUTPUT
 
-  test-sub-server:
+  test-vulnerability-server:
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
       working-directory: 'server'
 
-  test-sub-client:
+  test-vulnerability-client:
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
       working-directory: 'client'
+
+  test-helm-lint-on-backend:
+    needs: [test-short-sha]
+    uses: ./.github/workflows/helm-install.yml
+    with:
+      commit-sha: ${{ needs.test-short-sha.outputs.short-sha }}
+      helm-folder: 'helm/backend/'
+
+  test-helm-lint-on-frontend:
+    needs: [test-short-sha]
+    uses: ./.github/workflows/helm-install.yml
+    with:
+      commit-sha: ${{ needs.test-short-sha.outputs.short-sha }}
+      helm-folder: 'helm/frontend/'

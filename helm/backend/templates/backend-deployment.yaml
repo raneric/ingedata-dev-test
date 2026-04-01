@@ -2,51 +2,51 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: {{ .Values.backend.name }}
+  name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
   
 spec:
-  replicas: {{ .Values.backend.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.backend.appLabel }}
+      app: {{ .Values.appLabel }}
   template:
     metadata:
       labels:
-        app: {{ .Values.backend.appLabel }}
+        app: {{ .Values.appLabel }}
     spec:
       containers:
         - name: backend
-          image: '{{  .Values.global.ghcr }}/{{  .Values.backend.image.repository }}:{{  .Values.backend.image.tag }}'
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          image: '{{ .Values.ghcr }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.backend.containerPort }}
+            - containerPort: {{ .Values.containerPort }}
           env:
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.backend.configMapName }}
+                  name: {{ .Values.configMapName }}
                   key: DB_NAME
             - name: DB_USER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.backend.configMapName }}
+                  name: {{ .Values.configMapName }}
                   key: DB_USER
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.backend.secretName }}
+                  name: {{ .Values.secretName }}
                   key: DB_HOST
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.backend.configMapName }}
+                  name: {{ .Values.configMapName }}
                   key: DB_PORT
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.backend.secretName }}
+                  name: {{ .Values.secretName }}
                   key: DB_PASSWORD
           resources:
-            {{- toYaml .Values.backend.resources | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
 

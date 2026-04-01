@@ -1,0 +1,25 @@
+namespace: dev
+
+ghcr: ghcr.io/raneric
+
+name: front-deployment
+appLabel: react-app
+replicaCount: 2
+
+image:
+  repository: react-front
+  tag: 'latest'
+  pullPolicy: IfNotPresent
+
+containerPort: 80
+
+configMapName: client-cm
+serviceName: client-svc
+
+resources:
+  requests:
+    memory: '128Mi'
+    cpu: '250m'
+  limits:
+    memory: '256Mi'
+    cpu: '500m'

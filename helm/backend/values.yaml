@@ -1,0 +1,26 @@
+namespace: dev
+
+ghcr: ghcr.io/raneric
+
+name: api-deployment
+appLabel: backend-api
+replicaCount: 2
+
+image:
+  repository: booking-api
+  tag: 'latest'
+  pullPolicy: IfNotPresent
+
+containerPort: 3000
+
+configMapName: api-cm
+secretName: api-secrets
+serviceName: api-service
+
+resources:
+  requests:
+    memory: '128Mi'
+    cpu: '250m'
+  limits:
+    memory: '256Mi'
+    cpu: '500m'

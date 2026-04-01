@@ -1,15 +1,12 @@
-import express from "express";
-import cors from "cors";
-import roomRouter from "./routes/room.routes.js";
-import bookingRouter from "./routes/booking.routes.js";
-import adminRouter from "./routes/admin.routes.js";
-import userRouter from "./routes/user.routes.js";
-import authRouter from "./routes/auth.routes.js";
+import express from 'express';
+import cors from 'cors';
+import roomRouter from './routes/room.routes.js';
+import bookingRouter from './routes/booking.routes.js';
+import adminRouter from './routes/admin.routes.js';
+import userRouter from './routes/user.routes.js';
+import authRouter from './routes/auth.routes.js';
 
-import {
-  errorHandler,
-  defaultResourceNotFoundError,
-} from "./middleware/error.middleware.js";
+import { errorHandler, defaultResourceNotFoundError } from './middleware/error.middleware.js';
 const app = express();
 
 // Configurations middlewares
@@ -18,15 +15,15 @@ app.use(
   cors({
     origin: process.env.FRONT_END_HOST,
     credentials: true,
-  })
+  }),
 );
 
 // Routes middlewares
-app.use("/", roomRouter);
-app.use("/", bookingRouter);
-app.use("/admin", adminRouter);
-app.use("/user", userRouter);
-app.use("/auth", authRouter);
+app.use('/', roomRouter);
+app.use('/', bookingRouter);
+app.use('/admin', adminRouter);
+app.use('/user', userRouter);
+app.use('/auth', authRouter);
 
 app.use(defaultResourceNotFoundError);
 

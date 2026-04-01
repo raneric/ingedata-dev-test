@@ -15,5 +15,7 @@ jobs:
       image-repo: 'react-front'
       docker-context: './client'
       docker-file: './client/Dockerfile'
+      build-args: |
+        VITE_API_URL=${{ vars.API_ENDPOINT }}
     secrets:
       token: ${{ secrets.PAT_SECRET }}

@@ -10,6 +10,9 @@ on:
       helm-folder:
         required: true
         type: string
+      release-name:
+        required: true
+        type: string
 
 jobs:
   helm-lint:
@@ -25,6 +28,13 @@ jobs:
         with:
           version: v3.14.0
 
+      - name: get commit short sha
+        id: short-sha-step
+        uses: ./.github/actions/get-short-sha-action/
+        with:
+          full-sha: ${{ github.sha }}
+
       - name: Run helm lint
         run: |
-          helm lint ${{ inputs.helm-folder }}
+          helm upgrade ${{ inputs.release-name }} ./${{ inputs.helm-folder }} \
+          set image.tag=${{ steps.short-sha-step.outputs.short-sha }}

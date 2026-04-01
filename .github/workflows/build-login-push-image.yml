@@ -12,9 +12,16 @@ on:
       docker-file:
         required: true
         type: string
+      build-args:
+        required: false
+        type: string
+
     secrets:
       token:
         required: true
+
+env:
+  REGISTRY: ghcr.io
 
 jobs:
   containerize:
@@ -31,7 +38,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.token }}
 
@@ -47,4 +54,5 @@ jobs:
           context: ${{ inputs.docker-context }}
           file: ${{ inputs.docker-file }}
           push: true
-          tags: ghcr.io/${{ github.actor }}/${{ inputs.image-repo }}:${{ steps.short-sha-step.outputs.short-sha }}
+          tags: ${{ env.REGISTRY }}/${{ github.actor }}/${{ inputs.image-repo }}:${{ steps.short-sha-step.outputs.short-sha }}
+          build-args: ${{ inputs.build-args }}

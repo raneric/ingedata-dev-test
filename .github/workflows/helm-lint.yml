@@ -4,9 +4,6 @@ run-name: Run helm lint with the provided args
 on:
   workflow_call:
     inputs:
-      commit-sha:
-        required: true
-        type: string
       helm-folder:
         required: true
         type: string

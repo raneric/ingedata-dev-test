@@ -1,10 +1,3 @@
-/**
- * this should be stored in .env file but for simplicity
- * and in order tp avoid a lot of configuration I kept it here
- */
-
-const BASE_URL = 'http://10.103.176.43';
-
 const AppPath = {
   room: {
     all: '/rooms',
@@ -91,12 +84,4 @@ const FAKE_FEATURES_DATA = [
   },
 ];
 
-export {
-  BASE_URL,
-  AppPath,
-  DEFAULT_DATE_FORMAT,
-  monthList,
-  DUMMY_USER,
-  FAKE_IMAGE_DATA,
-  FAKE_FEATURES_DATA,
-};
+export { AppPath, DEFAULT_DATE_FORMAT, monthList, DUMMY_USER, FAKE_IMAGE_DATA, FAKE_FEATURES_DATA };

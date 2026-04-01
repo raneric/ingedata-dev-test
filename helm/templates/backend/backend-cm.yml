@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: { { .Values.backend.configMapName } }
+  namespace: { { .Values.namespace } }
+data:
+  DB_NAME: 'booking_db'
+  DB_USER: 'postgres'
+  DB_PORT: '5432'
+  FRONT_END_HOST: 'http://10.96.70.90'

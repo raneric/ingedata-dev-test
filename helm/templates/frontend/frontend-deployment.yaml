@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ .Values.frontend.name }}
+  namespace: {{ .Values.namespace }}
+  
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.frontend.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.frontend.appLabel }}
+    spec:
+      containers:
+        - name: front-end
+          image: '{{ .Values.global.ghcr }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}'
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.frontend.containerPort }}
+          env:
+            - name: API_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.frontend.configMapName }}
+                  key: API_URL
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+
+          

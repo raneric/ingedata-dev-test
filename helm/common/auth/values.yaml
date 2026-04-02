@@ -1,5 +1,0 @@
-namespace: dev
-name: front-deployment
-frontAppLabel: react-app
-backAppLabel: backend-api
-secretName: api-secrets

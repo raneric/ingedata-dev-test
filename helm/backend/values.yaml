@@ -16,6 +16,7 @@ containerPort: 3000
 configMapName: api-cm
 secretName: api-secrets
 serviceName: api-service
+serviceAccount: backend-service-account
 
 resources:
   requests:

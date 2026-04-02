@@ -1,5 +1,5 @@
 name: check-helm-file-on-push
-run-name: Check helm file when on pus
+run-name: Check helm file when on push
 on:
   push:
     paths:

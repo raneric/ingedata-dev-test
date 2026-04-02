@@ -10,7 +10,7 @@ jobs:
       short-sha: ${{ steps.custom-sha.outputs.short-sha }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: test custom action
         id: custom-sha
         uses: ./.github/actions/get-short-sha-action/
@@ -31,14 +31,12 @@ jobs:
 
   test-helm-lint-on-backend:
     needs: [test-short-sha]
-    uses: ./.github/workflows/helm-install.yml
+    uses: ./.github/workflows/helm-lint.yml
     with:
-      commit-sha: ${{ needs.test-short-sha.outputs.short-sha }}
       helm-folder: 'helm/backend/'
 
   test-helm-lint-on-frontend:
     needs: [test-short-sha]
-    uses: ./.github/workflows/helm-install.yml
+    uses: ./.github/workflows/helm-lint.yml
     with:
-      commit-sha: ${{ needs.test-short-sha.outputs.short-sha }}
       helm-folder: 'helm/frontend/'

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rbac-manager
+description: Configure RBAC for all service and use
+type: application
+version: 0.1.0
+appVersion: '1.0.0'

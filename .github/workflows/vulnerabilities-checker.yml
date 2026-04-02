@@ -14,6 +14,9 @@ on:
         required: false
         type: string
         default: 'high'
+      source:
+        required: true
+        type: string
 
 jobs:
   npm-audit:
@@ -29,7 +32,33 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
 
-      - name: Run npm audit
+      - name: Run npm audit and save report
+        id: audit-reporting
         run: |
           cd ${{ inputs.working-directory }}
-          npm audit --audit-level=${{ inputs.audit-level }}
+          # Create timestamp
+          TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+          # Create dynamic filename
+          AUDIT_FILE="${{ inputs.source }}-audit-${{ inputs.working-directory }}-${TIMESTAMP}.json"
+          # Run audit and save to file
+          npm audit --json --audit-level=${{ inputs.audit-level }} > $AUDIT_FILE
+          echo "Audit report saved to $AUDIT_FILE"
+          # Output the filename as a step output so we can use it later
+          echo "audit-file=$AUDIT_FILE" >> $GITHUB_OUTPUT
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v6
+        with:
+          name: npm-audit-report-${{ inputs.working-directory }}
+          path: ${{ inputs.working-directory }}/${{ steps.audit-reporting.outputs.audit-file }}
+
+      - name: Check for vulnerabilities
+        id: check
+        run: |
+          cd ${{ inputs.working-directory }}
+          total=$(jq '.metadata.vulnerabilities.total' ${{ steps.audit-reporting.outputs.audit-file }})
+          echo "Total vulnerabilities found: $total"
+          if [ "$total" -gt 0 ]; then
+            echo "Vulnerabilities above threshold found!"
+            exit 1
+          fi

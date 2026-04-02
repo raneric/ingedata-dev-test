@@ -29,6 +29,7 @@ jobs:
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
       working-directory: 'server'
+      source: 'api-ci'
 
   build-push-api-image:
     needs: [check-deps-vulnerability]

@@ -1,0 +1,25 @@
+name: Scheduled dependency vulnerability check
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  checkout-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+  check-api-deps-vulnerability:
+    uses: ./.github/workflows/vulnerabilities-checker.yml
+    with:
+      working-directory: 'server'
+      source: 'auto-check'
+
+  check-react-deps-vulnerability:
+    uses: ./.github/workflows/vulnerabilities-checker.yml
+    with:
+      working-directory: 'client'
+      source: 'auto-check'

@@ -4,4 +4,4 @@ metadata:
   name: {{ .Values.configMapName }}
   namespace: {{ .Values.namespace }}
 data:
-  API_URL: http://api-service.dev.svc.cluster.local
+  API_URL: http://api-service.{{ .Values.namespace }}.svc.cluster.local

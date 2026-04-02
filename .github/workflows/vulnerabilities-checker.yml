@@ -36,29 +36,35 @@ jobs:
         id: audit-reporting
         run: |
           cd ${{ inputs.working-directory }}
-          # Create timestamp
           TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
-          # Create dynamic filename
+          # Audit file name based of source, working-directory  and timestamp
           AUDIT_FILE="${{ inputs.source }}-audit-${{ inputs.working-directory }}-${TIMESTAMP}.json"
-          # Run audit and save to file
           npm audit --json --audit-level=${{ inputs.audit-level }} > $AUDIT_FILE
           echo "Audit report saved to $AUDIT_FILE"
-          # Output the filename as a step output so we can use it later
           echo "audit-file=$AUDIT_FILE" >> $GITHUB_OUTPUT
 
+      - name: Check for vulnerabilities
+        id: check
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          total=$(jq '.metadata.vulnerabilities.total' ${{ steps.audit-reporting.outputs.audit-file }})
+          echo "Total vulnerabilities found: $total"
+
+          if [ "$total" -gt 0 ]; then
+            echo "vulnerabilities=true" >> $GITHUB_OUTPUT
+          else
+            echo "vulnerabilities=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload audit report
-        uses: actions/upload-artifact@v6
+        if: steps.check.outputs.vulnerabilities == 'true'
+        uses: actions/upload-artifact@v4
         with:
           name: npm-audit-report-${{ inputs.working-directory }}
           path: ${{ inputs.working-directory }}/${{ steps.audit-reporting.outputs.audit-file }}
 
-      - name: Check for vulnerabilities
-        id: check
+      - name: Fail if vulnerabilities found
+        if: steps.check.outputs.vulnerabilities == 'true'
         run: |
-          cd ${{ inputs.working-directory }}
-          total=$(jq '.metadata.vulnerabilities.total' ${{ steps.audit-reporting.outputs.audit-file }})
-          echo "Total vulnerabilities found: $total"
-          if [ "$total" -gt 0 ]; then
-            echo "Vulnerabilities above threshold found!"
-            exit 1
-          fi
+          echo "❌ Vulnerabilities found."
+          exit 1

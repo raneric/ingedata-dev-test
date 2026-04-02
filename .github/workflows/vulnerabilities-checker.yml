@@ -1,4 +1,5 @@
-name: NPM Audit Job
+name: npm-audit-job
+run-name: Execute npm audit and upload artifact if vulnerability found
 
 on:
   workflow_call:

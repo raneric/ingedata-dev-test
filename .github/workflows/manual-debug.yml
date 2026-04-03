@@ -23,11 +23,13 @@ jobs:
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
       working-directory: 'server'
+      source: 'debug'
 
   test-vulnerability-client:
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
       working-directory: 'client'
+      source: 'debug'
 
   test-helm-lint-on-backend:
     needs: [test-short-sha]

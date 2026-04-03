@@ -13,7 +13,7 @@ function errorHandler(err, req, res, _) {
   const statusCode = err.statusCode || 500;
   res.status(statusCode).json({
     error: err.name,
-    message: err.message
+    message: err.message,
   });
 }
 
@@ -34,7 +34,4 @@ function defaultResourceNotFoundError(req, res, _) {
   });
 }
 
-export {
-  errorHandler,
-  defaultResourceNotFoundError
-}
+export { errorHandler, defaultResourceNotFoundError };

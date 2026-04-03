@@ -24,6 +24,21 @@ services:
     depends_on:
       - server
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+    ports:
+      - '9090:9090'
+    networks:
+      - local-shared-network
+    depends_on:
+      - server
+
 networks:
   local-shared-network:
     external: true

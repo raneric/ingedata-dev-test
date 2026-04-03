@@ -5,8 +5,10 @@ import bookingRouter from './routes/booking.routes.js';
 import adminRouter from './routes/admin.routes.js';
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
+import metricRouter from './routes/metric.routes.js';
 
 import { errorHandler, defaultResourceNotFoundError } from './middleware/error.middleware.js';
+import { metricsMiddleware } from './middleware/metrics.middleware.js';
 const app = express();
 
 // Configurations middlewares
@@ -18,9 +20,13 @@ app.use(
   }),
 );
 
+app.use(metricsMiddleware);
+
+app.use('/observability', metricRouter);
 // Routes middlewares
 app.use('/', roomRouter);
 app.use('/', bookingRouter);
+
 app.use('/admin', adminRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);

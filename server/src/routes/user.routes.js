@@ -1,6 +1,11 @@
 import express from 'express';
-import { getUserBookings, getUserBooking, deleteBooking, addBooking } from '../controller/user.controller.js';
-import validateToken from '../middleware/authMiddleware.js';
+import {
+  getUserBookings,
+  getUserBooking,
+  deleteBooking,
+  addBooking,
+} from '../controller/user.controller.js';
+import validateToken from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 

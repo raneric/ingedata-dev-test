@@ -1,18 +1,18 @@
-import httpMocks from 'node-mocks-http';
-import jwt from 'jsonwebtoken';
-import validateToken from '../src/middleware/authMiddleware.js';
+import httpMocks from "node-mocks-http";
+import jwt from "jsonwebtoken";
+import validateToken from "../src/middleware/auth.middleware.js";
 import {
   AUTH_ERROR_MESSAGE,
   AuthenticationError,
   AuthorizationError,
-} from '../src/utils/ApplicationError.js';
-import { jest, describe, test, expect, beforeEach } from '@jest/globals';
+} from "../src/utils/ApplicationError.js";
+import { jest, describe, test, expect, beforeEach } from "@jest/globals";
 
-jest.mock('jsonwebtoken');
+jest.mock("jsonwebtoken");
 
-const jwtVerifyMock = jest.spyOn(jwt, 'verify');
+const jwtVerifyMock = jest.spyOn(jwt, "verify");
 
-describe('validateToken middleware', () => {
+describe("validateToken middleware", () => {
   let req, res, next;
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('validateToken middleware', () => {
     next = jest.fn();
   });
 
-  test('should call next with AuthorizationError if no Authorization header', () => {
+  test("should call next with AuthorizationError if no Authorization header", () => {
     req.header = jest.fn().mockReturnValue(undefined);
 
     validateToken(req, res, next);
@@ -32,12 +32,12 @@ describe('validateToken middleware', () => {
     expect(error.message).toBe(AUTH_ERROR_MESSAGE.missingCredentials);
   });
 
-  test('should call next with AuthenticationError if token is invalid', () => {
-    const fakeToken = 'fake.token.value';
+  test("should call next with AuthenticationError if token is invalid", () => {
+    const fakeToken = "fake.token.value";
     req.header = jest.fn().mockReturnValue(`Bearer ${fakeToken}`);
 
     jwtVerifyMock.mockImplementation((token, secret, callback) => {
-      callback(new Error('jwt malformed'), null);
+      callback(new Error("jwt malformed"), null);
     });
 
     validateToken(req, res, next);
@@ -45,20 +45,20 @@ describe('validateToken middleware', () => {
     expect(jwtVerifyMock).toHaveBeenCalledWith(
       fakeToken,
       process.env.AUTH_SECRET,
-      expect.any(Function),
+      expect.any(Function)
     );
 
     const error = next.mock.calls[0][0];
     expect(error).toBeInstanceOf(AuthenticationError);
-    expect(error.message).toBe('jwt malformed');
+    expect(error.message).toBe("jwt malformed");
   });
 
-  test('should call next without error if token is valid', () => {
-    const fakeToken = 'valid.token.value';
+  test("should call next without error if token is valid", () => {
+    const fakeToken = "valid.token.value";
     req.header = jest.fn().mockReturnValue(`Bearer ${fakeToken}`);
 
     jwtVerifyMock.mockImplementation((token, secret, callback) => {
-      callback(null, { id: 'user123', email: 'test@example.com' });
+      callback(null, { id: "user123", email: "test@example.com" });
     });
 
     validateToken(req, res, next);

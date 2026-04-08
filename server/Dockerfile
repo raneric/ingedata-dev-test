@@ -14,6 +14,10 @@ FROM node:24-alpine AS runner
 
 WORKDIR /app
 
+ARG FRONTEND_HOST
+
+ENV FRONTEND_HOST=$FRONTEND_HOST
+
 ENV NODE_ENV=production
 
 COPY --from=deps /app ./

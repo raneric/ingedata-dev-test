@@ -28,15 +28,17 @@ jobs:
     needs: [unit-test]
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
-      working-directory: 'server'
-      source: 'api-ci'
+      working-directory: "server"
+      source: "api-ci"
 
   build-push-api-image:
     needs: [check-deps-vulnerability]
     uses: ./.github/workflows/build-login-push-image.yml
     with:
-      image-repo: 'booking-api'
-      docker-context: './server'
-      docker-file: './server/Dockerfile'
+      image-repo: "booking-api"
+      docker-context: "./server"
+      docker-file: "./server/Dockerfile"
+      build-args: |
+        FRONTEND_HOST=${{ vars.FRONTEND_HOST }}
     secrets:
       token: ${{ secrets.PAT_SECRET }}

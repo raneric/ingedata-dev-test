@@ -1,35 +1,38 @@
-import express from 'express';
-import cors from 'cors';
-import roomRouter from './routes/room.routes.js';
-import bookingRouter from './routes/booking.routes.js';
-import adminRouter from './routes/admin.routes.js';
-import userRouter from './routes/user.routes.js';
-import authRouter from './routes/auth.routes.js';
-import metricRouter from './routes/metric.routes.js';
+import express from "express";
+import cors from "cors";
+import roomRouter from "./routes/room.routes.js";
+import bookingRouter from "./routes/booking.routes.js";
+import adminRouter from "./routes/admin.routes.js";
+import userRouter from "./routes/user.routes.js";
+import authRouter from "./routes/auth.routes.js";
+import metricRouter from "./routes/metric.routes.js";
 
-import { errorHandler, defaultResourceNotFoundError } from './middleware/error.middleware.js';
-import { metricsMiddleware } from './middleware/metrics.middleware.js';
+import {
+  errorHandler,
+  defaultResourceNotFoundError,
+} from "./middleware/error.middleware.js";
+import { metricsMiddleware } from "./middleware/metrics.middleware.js";
 const app = express();
 
 // Configurations middlewares
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONT_END_HOST,
+    origin: process.env.FRONTEND_HOST,
     credentials: true,
-  }),
+  })
 );
 
 app.use(metricsMiddleware);
 
-app.use('/observability', metricRouter);
+app.use("/observability", metricRouter);
 // Routes middlewares
-app.use('/', roomRouter);
-app.use('/', bookingRouter);
+app.use("/", roomRouter);
+app.use("/", bookingRouter);
 
-app.use('/admin', adminRouter);
-app.use('/user', userRouter);
-app.use('/auth', authRouter);
+app.use("/admin", adminRouter);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 
 app.use(defaultResourceNotFoundError);
 

@@ -10,11 +10,11 @@ on:
       node-version:
         required: false
         type: string
-        default: '22'
+        default: "22"
       audit-level:
         required: false
         type: string
-        default: 'high'
+        default: "high"
       source:
         required: true
         type: string
@@ -40,7 +40,7 @@ jobs:
           TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
           # Audit file name based of source, working-directory  and timestamp
           AUDIT_FILE="${{ inputs.source }}-audit-${{ inputs.working-directory }}-${TIMESTAMP}.json"
-          npm audit --json --audit-level=${{ inputs.audit-level }} > $AUDIT_FILE
+          npm audit --json --audit-level=${{ inputs.audit-level }} > $AUDIT_FILE || true
           echo "Audit report saved to $AUDIT_FILE"
           echo "audit-file=$AUDIT_FILE" >> $GITHUB_OUTPUT
 

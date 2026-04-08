@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "cors";
+//import cors from "cors";
 import roomRouter from "./routes/room.routes.js";
 import bookingRouter from "./routes/booking.routes.js";
 import adminRouter from "./routes/admin.routes.js";
@@ -16,12 +16,12 @@ const app = express();
 
 // Configurations middlewares
 app.use(express.json());
-app.use(
+/* app.use(
   cors({
     origin: process.env.FRONTEND_HOST,
     credentials: true,
   })
-);
+); */
 
 app.use(metricsMiddleware);
 

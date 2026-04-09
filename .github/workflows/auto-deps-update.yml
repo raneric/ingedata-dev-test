@@ -30,20 +30,11 @@ jobs:
       - name: Run update
         working-directory: ${{ inputs.working-dir }}
         run: |
-          echo "----------Running git diff before------------"
-          git diff
-          echo "----------------------------------------"
           npm audit fix || true
-          echo "----------Running git diff after------------"
-          git diff
-          echo "-----------------------------------"
       - name: Check for changes
         working-directory: ${{ inputs.working-dir }}
         id: changes
         run: |
-          echo "----------Running git diff------------"
-          git diff
-          echo "----------Running git diff------------"
           if git diff --quiet; then
             echo "is_deps_updated=false" >> $GITHUB_OUTPUT
           else

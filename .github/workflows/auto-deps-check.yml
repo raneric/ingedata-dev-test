@@ -2,7 +2,7 @@ name: auto-deps-check
 run-name: Scheduled dependency vulnerability check
 on:
   schedule:
-    - cron: '0 0 * * 1,3,5,0' #Run At 12:00 AM on Monday, Wednesday, Friday, and Sunday
+    - cron: '0 12 * * 1,3,5,0' #Run At 12:00 AM on Monday, Wednesday, Friday, and Sunday
 
   workflow_dispatch:
 

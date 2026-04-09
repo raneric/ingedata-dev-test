@@ -37,11 +37,6 @@ jobs:
       working-directory: 'client'
       source: 'debug'
 
-  auto-update-front-deps-if-vulnerability-found:
-    uses: ./.github/workflows/auto-deps-update.yml
-    with:
-      working-dir: 'client'
-
   test-helm-lint-on-backend:
     needs: [test-short-sha]
     uses: ./.github/workflows/helm-lint.yml

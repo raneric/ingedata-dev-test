@@ -25,11 +25,22 @@ jobs:
       working-directory: 'server'
       source: 'debug'
 
+  auto-update-api-deps-if-vulnerability-found:
+    uses: ./.github/workflows/auto-deps-update.yml
+    with:
+      working-dir: 'server'
+      should-run-unit-test: true
+
   test-vulnerability-client:
     uses: ./.github/workflows/vulnerabilities-checker.yml
     with:
       working-directory: 'client'
       source: 'debug'
+
+  auto-update-front-deps-if-vulnerability-found:
+    uses: ./.github/workflows/auto-deps-update.yml
+    with:
+      working-dir: 'client'
 
   test-helm-lint-on-backend:
     needs: [test-short-sha]

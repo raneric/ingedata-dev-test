@@ -10,19 +10,24 @@ on:
       node-version:
         required: false
         type: string
-        default: "22"
+        default: '22'
       audit-level:
         required: false
         type: string
-        default: "high"
+        default: 'high'
       source:
         required: true
         type: string
-
+    outputs:
+      has_vulnerability:
+        description: 'npm audit report vulnerability'
+        value: ${{ jobs.npm-audit.outputs.vulnerability_test_result }}
 jobs:
   npm-audit:
     name: Run npm audit
     runs-on: ubuntu-latest
+    outputs:
+      vulnerability_test_result: ${{ steps.check.outputs.vulnerabilities }}
 
     steps:
       - name: Checkout code
@@ -34,9 +39,9 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Run npm audit and save report
+        working-directory: ${{ inputs.working-directory }}
         id: audit-reporting
         run: |
-          cd ${{ inputs.working-directory }}
           TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
           # Audit file name based of source, working-directory  and timestamp
           AUDIT_FILE="${{ inputs.source }}-audit-${{ inputs.working-directory }}-${TIMESTAMP}.json"
@@ -56,6 +61,7 @@ jobs:
           else
             echo "vulnerabilities=false" >> $GITHUB_OUTPUT
           fi
+          echo $GITHUB_OUTPUT
 
       - name: Upload audit report
         if: steps.check.outputs.vulnerabilities == 'true'
@@ -65,7 +71,7 @@ jobs:
           path: ${{ inputs.working-directory }}/${{ steps.audit-reporting.outputs.audit-file }}
 
       - name: Fail if vulnerabilities found
-        if: steps.check.outputs.vulnerabilities == 'true'
+        if: steps.check.outputs.vulnerabilities == 'true' && inputs.source != 'auto-check'
         run: |
           echo "❌ Vulnerabilities found."
           exit 1
